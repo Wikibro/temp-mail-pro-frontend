@@ -1,0 +1,33 @@
+.blog-list {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.blog-list h2 {
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.blog-list .blog-link {
+  font-size: 1.1rem;
+  color: #0d6efd;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.blog-list .blog-link:hover {
+  color: #084298;
+  text-decoration: underline;
+}
+
+.dark-mode .blog-list {
+  background: #1c1c1c;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .blog-list h2,
+.dark-mode .blog-list .blog-link {
+  color: #f1f1f1;
+}
