@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Sitemap: User-agent: *
+Allow: /
+Sitemap: https://temp-mail-pro-frontend.vercel.app/sitemap.xml
