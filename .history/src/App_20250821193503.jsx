@@ -13,8 +13,8 @@ import BlogList from "./components/BlogList";
 import BlogPost from "./components/BlogPost";
 
 import Privacy from "./components/Privacy";  // make sure the file exists
-// const API_BASE = import.meta.env.VITE_API_BASE || "/api";
-const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
+const API_BASE = import.meta.env.VITE_API_BASE || "/api";
 
 function AppContent() {
   const [account, setAccount] = useState(() => {
