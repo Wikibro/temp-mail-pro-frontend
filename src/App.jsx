@@ -1037,62 +1037,62 @@
 //   );
 // }
 
-import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-import { Helmet } from "react-helmet";
+// import React, { useState, useEffect, useRef } from "react";
+// import axios from "axios";
+// import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+// import { Helmet } from "react-helmet";
 
-import AccountManager from "./components/AccountManager.jsx";
-import Inbox from "./components/Inbox.jsx";
-import MainPage from "./components/MainPage";
-import FAQSection from "./components/FAQSection";
-import BlogList from "./components/BlogList";
-import BlogPost from "./components/BlogPost";
-import Privacy from "./components/Privacy";
+// import AccountManager from "./components/AccountManager.jsx";
+// import Inbox from "./components/Inbox.jsx";
+// import MainPage from "./components/MainPage";
+// import FAQSection from "./components/FAQSection";
+// import BlogList from "./components/BlogList";
+// import BlogPost from "./components/BlogPost";
+// import Privacy from "./components/Privacy";
 
-const API_BASE = import.meta.env.VITE_API_BASE;
+// const API_BASE = import.meta.env.VITE_API_BASE;
 
-// Email Card Component
-const EmailCard = ({ email, expiration, onSelect, isActive = false }) => {
-  const formatTimeRemaining = (expirationDate) => {
-    const now = new Date();
-    const expiry = new Date(expirationDate);
-    const diffMs = expiry - now;
+// // Email Card Component
+// const EmailCard = ({ email, expiration, onSelect, isActive = false }) => {
+//   const formatTimeRemaining = (expirationDate) => {
+//     const now = new Date();
+//     const expiry = new Date(expirationDate);
+//     const diffMs = expiry - now;
     
-    if (diffMs <= 0) return "Expired";
+//     if (diffMs <= 0) return "Expired";
     
-    const hours = Math.floor(diffMs / (1000 * 60 * 60));
-    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+//     const hours = Math.floor(diffMs / (1000 * 60 * 60));
+//     const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
     
-    if (hours > 0) {
-      return `${hours}h ${minutes}m remaining`;
-    }
-    return `${minutes}m remaining`;
-  };
+//     if (hours > 0) {
+//       return `${hours}h ${minutes}m remaining`;
+//     }
+//     return `${minutes}m remaining`;
+//   };
 
-  return (
-    <div className={`card h-100 ${isActive ? 'border-primary' : ''}`}>
-      <div className="card-body">
-        <h6 className="card-title text-truncate">{email}</h6>
-        <div className="d-flex justify-content-between align-items-center mb-2">
-          <small className="text-muted">Expires:</small>
-          <small className={expiration && new Date(expiration) < new Date() ? 'text-danger' : 'text-success'}>
-            {expiration ? formatTimeRemaining(expiration) : 'Unknown'}
-          </small>
-        </div>
-        <div className="d-grid">
-          <button
-            className={`btn ${isActive ? 'btn-outline-primary' : 'btn-primary'} btn-sm`}
-            onClick={onSelect}
-            disabled={isActive}
-          >
-            {isActive ? 'Active' : 'Use This Email'}
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
+//   return (
+//     <div className={`card h-100 ${isActive ? 'border-primary' : ''}`}>
+//       <div className="card-body">
+//         <h6 className="card-title text-truncate">{email}</h6>
+//         <div className="d-flex justify-content-between align-items-center mb-2">
+//           <small className="text-muted">Expires:</small>
+//           <small className={expiration && new Date(expiration) < new Date() ? 'text-danger' : 'text-success'}>
+//             {expiration ? formatTimeRemaining(expiration) : 'Unknown'}
+//           </small>
+//         </div>
+//         <div className="d-grid">
+//           <button
+//             className={`btn ${isActive ? 'btn-outline-primary' : 'btn-primary'} btn-sm`}
+//             onClick={onSelect}
+//             disabled={isActive}
+//           >
+//             {isActive ? 'Active' : 'Use This Email'}
+//           </button>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 // function AppContent() {
 //   const [account, setAccount] = useState(() => {
@@ -1471,6 +1471,10 @@ const EmailCard = ({ email, expiration, onSelect, isActive = false }) => {
 //     </Router>
 //   );
 // }
+
+
+
+
 // good one above one
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
