@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react
 import { Helmet } from "react-helmet";
 
 import AccountManager from "./components/AccountManager.jsx";
+
+import Inbox from "./components/Inbox.jsx";
 import MainPage from "./components/MainPage";
 import FAQSection from "./components/FAQSection";
 import BlogList from "./components/BlogList";
