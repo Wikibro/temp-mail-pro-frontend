@@ -1487,7 +1487,7 @@ import Privacy from "./components/Privacy";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 
-// Email Card Component
+// Email Card Component - Only one declaration
 const EmailCard = ({ email, expiration, isActive = false, onDelete }) => {
   const formatTimeRemaining = (expirationDate) => {
     const now = new Date();
@@ -1559,7 +1559,6 @@ function AppContent() {
   const isHomePage = location.pathname === "/";
 
   const toggleDarkMode = () => {
-    const now = new Date();
     const newMode = !darkMode;
     setDarkMode(newMode);
     localStorage.setItem("darkMode", newMode.toString());
