@@ -1985,3 +1985,168 @@ body.dark-mode .hero {
   }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+recent one/*  */
+
+
+
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .navbar-nav .btn {
+    margin-bottom: 5px;
+    width: 100%;
+  }
+  
+  .display-5 {
+    font-size: 2rem;
+  }
+  
+  .lead {
+    font-size: 1rem;
+  }
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #121212;
+  color: #ffffff;
+}
+
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #ffffff;
+  border-color: #333;
+}
+
+body.dark-mode .bg-light {
+  background-color: #2d2d2d !important;
+  color: #ffffff;
+}
+
+body.dark-mode .navbar-light {
+  background-color: #2d2d2d !important;
+  border-color: #444;
+}
+
+body.dark-mode .text-muted {
+  color: #aaa !important;
+}
+
+body.dark-mode .border-top {
+  border-color: #444 !important;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+.theme-toggle-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .theme-toggle-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Improved Card Styles */
+.card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode .card:hover {
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.05);
+}
+
+/* Button Improvements */
+.btn {
+  transition: all 0.2s ease;
+}
+
+/* Loading Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in;
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+.btn:focus {
+  outline: 2px solid #0d6efd;
+  outline-offset: 2px;
+}
+
+/* Responsive table for inbox */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Custom scrollbar for dark mode */
+body.dark-mode ::-webkit-scrollbar {
+  width: 8px;
+}
+
+body.dark-mode ::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+body.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+
+
+
+
+
+
