@@ -15,430 +15,430 @@
 
 
 // // good one above one
-// import React, { useState, useEffect, useRef } from "react";
-// import axios from "axios";
-// import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
-// import { Helmet } from "react-helmet";
+import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
-// import AccountManager from "./components/AccountManager.jsx";
-// import Inbox from "./components/Inbox.jsx";
-// import MainPage from "./components/MainPage";
-// import FAQSection from "./components/FAQSection";
-// import BlogList from "./components/BlogList";
-// import BlogPost from "./components/BlogPost";
-// import Privacy from "./components/Privacy";
+import AccountManager from "./components/AccountManager.jsx";
+import Inbox from "./components/Inbox.jsx";
+import MainPage from "./components/MainPage";
+import FAQSection from "./components/FAQSection";
+import BlogList from "./components/BlogList";
+import BlogPost from "./components/BlogPost";
+import Privacy from "./components/Privacy";
 
-// const API_BASE = import.meta.env.VITE_API_BASE;
+const API_BASE = import.meta.env.VITE_API_BASE;
 
-// // Email Card Component - Only one declaration
-// const EmailCard = ({ email, expiration, isActive = false, onDelete }) => {
-//   const formatTimeRemaining = (expirationDate) => {
-//     const now = new Date();
-//     const expiry = new Date(expirationDate);
-//     const diffMs = expiry - now;
+// Email Card Component - Only one declaration
+const EmailCard = ({ email, expiration, isActive = false, onDelete }) => {
+  const formatTimeRemaining = (expirationDate) => {
+    const now = new Date();
+    const expiry = new Date(expirationDate);
+    const diffMs = expiry - now;
     
-//     if (diffMs <= 0) return "Expired";
+    if (diffMs <= 0) return "Expired";
     
-//     const hours = Math.floor(diffMs / (1000 * 60 * 60));
-//     const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
+    const hours = Math.floor(diffMs / (1000 * 60 * 60));
+    const minutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60));
     
-//     if (hours > 0) {
-//       return `${hours}h ${minutes}m remaining`;
-//     }
-//     return `${minutes}m remaining`;
-//   };
+    if (hours > 0) {
+      return `${hours}h ${minutes}m remaining`;
+    }
+    return `${minutes}m remaining`;
+  };
 
-//   return (
-//     <div className={`card h-100 ${isActive ? 'border-primary' : ''}`}>
-//       <div className="card-body">
-//         <div className="d-flex justify-content-between align-items-start mb-2">
-//           <h6 className="card-title text-truncate flex-grow-1 me-2">{email}</h6>
-//           {onDelete && (
-//             <button 
-//               className="btn btn-sm btn-outline-danger"
-//               onClick={onDelete}
-//               title="Delete this email"
-//             >
-//               <i className="bi bi-x-lg"></i>
-//             </button>
-//           )}
-//         </div>
-//         <div className="d-flex justify-content-between align-items-center mb-2">
-//           <small className="text-muted">Expires:</small>
-//           <small className={expiration && new Date(expiration) < new Date() ? 'text-danger' : 'text-success'}>
-//             {expiration ? formatTimeRemaining(expiration) : 'Unknown'}
-//           </small>
-//         </div>
-//         {isActive && (
-//           <div className="badge bg-success w-100">Active Email</div>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
+  return (
+    <div className={`card h-100 ${isActive ? 'border-primary' : ''}`}>
+      <div className="card-body">
+        <div className="d-flex justify-content-between align-items-start mb-2">
+          <h6 className="card-title text-truncate flex-grow-1 me-2">{email}</h6>
+          {onDelete && (
+            <button 
+              className="btn btn-sm btn-outline-danger"
+              onClick={onDelete}
+              title="Delete this email"
+            >
+              <i className="bi bi-x-lg"></i>
+            </button>
+          )}
+        </div>
+        <div className="d-flex justify-content-between align-items-center mb-2">
+          <small className="text-muted">Expires:</small>
+          <small className={expiration && new Date(expiration) < new Date() ? 'text-danger' : 'text-success'}>
+            {expiration ? formatTimeRemaining(expiration) : 'Unknown'}
+          </small>
+        </div>
+        {isActive && (
+          <div className="badge bg-success w-100">Active Email</div>
+        )}
+      </div>
+    </div>
+  );
+};
 
-// function AppContent() {
-//   const [account, setAccount] = useState(() => {
-//     const saved = localStorage.getItem("tempMailAccount");
-//     return saved ? JSON.parse(saved) : null;
-//   });
-//   const [generatedEmails, setGeneratedEmails] = useState(() => {
-//     const saved = localStorage.getItem("generatedEmails");
-//     return saved ? JSON.parse(saved) : [];
-//   });
-//   const [messages, setMessages] = useState([]);
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState(null);
-//   const [darkMode, setDarkMode] = useState(() => {
-//     const saved = localStorage.getItem("darkMode");
-//     return saved === "true";
-//   });
-//   const [emailDuration, setEmailDuration] = useState(() => {
-//     const saved = localStorage.getItem("emailDuration");
-//     return saved || "1hour"; // Default to 1 hour
-//   });
+function AppContent() {
+  const [account, setAccount] = useState(() => {
+    const saved = localStorage.getItem("tempMailAccount");
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [generatedEmails, setGeneratedEmails] = useState(() => {
+    const saved = localStorage.getItem("generatedEmails");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [darkMode, setDarkMode] = useState(() => {
+    const saved = localStorage.getItem("darkMode");
+    return saved === "true";
+  });
+  const [emailDuration, setEmailDuration] = useState(() => {
+    const saved = localStorage.getItem("emailDuration");
+    return saved || "1hour"; // Default to 1 hour
+  });
 
-//   const location = useLocation();
-//   const isHomePage = location.pathname === "/";
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
 
-//   const toggleDarkMode = () => {
-//     const newMode = !darkMode;
-//     setDarkMode(newMode);
-//     localStorage.setItem("darkMode", newMode.toString());
-//   };
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
+  };
 
-//   const setDuration = (duration) => {
-//     setEmailDuration(duration);
-//     localStorage.setItem("emailDuration", duration);
-//   };
+  const setDuration = (duration) => {
+    setEmailDuration(duration);
+    localStorage.setItem("emailDuration", duration);
+  };
 
-//   useEffect(() => {
-//     document.body.classList.toggle("dark-mode", darkMode);
-//   }, [darkMode]);
+  useEffect(() => {
+    document.body.classList.toggle("dark-mode", darkMode);
+  }, [darkMode]);
 
-//   useEffect(() => {
-//     if (account) {
-//       localStorage.setItem("tempMailAccount", JSON.stringify(account));
-//       fetchInbox();
-//     }
-//   }, [account]);
+  useEffect(() => {
+    if (account) {
+      localStorage.setItem("tempMailAccount", JSON.stringify(account));
+      fetchInbox();
+    }
+  }, [account]);
 
-//   useEffect(() => {
-//     localStorage.setItem("generatedEmails", JSON.stringify(generatedEmails));
-//   }, [generatedEmails]);
+  useEffect(() => {
+    localStorage.setItem("generatedEmails", JSON.stringify(generatedEmails));
+  }, [generatedEmails]);
 
-//   // Auto-generate an email on first visit
-//   useEffect(() => {
-//     if (isHomePage && !account && generatedEmails.length === 0) {
-//       createNewAccount(true); // true indicates it's an auto-generated email
-//     }
-//   }, [isHomePage]);
+  // Auto-generate an email on first visit
+  useEffect(() => {
+    if (isHomePage && !account && generatedEmails.length === 0) {
+      createNewAccount(true); // true indicates it's an auto-generated email
+    }
+  }, [isHomePage]);
 
-//   const createNewAccount = async (isAutoGenerated = false) => {
-//     setIsLoading(true);
-//     setError(null);
+  const createNewAccount = async (isAutoGenerated = false) => {
+    setIsLoading(true);
+    setError(null);
     
-//     try {
-//       const res = await axios.post(`${API_BASE}/accounts/create`);
+    try {
+      const res = await axios.post(`${API_BASE}/accounts/create`);
       
-//       // Add expiration time based on selected duration
-//       const now = new Date();
-//       let expirationTime;
+      // Add expiration time based on selected duration
+      const now = new Date();
+      let expirationTime;
       
-//       // For auto-generated emails, use 1 hour regardless of navbar setting
-//       const durationToUse = isAutoGenerated ? "1hour" : emailDuration;
+      // For auto-generated emails, use 1 hour regardless of navbar setting
+      const durationToUse = isAutoGenerated ? "1hour" : emailDuration;
       
-//       switch(durationToUse) {
-//         case "10min":
-//           expirationTime = new Date(now.getTime() + 10 * 60000);
-//           break;
-//         case "1hour":
-//           expirationTime = new Date(now.getTime() + 60 * 60000);
-//           break;
-//         case "24hour":
-//           expirationTime = new Date(now.getTime() + 24 * 60 * 60000);
-//           break;
-//         case "max":
-//           // Set to a far future date (10 years)
-//           expirationTime = new Date(now.getTime() + 3650 * 24 * 60 * 60000);
-//           break;
-//         default:
-//           expirationTime = new Date(now.getTime() + 60 * 60000); // Default to 1 hour
-//       }
+      switch(durationToUse) {
+        case "10min":
+          expirationTime = new Date(now.getTime() + 10 * 60000);
+          break;
+        case "1hour":
+          expirationTime = new Date(now.getTime() + 60 * 60000);
+          break;
+        case "24hour":
+          expirationTime = new Date(now.getTime() + 24 * 60 * 60000);
+          break;
+        case "max":
+          // Set to a far future date (10 years)
+          expirationTime = new Date(now.getTime() + 3650 * 24 * 60 * 60000);
+          break;
+        default:
+          expirationTime = new Date(now.getTime() + 60 * 60000); // Default to 1 hour
+      }
       
-//       const accountData = {
-//         ...res.data,
-//         expiration: expirationTime.toISOString(),
-//         isAutoGenerated
-//       };
+      const accountData = {
+        ...res.data,
+        expiration: expirationTime.toISOString(),
+        isAutoGenerated
+      };
       
-//       setAccount(accountData);
+      setAccount(accountData);
       
-//       // Add to generated emails list if not already there
-//       if (!generatedEmails.some(email => email.address === accountData.email)) {
-//         setGeneratedEmails(prev => [...prev, {
-//           address: accountData.email,
-//           expiration: accountData.expiration,
-//           createdAt: new Date().toISOString()
-//         }]);
-//       }
+      // Add to generated emails list if not already there
+      if (!generatedEmails.some(email => email.address === accountData.email)) {
+        setGeneratedEmails(prev => [...prev, {
+          address: accountData.email,
+          expiration: accountData.expiration,
+          createdAt: new Date().toISOString()
+        }]);
+      }
       
-//       setMessages([]);
-//     } catch (err) {
-//       setError({ message: err.response?.data?.error || "Account creation failed" });
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
+      setMessages([]);
+    } catch (err) {
+      setError({ message: err.response?.data?.error || "Account creation failed" });
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-//   const switchAccount = (emailAddress) => {
-//     // Find the email in generatedEmails
-//     const emailAccount = generatedEmails.find(email => email.address === emailAddress);
-//     if (emailAccount) {
-//       setAccount({
-//         email: emailAccount.address,
-//         expiration: emailAccount.expiration,
-//         // We need to handle token differently - this is a limitation
-//         // For a real implementation, you'd need to store tokens for all generated emails
-//         token: account?.token || "" // This is a placeholder
-//       });
-//     }
-//   };
+  const switchAccount = (emailAddress) => {
+    // Find the email in generatedEmails
+    const emailAccount = generatedEmails.find(email => email.address === emailAddress);
+    if (emailAccount) {
+      setAccount({
+        email: emailAccount.address,
+        expiration: emailAccount.expiration,
+        // We need to handle token differently - this is a limitation
+        // For a real implementation, you'd need to store tokens for all generated emails
+        token: account?.token || "" // This is a placeholder
+      });
+    }
+  };
 
-//   const deleteEmail = (emailAddress) => {
-//     setGeneratedEmails(prev => prev.filter(email => email.address !== emailAddress));
+  const deleteEmail = (emailAddress) => {
+    setGeneratedEmails(prev => prev.filter(email => email.address !== emailAddress));
     
-//     // If the deleted email is the active account, switch to the first available email
-//     if (account && account.email === emailAddress) {
-//       const remainingEmails = generatedEmails.filter(email => email.address !== emailAddress);
-//       if (remainingEmails.length > 0) {
-//         switchAccount(remainingEmails[0].address);
-//       } else {
-//         setAccount(null);
-//         createNewAccount(true); // Create a new auto-generated email
-//       }
-//     }
-//   };
+    // If the deleted email is the active account, switch to the first available email
+    if (account && account.email === emailAddress) {
+      const remainingEmails = generatedEmails.filter(email => email.address !== emailAddress);
+      if (remainingEmails.length > 0) {
+        switchAccount(remainingEmails[0].address);
+      } else {
+        setAccount(null);
+        createNewAccount(true); // Create a new auto-generated email
+      }
+    }
+  };
 
-//   const fetchInbox = async () => {
-//     if (!account?.token) return;
+  const fetchInbox = async () => {
+    if (!account?.token) return;
     
-//     // Check if account has expired
-//     if (account.expiration) {
-//       const now = new Date();
-//       const expiration = new Date(account.expiration);
+    // Check if account has expired
+    if (account.expiration) {
+      const now = new Date();
+      const expiration = new Date(account.expiration);
       
-//       if (now > expiration) {
-//         setError({ message: "Email address has expired. Please create a new one." });
-//         localStorage.removeItem("tempMailAccount");
-//         setAccount(null);
-//         return;
-//       }
-//     }
+      if (now > expiration) {
+        setError({ message: "Email address has expired. Please create a new one." });
+        localStorage.removeItem("tempMailAccount");
+        setAccount(null);
+        return;
+      }
+    }
     
-//     try {
-//       const res = await axios.get(`${API_BASE}/inbox/${account.token}`);
-//       const inboxArray = Array.isArray(res.data) ? res.data : res.data?.messages || [];
-//       setMessages(inboxArray);
-//       setError(null);
-//     } catch (err) {
-//       let errorMessage = err.response?.data?.error || "Failed to load inbox";
-//       if (errorMessage.includes("expired") || err.response?.status === 401) {
-//         errorMessage = "Session expired. Please create a new email address.";
-//         localStorage.removeItem("tempMailAccount");
-//         setAccount(null);
-//       }
-//       setError({ message: errorMessage });
-//     }
-//   };
+    try {
+      const res = await axios.get(`${API_BASE}/inbox/${account.token}`);
+      const inboxArray = Array.isArray(res.data) ? res.data : res.data?.messages || [];
+      setMessages(inboxArray);
+      setError(null);
+    } catch (err) {
+      let errorMessage = err.response?.data?.error || "Failed to load inbox";
+      if (errorMessage.includes("expired") || err.response?.status === 401) {
+        errorMessage = "Session expired. Please create a new email address.";
+        localStorage.removeItem("tempMailAccount");
+        setAccount(null);
+      }
+      setError({ message: errorMessage });
+    }
+  };
 
-//   useEffect(() => {
-//     if (account) {
-//       const interval = setInterval(fetchInbox, 5000);
-//       return () => clearInterval(interval);
-//     }
-//   }, [account]);
+  useEffect(() => {
+    if (account) {
+      const interval = setInterval(fetchInbox, 5000);
+      return () => clearInterval(interval);
+    }
+  }, [account]);
 
-//   return (
-//     <div className={`container py-4 ${darkMode ? "dark-mode" : ""}`}>
-//       {/* Navbar with time options */}
-//       <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded">
-//         <div className="container-fluid">
-//           <span className="navbar-brand">New Email Duration:</span>
-//           <div className="navbar-nav">
-//             <button 
-//               className={`nav-link btn ${emailDuration === "10min" ? "btn-primary" : "btn-outline-primary"} me-2`}
-//               onClick={() => setDuration("10min")}
-//             >
-//               10 min
-//             </button>
-//             <button 
-//               className={`nav-link btn ${emailDuration === "1hour" ? "btn-primary" : "btn-outline-primary"} me-2`}
-//               onClick={() => setDuration("1hour")}
-//             >
-//               1 hour
-//             </button>
-//             <button 
-//               className={`nav-link btn ${emailDuration === "24hour" ? "btn-primary" : "btn-outline-primary"} me-2`}
-//               onClick={() => setDuration("24hour")}
-//             >
-//               24 hours
-//             </button>
-//             <button 
-//               className={`nav-link btn ${emailDuration === "max" ? "btn-primary" : "btn-outline-primary"}`}
-//               onClick={() => setDuration("max")}
-//             >
-//               Max Time
-//             </button>
-//           </div>
-//         </div>
-//       </nav>
+  return (
+    <div className={`container py-4 ${darkMode ? "dark-mode" : ""}`}>
+      {/* Navbar with time options */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded">
+        <div className="container-fluid">
+          <span className="navbar-brand">New Email Duration:</span>
+          <div className="navbar-nav">
+            <button 
+              className={`nav-link btn ${emailDuration === "10min" ? "btn-primary" : "btn-outline-primary"} me-2`}
+              onClick={() => setDuration("10min")}
+            >
+              10 min
+            </button>
+            <button 
+              className={`nav-link btn ${emailDuration === "1hour" ? "btn-primary" : "btn-outline-primary"} me-2`}
+              onClick={() => setDuration("1hour")}
+            >
+              1 hour
+            </button>
+            <button 
+              className={`nav-link btn ${emailDuration === "24hour" ? "btn-primary" : "btn-outline-primary"} me-2`}
+              onClick={() => setDuration("24hour")}
+            >
+              24 hours
+            </button>
+            <button 
+              className={`nav-link btn ${emailDuration === "max" ? "btn-primary" : "btn-outline-primary"}`}
+              onClick={() => setDuration("max")}
+            >
+              Max Time
+            </button>
+          </div>
+        </div>
+      </nav>
 
-//       {/* Header */}
-//       <header className="text-center mb-5 position-relative">
-//         <button
-//           onClick={toggleDarkMode}
-//           className={`theme-toggle-btn position-absolute top-0 end-0 mt-3 me-3 ${darkMode ? "sun" : "moon"}`}
-//           aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-//         >
-//           {darkMode ? <i className="bi bi-sun-fill"></i> : <i className="bi bi-moon-fill"></i>}
-//         </button>
+      {/* Header */}
+      <header className="text-center mb-5 position-relative">
+        <button
+          onClick={toggleDarkMode}
+          className={`theme-toggle-btn position-absolute top-0 end-0 mt-3 me-3 ${darkMode ? "sun" : "moon"}`}
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+        >
+          {darkMode ? <i className="bi bi-sun-fill"></i> : <i className="bi bi-moon-fill"></i>}
+        </button>
 
-//         <h1 className="fw-bold">TempMail Pro</h1>
-//         <p className="text-muted">Disposable Email Service</p>
-//       </header>
+        <h1 className="fw-bold">TempMail Pro</h1>
+        <p className="text-muted">Disposable Email Service</p>
+      </header>
 
-//       {/* Error Handler - only shown on home page */}
-//       {isHomePage && error && (
-//         <div className="alert alert-danger">
-//           <strong>Error:</strong> {error.message}
-//           <button className="btn btn-sm btn-warning ms-2" onClick={fetchInbox}>
-//             Retry
-//           </button>
-//         </div>
-//       )}
+      {/* Error Handler - only shown on home page */}
+      {isHomePage && error && (
+        <div className="alert alert-danger">
+          <strong>Error:</strong> {error.message}
+          <button className="btn btn-sm btn-warning ms-2" onClick={fetchInbox}>
+            Retry
+          </button>
+        </div>
+      )}
 
-//       <Routes>
-//         {/* Home Page Route */}
-//         <Route path="/" element={
-//           <>
-//             {/* Active Email Card */}
-//             {account && (
-//               <div className="row justify-content-center mb-4">
-//                 <div className="col-md-6">
-//                   <EmailCard
-//                     email={account.email}
-//                     expiration={account.expiration}
-//                     isActive={true}
-//                   />
-//                 </div>
-//               </div>
-//             )}
+      <Routes>
+        {/* Home Page Route */}
+        <Route path="/" element={
+          <>
+            {/* Active Email Card */}
+            {account && (
+              <div className="row justify-content-center mb-4">
+                <div className="col-md-6">
+                  <EmailCard
+                    email={account.email}
+                    expiration={account.expiration}
+                    isActive={true}
+                  />
+                </div>
+              </div>
+            )}
             
-//             {/* TempMail Section - only shown on home page */}
-//             {!account ? (
-//               <div className="d-flex justify-content-center my-5 py-5">
-//                 <button
-//                   className="btn btn-primary btn-lg px-5 py-3 fw-bold"
-//                   onClick={() => createNewAccount(false)}
-//                   disabled={isLoading}
-//                 >
-//                   {isLoading ? "Creating..." : "Create Temporary Email"}
-//                 </button>
-//               </div>
-//             ) : (
-//               <>
-//                 <AccountManager 
-//                   account={account} 
-//                   refreshInbox={fetchInbox} 
-//                   onNewEmail={() => createNewAccount(false)}
-//                 />
+            {/* TempMail Section - only shown on home page */}
+            {!account ? (
+              <div className="d-flex justify-content-center my-5 py-5">
+                <button
+                  className="btn btn-primary btn-lg px-5 py-3 fw-bold"
+                  onClick={() => createNewAccount(false)}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Creating..." : "Create Temporary Email"}
+                </button>
+              </div>
+            ) : (
+              <>
+                <AccountManager 
+                  account={account} 
+                  refreshInbox={fetchInbox} 
+                  onNewEmail={() => createNewAccount(false)}
+                />
                 
-//                 {/* Generated Emails List */}
-//                 {generatedEmails.length > 1 && (
-//                   <div className="mt-4">
-//                     <h4 className="mb-3">Your Generated Emails</h4>
-//                     <div className="row">
-//                       {generatedEmails
-//                         .filter(email => email.address !== account.email)
-//                         .map((email, index) => (
-//                           <div key={index} className="col-md-4 mb-3">
-//                             <EmailCard
-//                               email={email.address}
-//                               expiration={email.expiration}
-//                               onDelete={() => deleteEmail(email.address)}
-//                             />
-//                           </div>
-//                         ))
-//                       }
-//                     </div>
-//                   </div>
-//                 )}
+                {/* Generated Emails List */}
+                {generatedEmails.length > 1 && (
+                  <div className="mt-4">
+                    <h4 className="mb-3">Your Generated Emails</h4>
+                    <div className="row">
+                      {generatedEmails
+                        .filter(email => email.address !== account.email)
+                        .map((email, index) => (
+                          <div key={index} className="col-md-4 mb-3">
+                            <EmailCard
+                              email={email.address}
+                              expiration={email.expiration}
+                              onDelete={() => deleteEmail(email.address)}
+                            />
+                          </div>
+                        ))
+                      }
+                    </div>
+                  </div>
+                )}
                 
-//                 <Inbox
-//                   messages={messages.map((msg) => ({
-//                     ...msg,
-//                     token: account.token,
-//                   }))}
-//                 />
+                <Inbox
+                  messages={messages.map((msg) => ({
+                    ...msg,
+                    token: account.token,
+                  }))}
+                />
                 
-//                 {/* Generate New Email Button */}
-//                 <div className="text-center mt-4">
-//                   <button
-//                     className="btn btn-outline-primary"
-//                     onClick={() => createNewAccount(false)}
-//                     disabled={isLoading}
-//                   >
-//                     {isLoading ? "Creating..." : "Generate Another Email"}
-//                   </button>
-//                 </div>
-//               </>
-//             )}
+                {/* Generate New Email Button */}
+                <div className="text-center mt-4">
+                  <button
+                    className="btn btn-outline-primary"
+                    onClick={() => createNewAccount(false)}
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Creating..." : "Generate Another Email"}
+                  </button>
+                </div>
+              </>
+            )}
 
-//             {/* Other Sections */}
-//             <MainPage />
-//             <FAQSection />
-//             <BlogList />
-//           </>
-//         } />
+            {/* Other Sections */}
+            <MainPage />
+            <FAQSection />
+            <BlogList />
+          </>
+        } />
 
-//         {/* Blog Post Route */}
-//         <Route path="/blog/:slug" element={<BlogPost />} />
+        {/* Blog Post Route */}
+        <Route path="/blog/:slug" element={<BlogPost />} />
 
-//         <Route path="/privacy" element={<Privacy />} />
-//       </Routes>
+        <Route path="/privacy" element={<Privacy />} />
+      </Routes>
 
-//       {/* Footer */}
-//       <footer className="mt-5 pt-4 border-top text-center text-muted">
-//         <div className="container">
-//           <p className="mb-1">
-//             &copy; {new Date().getFullYear()} TempMail Pro • Powered by Mail.tm API •
-//             <Link to="/privacy" className="ms-2 text-decoration-none">
-//               Privacy Policy
-//             </Link>
-//           </p>
-//           <p className="mb-0">Free temporary email service • No registration required</p>
-//         </div>
-//       </footer>
-//     </div>
-//   );
-// }
+      {/* Footer */}
+      <footer className="mt-5 pt-4 border-top text-center text-muted">
+        <div className="container">
+          <p className="mb-1">
+            &copy; {new Date().getFullYear()} TempMail Pro • Powered by Mail.tm API •
+            <Link to="/privacy" className="ms-2 text-decoration-none">
+              Privacy Policy
+            </Link>
+          </p>
+          <p className="mb-0">Free temporary email service • No registration required</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
 
-// export default function App() {
-//   return (
-//     <Router>
-//       <Helmet>
-//         <title>TempMail Pro - Free Temporary Email Service</title>
-//         <meta
-//           name="description"
-//           content="Get a free disposable email address instantly. Protect your inbox from spam & hackers."
-//         />
-//         <meta
-//           name="keywords"
-//           content="temporary email, temp mail, disposable email, burner email"
-//         />
-//       </Helmet>
-//       <AppContent />
-//     </Router>
-//   );
-// }
+export default function App() {
+  return (
+    <Router>
+      <Helmet>
+        <title>TempMail Pro - Free Temporary Email Service</title>
+        <meta
+          name="description"
+          content="Get a free disposable email address instantly. Protect your inbox from spam & hackers."
+        />
+        <meta
+          name="keywords"
+          content="temporary email, temp mail, disposable email, burner email"
+        />
+      </Helmet>
+      <AppContent />
+    </Router>
+  );
+}
