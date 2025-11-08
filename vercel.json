@@ -3,7 +3,24 @@
     { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
     { "source": "/rss.xml", "destination": "/rss.xml" },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.tempmailpk.com"
+        }
+      ],
+      "destination": "https://tempmailpk.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "permanent": true
+    }
   ]
 }
-
 
