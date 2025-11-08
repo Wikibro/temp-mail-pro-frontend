@@ -522,7 +522,7 @@ const Landing = () => {
           content="TempMail Pro provides free disposable email addresses to protect your inbox from spam. Create, use, and delete emails instantly." 
         />
         <meta name="keywords" content="temporary email, disposable email, temp mail, spam protection, free email service, anonymous email" />
-        
+         <link rel="canonical" href="https://tempmailpk.com/" />
         {/* Open Graph */}
         <meta property="og:title" content="TempMail Pro - Free Disposable Email Service" />
         <meta property="og:description" content="Protect your inbox with free disposable emails from TempMail Pro. No registration required." />
