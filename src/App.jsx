@@ -1115,7 +1115,8 @@ function TempMailApp() {
 
   const location = useLocation();
   const isAppPage = location.pathname === "/app";
-  const currentUrl = `${window.location.origin}${location.pathname}${location.search}`;
+// In your TempMailApp component, update the currentUrl logic:
+const currentUrl = `${window.location.origin}${location.pathname}`;
 
   // Use refs to access current state in intervals
   const accountRef = useRef(account);
@@ -1389,8 +1390,10 @@ function TempMailApp() {
         />
         <meta property="og:title" content={account ? `TempMail Pro - ${account.email}` : "TempMail Pro - Free Temporary Email Service"} />
         <meta property="og:description" content={account ? `Your temporary email address is ${account.email}. Protect your inbox with TempMail Pro.` : "Get free disposable email addresses with TempMail Pro. Protect your inbox from spam and stay secure."} />
-        <meta property="og:url" content={currentUrl} />
-        <link rel="canonical" href={currentUrl} />
+       {/* FIXED CANONICAL - Always use clean URL without search params */}
+  <link rel="canonical" href={`https://tempmailpk.com${location.pathname}`} />
+  
+  <meta property="og:url" content={`https://tempmailpk.com${location.pathname}`} />
       </Helmet>
 
       {/* Subtle background polling indicator */}
