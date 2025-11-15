@@ -17,10 +17,20 @@
       "permanent": true
     },
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "tempmailpk\\.vercel\\.app"
+        }
+      ],
+      "destination": "https://tempmailpk.com/:path*",
+      "permanent": true
+    },
+    {
       "source": "/:path+/",
       "destination": "/:path+",
       "permanent": true
     }
   ]
 }
-
