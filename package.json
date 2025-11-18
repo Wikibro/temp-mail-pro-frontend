@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "prebuild": "node scripts/generateSitemap.js && node scripts/generateFeeds.js",
+    "prebuild": "node scripts/generateSitemap.js",
     "dev": "vite",
     "build": "chmod +x node_modules/.bin/vite && vite build",
     "preview": "vite preview"
