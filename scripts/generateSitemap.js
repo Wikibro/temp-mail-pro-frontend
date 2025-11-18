@@ -4,23 +4,25 @@ import path from "path";
 import { SitemapStream, streamToPromise } from "sitemap";
 import { Feed } from "feed";
 
-// Change this to your deployed domain
 const SITE_URL = "https://tempmailpk.com";
-
-// Paths to put sitemap/rss
 const publicDir = path.resolve("public");
+
 if (!fs.existsSync(publicDir)) {
   fs.mkdirSync(publicDir);
 }
 
-// 1) Define your site routes (or read dynamically from your blog files)
+// ALL YOUR PAGES - INCLUDE EVERYTHING
 const routes = [
   { url: "/", changefreq: "daily", priority: 1.0 },
+  { url: "/app", changefreq: "daily", priority: 0.9 },
   { url: "/about", changefreq: "monthly", priority: 0.8 },
   { url: "/blog", changefreq: "daily", priority: 0.9 },
+  { url: "/blog/tech-behind-disposable-emails", changefreq: "monthly", priority: 0.7 },
+  { url: "/blog/receive-sms-otp-online", changefreq: "monthly", priority: 0.7 },
+  { url: "/blog/private-domains-temp-email", changefreq: "monthly", priority: 0.7 },
+  { url: "/blog/burner-email-for-social-media", changefreq: "monthly", priority: 0.7 },
 ];
 
-// ========== Generate Sitemap ==========
 async function generateSitemap() {
   const sitemapStream = new SitemapStream({ hostname: SITE_URL });
 
@@ -35,39 +37,7 @@ async function generateSitemap() {
   console.log("✅ sitemap.xml generated");
 }
 
-// ========== Generate RSS ==========
-async function generateRSS() {
-  const feed = new Feed({
-    title: "My Blog Feed",
-    description: "Latest posts from my blog",
-    id: SITE_URL,
-    link: SITE_URL,
-    language: "en",
-    favicon: `${SITE_URL}/favicon.ico`,
-    copyright: `© ${new Date().getFullYear()} My Blog`,
-  });
-
-  // Example posts (replace with your actual markdown/blog data)
-  const posts = [
-    {
-      title: "First Post",
-      id: `${SITE_URL}/blog/first-post`,
-      link: `${SITE_URL}/blog/first-post`,
-      date: new Date(),
-      description: "This is my first post",
-    },
-  ];
-
-  posts.forEach((post) => {
-    feed.addItem(post);
-  });
-
-  fs.writeFileSync(path.join(publicDir, "rss.xml"), feed.rss2(), "utf8");
-  console.log("✅ rss.xml generated");
-}
-
-// Run both
+// Run it
 (async () => {
   await generateSitemap();
-  await generateRSS();
 })();
