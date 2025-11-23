@@ -3,7 +3,7 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "tempmailpk.vercel.app" }
+        { "type": "host", "value": "www.tempmailpk.com" }
       ],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
@@ -11,40 +11,10 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "www.tempmailpk.com" }
+        { "type": "host", "value": "tempmailpk.vercel.app" }
       ],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
-    }
-  ],
-
-  "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/sitemap.xml" },
-    { "source": "/robots.txt", "destination": "/robots.txt" },
-    { "source": "/rss.xml", "destination": "/rss.xml" },
-
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-
-  "headers": [
-    {
-      "source": "/sitemap.xml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/xml" },
-        { "key": "Cache-Control", "value": "public, max-age=3600" }
-      ]
-    },
-    {
-      "source": "/rss.xml",
-      "headers": [
-        { "key": "Content-Type", "value": "application/xml" }
-      ]
-    },
-    {
-      "source": "/robots.txt",
-      "headers": [
-        { "key": "Content-Type", "value": "text/plain" }
-      ]
     }
   ]
 }
