@@ -4,11 +4,10 @@
    
 <!-- Conditional Monetag Loading -->
 <script>
-  // Only load Monetag on regular pages, not XML files
-  if (window.location.pathname !== '/sitemap.xml' && 
-      window.location.pathname !== '/robots.txt' &&
-      window.location.pathname !== '/rss.xml') {
-    
+  // Only load Monetag on real frontend pages
+  const forbiddenPaths = ['/sitemap.xml', '/robots.txt', '/rss.xml'];
+
+  if (!forbiddenPaths.includes(window.location.pathname)) {
     const script = document.createElement('script');
     script.src = 'https://fpyf8.com/88/tag.min.js';
     script.setAttribute('data-zone', '185295');
@@ -17,6 +16,7 @@
     document.head.appendChild(script);
   }
 </script>
+
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
     
