@@ -3,7 +3,7 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "www.tempmailpk.com" }
+        { "type": "host", "value": "tempmailpk.vercel.app" }
       ],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
@@ -11,10 +11,21 @@
     {
       "source": "/(.*)",
       "has": [
-        { "type": "host", "value": "tempmailpk.vercel.app" }
+        { "type": "host", "value": "www.tempmailpk.com" }
       ],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
     }
+  ],
+  "rewrites": [
+    { 
+      "source": "/sitemap.xml", 
+      "destination": "https://temp-mail-pro-backend.onrender.com/sitemap.xml" 
+    },
+    { 
+      "source": "/robots.txt", 
+      "destination": "https://temp-mail-pro-backend.onrender.com/robots.txt" 
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
