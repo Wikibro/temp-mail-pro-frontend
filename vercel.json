@@ -1,34 +1,34 @@
 {
+  "rewrites": [
+    {
+      "source": "/sitemap.xml",
+      "destination": "https://temp-mail-pro-backend.onrender.com/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "https://temp-mail-pro-backend.onrender.com/robots.txt"
+    },
+    {
+      "source": "/rss.xml",
+      "destination": "https://temp-mail-pro-backend.onrender.com/rss.xml"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [
-        { "type": "host", "value": "tempmailpk.vercel.app" }
-      ],
+      "has": [{ "type": "host", "value": "tempmailpk.vercel.app" }],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
     },
     {
       "source": "/(.*)",
-      "has": [
-        { "type": "host", "value": "www.tempmailpk.com" }
-      ],
+      "has": [{ "type": "host", "value": "www.tempmailpk.com" }],
       "destination": "https://tempmailpk.com/$1",
       "permanent": true
-    }
-  ],
-  "rewrites": [
-    { 
-      "source": "/sitemap.xml", 
-      "destination": "https://temp-mail-pro-backend.onrender.com/sitemap.xml" 
-    },
-    { 
-      "source": "/robots.txt", 
-      "destination": "https://temp-mail-pro-backend.onrender.com/robots.txt" 
-    },
-    { 
-      "source": "/(.*)", 
-      "destination": "/index.html" 
     }
   ],
   "headers": [
