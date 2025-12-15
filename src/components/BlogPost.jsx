@@ -481,7 +481,25 @@ export default function BlogPost() {
               {content}
             </ReactMarkdown>
           </div>
-
+          {/* Service Promotion Section */}
+<div className="card border-primary mt-5 mb-4">
+  <div className="card-body">
+    <div className="row align-items-center">
+      <div className="col-md-8">
+        <h4 className="card-title mb-3">Try Our Free Temporary Email Service</h4>
+        <p className="card-text mb-0">
+          This guide was created by <strong>TempMail Pk</strong>. Why read about privacy when you can use our free service right now?
+        </p>
+      </div>
+      <div className="col-md-4 text-md-end mt-3 mt-md-0">
+        <Link to="/app" className="btn btn-primary btn-lg">
+          <i className="fas fa-envelope me-2"></i>
+          Generate Free Email
+        </Link>
+      </div>
+    </div>
+  </div>
+</div>
           <footer className="mt-5 pt-4 border-top">
             <div className="d-flex justify-content-between align-items-center">
               <div>
