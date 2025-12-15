@@ -99,7 +99,7 @@
 
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { Helmet } from 'react-helmet-async';
 export default function BlogList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -155,6 +155,11 @@ export default function BlogList() {
   }
 
   return (
+          <Helmet>
+  <title>Email Privacy & Security Blog | TempMail Pk</title>
+  <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
+  <link rel="canonical" href="https://tempmailpk.com/blog" />
+</Helmet>
     <section className="blog-section py-5">
       <div className="container">
         <div className="text-center mb-5">
