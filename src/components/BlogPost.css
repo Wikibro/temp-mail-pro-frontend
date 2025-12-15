@@ -88,3 +88,23 @@
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
 }
+/* Blog-specific styles */
+.blog-post-container .card.border-primary {
+  border-width: 2px !important;
+}
+
+.blog-post-container .btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Make links in content stand out */
+.blog-content a {
+  color: var(--primary);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.blog-content a:hover {
+  color: var(--secondary);
+}
