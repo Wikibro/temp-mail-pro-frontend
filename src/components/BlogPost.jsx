@@ -464,7 +464,20 @@ export default function BlogPost() {
             </div>
             {description && <p className="lead mt-3">{description}</p>}
           </header>
-
+{/* Author Bio for E-E-A-T */}
+<div className="d-flex align-items-center my-4 p-3 bg-light rounded">
+  <div className="flex-shrink-0 me-3">
+    <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+      <i className="fas fa-user-shield"></i>
+    </div>
+  </div>
+  <div className="flex-grow-1">
+    <h6 className="mb-1 fw-bold">TempMail Pk Team</h6>
+    <p className="mb-0 small text-muted">
+      Email privacy & security experts. We've helped over 10,000 users protect their inboxes from spam and tracking.
+    </p>
+  </div>
+</div>
           {image && (
             <div className="text-center mb-4">
               <img 
