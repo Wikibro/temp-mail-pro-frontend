@@ -42,8 +42,7 @@ Instead of just reading about privacy tools, **try our free service** right now.
 - No registration or personal information required
 - Automatic email expiration for complete privacy
 - Completely free - no hidden costs
-
-[Generate your first temporary email now →]([/app](https://tempmailpk.com/app))
+[Generate your first temporary email now →](/app)
 
 > *This guide was brought to you by the team at **TempMail Pk**, helping thousands protect their inbox daily.*
 
