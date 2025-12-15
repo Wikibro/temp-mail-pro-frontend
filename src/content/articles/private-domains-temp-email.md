@@ -4,7 +4,6 @@ description: "Learn how to set up a private domain for disposable email and prot
 date: "2025-08-15"
 ---
 
-Your full article content here...
 
 ### Why Use a Private Temporary Email Domain?
 
