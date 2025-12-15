@@ -295,6 +295,7 @@
 // //     </div>
 // //   );
 // // }
+
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
@@ -386,7 +387,6 @@ export default function BlogPost() {
 
   return (
     <div className="blog-post-container">
-      {/* ✅ SEO for each article */}
       <Helmet>
         <title>{title ? `${title} | TempMail Pro Blog` : "Blog Post | TempMail Pro"}</title>
         <meta
@@ -395,7 +395,6 @@ export default function BlogPost() {
         />
         <link rel="canonical" href={canonicalUrl} />
 
-        {/* Open Graph for social media */}
         <meta property="og:title" content={title || "TempMail Pro Blog"} />
         <meta property="og:description" content={description || "TempMail Pro Blog article about email privacy and security"} />
         <meta property="og:type" content="article" />
@@ -403,14 +402,12 @@ export default function BlogPost() {
         <meta property="og:image" content={metaImage} />
         <meta property="og:site_name" content="TempMail Pro" />
 
-        {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={title || "TempMail Pro Blog"} />
         <meta name="twitter:description" content={description || "TempMail Pro Blog article about email privacy and security"} />
         <meta name="twitter:image" content={metaImage} />
         <meta name="twitter:site" content="@tempmailpro" />
 
-        {/* Additional structured data for SEO */}
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
@@ -462,20 +459,21 @@ export default function BlogPost() {
             </div>
             {description && <p className="lead mt-3">{description}</p>}
           </header>
-{/* Author Bio for E-E-A-T */}
-<div className="d-flex align-items-center my-4 p-3 bg-light rounded">
-  <div className="flex-shrink-0 me-3">
-    <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
-      <i className="fas fa-user-shield"></i>
-    </div>
-  </div>
-  <div className="flex-grow-1">
-    <h6 className="mb-1 fw-bold">TempMail Pk Team</h6>
-    <p className="mb-0 small text-muted">
-      Email privacy & security experts. We've helped over 10,000 users protect their inboxes from spam and tracking.
-    </p>
-  </div>
-</div>
+
+          <div className="d-flex align-items-center my-4 p-3 bg-light rounded">
+            <div className="flex-shrink-0 me-3">
+              <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+                <i className="fas fa-user-shield"></i>
+              </div>
+            </div>
+            <div className="flex-grow-1">
+              <h6 className="mb-1 fw-bold">TempMail Pk Team</h6>
+              <p className="mb-0 small text-muted">
+                Email privacy & security experts. We've helped over 10,000 users protect their inboxes from spam and tracking.
+              </p>
+            </div>
+          </div>
+
           {image && (
             <div className="text-center mb-4">
               <img 
@@ -492,25 +490,26 @@ export default function BlogPost() {
               {content}
             </ReactMarkdown>
           </div>
-          {/* Service Promotion Section */}
-<div className="card border-primary mt-5 mb-4">
-  <div className="card-body">
-    <div className="row align-items-center">
-      <div className="col-md-8">
-        <h4 className="card-title mb-3">Try Our Free Temporary Email Service</h4>
-        <p className="card-text mb-0">
-          This guide was created by <strong>TempMail Pk</strong>. Why read about privacy when you can use our free service right now?
-        </p>
-      </div>
-      <div className="col-md-4 text-md-end mt-3 mt-md-0">
-        <Link to="/app" className="btn btn-primary btn-lg">
-          <i className="fas fa-envelope me-2"></i>
-          Generate Free Email
-        </Link>
-      </div>
-    </div>
-  </div>
-</div>
+
+          <div className="card border-primary mt-5 mb-4">
+            <div className="card-body">
+              <div className="row align-items-center">
+                <div className="col-md-8">
+                  <h4 className="card-title mb-3">Try Our Free Temporary Email Service</h4>
+                  <p className="card-text mb-0">
+                    This guide was created by <strong>TempMail Pk</strong>. Why read about privacy when you can use our free service right now?
+                  </p>
+                </div>
+                <div className="col-md-4 text-md-end mt-3 mt-md-0">
+                  <Link to="/app" className="btn btn-primary btn-lg">
+                    <i className="fas fa-envelope me-2"></i>
+                    Generate Free Email
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <footer className="mt-5 pt-4 border-top">
             <div className="d-flex justify-content-between align-items-center">
               <div>
