@@ -155,17 +155,16 @@ export default function BlogList() {
   }
 
   return (
-          <Helmet>
-  <title>Email Privacy & Security Blog | TempMail Pk</title>
-  <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
-  <link rel="canonical" href="https://tempmailpk.com/blog" />
-</Helmet>
+  <> 
+    <Helmet>
+      <title>Email Privacy & Security Blog | TempMail Pk</title>
+      <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
+      <link rel="canonical" href="https://tempmailpk.com/blog" />
+    </Helmet>
     <section className="blog-section py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <h2 className="section-title">Latest Articles</h2>
-          <p className="section-subtitle">Discover insights about privacy, security, and technology</p>
-        </div>
+      {/* ... rest of your existing JSX code here ... */}
+    </section>
+  </>
         
         <div className="row">
           {articles.map((article, index) => (
