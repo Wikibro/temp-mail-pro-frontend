@@ -1059,6 +1059,7 @@ import AccountManager from "./components/AccountManager.jsx";
 import Inbox from "./components/Inbox.jsx";
 import Privacy from "./components/Privacy";
 import BlogPost from "./components/BlogPost";
+import BlogList from './components/BlogList';
 import Landing from "./components/Landing.jsx";
 import Footer from "./components/Footer";
 import EmailCard from "./components/EmailCard";
