@@ -1596,6 +1596,7 @@ function App() {
             <Route path="/" element={<Landing />} />
             <Route path="/app" element={<TempMailApp />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/blog" element={<BlogList />} />
             <Route path="/privacy" element={<Privacy />} />
           </Routes>
         </Router>
