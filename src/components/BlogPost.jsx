@@ -305,7 +305,7 @@ import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import { Helmet } from 'react-helmet-async';
 import 'highlight.js/styles/github.css';
-
+import { Link } from 'react-router-dom';
 // Import all markdown files at build time
 const markdownFiles = import.meta.glob('../content/articles/*.md', { as: 'raw', eager: true });
 
