@@ -91,22 +91,15 @@
 //     </section>
 //   );
 // }
-
-
-
-
-
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
+
 export default function BlogList() {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // This would typically come from an API or static import
-    // For now, we'll use a static list
     const articleData = [
       { 
         slug: "tech-behind-disposable-emails",
@@ -143,76 +136,75 @@ export default function BlogList() {
   }, []);
 
   if (loading) {
-  return (
-    <div className="blog-list py-5">
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
+    return (
+      <div className="blog-list py-5">
+        <div className="d-flex justify-content-center">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
+    );
+  }
 
-return (
+  return (
+    <>
+      <Helmet>
+        <title>Email Privacy & Security Blog | TempMail Pk</title>
+        <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
+        <link rel="canonical" href="https://tempmailpk.com/blog" />
+      </Helmet>
 
-  <>
-    <Helmet>
-      <title>Email Privacy & Security Blog | TempMail Pk</title>
-      <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
-      <link rel="canonical" href="https://tempmailpk.com/blog" />
-    </Helmet>
-
-    <section className="blog-section py-5">
-      <div className="container">
-        <div className="text-center mb-5">
-          <h2 className="section-title">Latest Articles</h2>
-          <p className="section-subtitle">Discover insights about privacy, security, and technology</p>
-        </div>
-        
-        {/* This row and its content are NOW correctly inside the section */}
-        <div className="row">
-          {articles.map((article, index) => (
-            <div key={article.slug} className="col-lg-6 mb-4">
-              <div className="blog-card card h-100 border-0 shadow-sm">
-                <div className="card-body">
-                  <div className="d-flex align-items-center mb-3">
-                    <div className="blog-icon me-3">
-                      <i className="bi bi-file-earmark-text"></i>
+      <section className="blog-section py-5">
+        <div className="container">
+          <div className="text-center mb-5">
+            <h2 className="section-title">Latest Articles</h2>
+            <p className="section-subtitle">Discover insights about privacy, security, and technology</p>
+          </div>
+          
+          <div className="row">
+            {articles.map((article) => (
+              <div key={article.slug} className="col-lg-6 mb-4">
+                <div className="blog-card card h-100 border-0 shadow-sm">
+                  <div className="card-body">
+                    <div className="d-flex align-items-center mb-3">
+                      <div className="blog-icon me-3">
+                        <i className="bi bi-file-earmark-text"></i>
+                      </div>
+                      <span className="read-time text-muted">{article.readTime}</span>
                     </div>
-                    <span className="read-time text-muted">{article.readTime}</span>
-                  </div>
-                  
-                  <h3 className="card-title h5">
-                    <Link 
-                      to={`/blog/${article.slug}`} 
-                      className="stretched-link text-decoration-none text-dark"
-                    >
-                      {article.title}
-                    </Link>
-                  </h3>
-                  
-                  <p className="card-text text-muted">{article.description}</p>
-                  
-                  <div className="d-flex align-items-center justify-content-between mt-3">
-                    <span className="text-muted small">
-                      {new Date(article.date).toLocaleDateString('en-US', { 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}
-                    </span>
-                    <span className="read-more text-primary fw-semibold">
-                      Read Article
-                      <i className="bi bi-arrow-right ms-2"></i>
-                    </span>
+                    
+                    <h3 className="card-title h5">
+                      <Link 
+                        to={`/blog/${article.slug}`} 
+                        className="stretched-link text-decoration-none text-dark"
+                      >
+                        {article.title}
+                      </Link>
+                    </h3>
+                    
+                    <p className="card-text text-muted">{article.description}</p>
+                    
+                    <div className="d-flex align-items-center justify-content-between mt-3">
+                      <span className="text-muted small">
+                        {new Date(article.date).toLocaleDateString('en-US', { 
+                          year: 'numeric', 
+                          month: 'short', 
+                          day: 'numeric' 
+                        })}
+                      </span>
+                      <span className="read-more text-primary fw-semibold">
+                        Read Article
+                        <i className="bi bi-arrow-right ms-2"></i>
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
-  </>
-);
+      </section>
+    </>
+  );
+}
