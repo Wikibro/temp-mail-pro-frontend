@@ -143,29 +143,34 @@ export default function BlogList() {
   }, []);
 
   if (loading) {
-    return (
-      <div className="blog-list py-5">
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
+  return (
+    <div className="blog-list py-5">
+      <div className="d-flex justify-content-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+}
 
-  return (
-  <> 
+return (
+
+  <>
     <Helmet>
       <title>Email Privacy & Security Blog | TempMail Pk</title>
       <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
       <link rel="canonical" href="https://tempmailpk.com/blog" />
     </Helmet>
+
     <section className="blog-section py-5">
-      {/* ... rest of your existing JSX code here ... */}
-    </section>
-  </>
+      <div className="container">
+        <div className="text-center mb-5">
+          <h2 className="section-title">Latest Articles</h2>
+          <p className="section-subtitle">Discover insights about privacy, security, and technology</p>
+        </div>
         
+        {/* This row and its content are NOW correctly inside the section */}
         <div className="row">
           {articles.map((article, index) => (
             <div key={article.slug} className="col-lg-6 mb-4">
@@ -209,5 +214,5 @@ export default function BlogList() {
         </div>
       </div>
     </section>
-  );
-}
+  </>
+);
