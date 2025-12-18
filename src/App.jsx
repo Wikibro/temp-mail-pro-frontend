@@ -1599,6 +1599,7 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/blog" element={<BlogList />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Router>
       </ErrorBoundary>
