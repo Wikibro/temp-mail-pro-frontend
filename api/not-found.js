@@ -1,12 +1,3 @@
-export default function handler(request, response) {
-  response.status(404).send(`
-    <!DOCTYPE html>
-    <html>
-      <head><title>404 - Page Not Found</title></head>
-      <body>
-        <h1>404 - Page Not Found</h1>
-        <p>The page you requested does not exist.</p>
-      </body>
-    </html>
-  `);
+export default function handler(req, res) {
+  res.status(404).send('404 - Page Not Found');
 }
