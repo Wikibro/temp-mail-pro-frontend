@@ -22,7 +22,7 @@
     { "source": "/blog/:slug", "destination": "/index.html" },
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
-    // 2. Catch-all for EVERYTHING ELSE → send to your 404 API endpoint
+   
     { "source": "/(.*)", "destination": "/api/not-found" }
   ]
 }
