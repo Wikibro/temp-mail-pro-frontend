@@ -14,7 +14,15 @@
     }
   ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
-     { "source": "/(.*)", "destination": "/api/not-found" }
+    // 1. First, let your valid SPA routes through to index.html
+    { "source": "/", "destination": "/index.html" },
+    { "source": "/app", "destination": "/index.html" },
+    { "source": "/app/:path*", "destination": "/index.html" }, // For any subpaths under /app if needed
+    { "source": "/blog", "destination": "/index.html" },
+    { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/about", "destination": "/index.html" },
+    // 2. Catch-all for EVERYTHING ELSE → send to your 404 API endpoint
+    { "source": "/(.*)", "destination": "/api/not-found" }
   ]
 }
