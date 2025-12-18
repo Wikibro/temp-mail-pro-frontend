@@ -1066,7 +1066,7 @@ import EmailCard from "./components/EmailCard";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import ErrorAlert from "./components/ErrorAlert";
-
+import NotFoundPage from "./pages/NotFoundPage";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 // Duration constants for better maintainability
