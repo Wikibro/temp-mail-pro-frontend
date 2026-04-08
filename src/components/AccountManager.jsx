@@ -474,6 +474,7 @@ const AccountManager = ({
   account, 
   refreshInbox, 
   onNewEmail,
+  onEmailCopied,
   isLoading = false
 }) => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -487,6 +488,7 @@ const AccountManager = ({
   const copyToClipboard = (email) => {
     navigator.clipboard.writeText(email).then(() => {
       setCopiedEmail(true);
+      if (onEmailCopied) onEmailCopied();
       setTimeout(() => setCopiedEmail(false), 2000);
     }).catch(err => {
       console.error('Failed to copy: ', err);

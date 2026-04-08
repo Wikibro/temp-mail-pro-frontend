@@ -1066,6 +1066,8 @@ import EmailCard from "./components/EmailCard";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import ErrorAlert from "./components/ErrorAlert";
+import PromoCard from "./components/PromoCard.jsx";
+import About from "./components/About.jsx";
 import NotFoundPage from "./pages/NotFoundPage";
 const API_BASE = import.meta.env.VITE_API_BASE;
 
@@ -1084,7 +1086,7 @@ const POLLING_INTERVALS = {
   SLOW: 30000     // 30 seconds
 };
 
-function TempMailApp() {
+function TempMailApp({ onEmailCopied }) {
   const [account, setAccount] = useState(() => {
     const saved = localStorage.getItem("tempMailAccount");
     return saved ? JSON.parse(saved) : null;
@@ -1116,8 +1118,7 @@ function TempMailApp() {
 
   const location = useLocation();
   const isAppPage = location.pathname === "/app";
-// In your TempMailApp component, update the currentUrl logic:
-const currentUrl = `${window.location.origin}${location.pathname}`;
+  const currentUrl = `${window.location.origin}${location.pathname}`;
 
   // Use refs to access current state in intervals
   const accountRef = useRef(account);
@@ -1483,6 +1484,7 @@ const currentUrl = `${window.location.origin}${location.pathname}`;
             account={account}
             refreshInbox={() => fetchInbox(true)}
             onNewEmail={() => createNewAccount(false)}
+            onEmailCopied={onEmailCopied}
             isLoading={isLoading || isInboxLoading}
           />
 
@@ -1550,6 +1552,56 @@ const currentUrl = `${window.location.origin}${location.pathname}`;
   );
 }
 
+function AppContent() {
+  const location = useLocation();
+  const [showPromoCard, setShowPromoCard] = useState(false);
+  const [promoClosed, setPromoClosed] = useState(() => localStorage.getItem("promoClosed") === "true");
+
+  const promotablePage = ["/", "/blog"].includes(location.pathname) ||
+    location.pathname.startsWith("/blog/") ||
+    location.pathname === "/app";
+
+  useEffect(() => {
+    if (!promotablePage || promoClosed) {
+      return undefined;
+    }
+
+    const timer = setTimeout(() => setShowPromoCard(true), 7000);
+    return () => clearTimeout(timer);
+  }, [promotablePage, promoClosed]);
+
+  const handlePromoClose = () => {
+    setShowPromoCard(false);
+    setPromoClosed(true);
+    localStorage.setItem("promoClosed", "true");
+  };
+
+  const handleEmailCopied = () => {
+    if (!promoClosed) {
+      setShowPromoCard(true);
+    }
+  };
+
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/app" element={<TempMailApp onEmailCopied={handleEmailCopied} />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+        <Route path="/blog" element={<BlogList />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+
+      <PromoCard
+        visible={showPromoCard && !promoClosed && promotablePage}
+        onClose={handlePromoClose}
+      />
+    </>
+  );
+}
+
 // Error Boundary Component to catch errors
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -1593,14 +1645,7 @@ function App() {
     <HelmetProvider>
       <ErrorBoundary>
         <Router>
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/app" element={<TempMailApp />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/blog" element={<BlogList />} />
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
+          <AppContent />
         </Router>
       </ErrorBoundary>
     </HelmetProvider>
