@@ -124,7 +124,7 @@ const Landing = () => {
               </li>
               <li className="nav-item">
                 <button 
-                  className="nav-link btn btn-link" 
+                  className="nav-link btn btn-link landing-nav-btn" 
                   onClick={() => scrollToSection('features')}
                 >
                   Features
@@ -132,7 +132,7 @@ const Landing = () => {
               </li>
               <li className="nav-item">
                 <button 
-                  className="nav-link btn btn-link" 
+                  className="nav-link btn btn-link landing-nav-btn" 
                   onClick={() => scrollToSection('how-it-works')}
                 >
                   How It Works
@@ -140,7 +140,7 @@ const Landing = () => {
               </li>
               <li className="nav-item">
                 <button 
-                  className="nav-link btn btn-link" 
+                  className="nav-link btn btn-link landing-nav-btn" 
                   onClick={() => scrollToSection('seo-article')}
                 >
                   Email Security Guide
@@ -148,7 +148,7 @@ const Landing = () => {
               </li>
               <li className="nav-item">
                 <button 
-                  className="nav-link btn btn-link" 
+                  className="nav-link btn btn-link landing-nav-btn" 
                   onClick={() => scrollToSection('faq')}
                 >
                   FAQ
@@ -156,7 +156,7 @@ const Landing = () => {
               </li>
               <li className="nav-item">
                 <button 
-                  className="nav-link btn btn-link" 
+                  className="nav-link btn btn-link landing-nav-btn" 
                   onClick={() => scrollToSection('blog')}
                 >
                   Blog
@@ -175,7 +175,7 @@ const Landing = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6">
-              <h1 className="display-4 fw-bold mb-4">Secure Your Privacy with <span className="brand-highlight">Temporary Email</span></h1>
+              <h1 className="display-4 fw-bold mb-4 hero-title">Secure Your Privacy with <span className="brand-highlight">Temporary Email</span></h1>
               <p className="lead mb-5">TempMail Pro provides free disposable email addresses to protect your personal inbox from spam, phishing, and unwanted marketing emails. No registration required!</p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/app" className="btn cta-button">

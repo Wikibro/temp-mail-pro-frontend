@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import YesimRecommendation from './YesimRecommendation';
 
 const AccountManager = ({ 
   account, 
@@ -225,7 +224,6 @@ const AccountManager = ({
         )}
       </div>
     </div>
-    <YesimRecommendation />
     </>
   );
 };

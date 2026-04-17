@@ -14,10 +14,10 @@ import Header from "./components/Header";
 import ErrorAlert from "./components/ErrorAlert";
 import PromoCard from "./components/PromoCard.jsx";
 import YesimRecommendation from "./components/YesimRecommendation.jsx";
+import Landing from "./components/Landing.jsx";
+import BlogList from "./components/BlogList";
 
-const Landing = lazy(() => import("./components/Landing.jsx"));
 const BlogPost = lazy(() => import("./components/BlogPost"));
-const BlogList = lazy(() => import("./components/BlogList"));
 const Privacy = lazy(() => import("./components/Privacy"));
 const About = lazy(() => import("./components/About.jsx"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
@@ -517,19 +517,20 @@ function AppContent() {
   const location = useLocation();
   const [showPromoCard, setShowPromoCard] = useState(false);
   const [promoClosed, setPromoClosed] = useState(() => localStorage.getItem("promoClosed") === "true");
+  const shouldAutoShowPromo = location.pathname !== "/app";
 
   const promotablePage = ["/", "/blog"].includes(location.pathname) ||
     location.pathname.startsWith("/blog/") ||
     location.pathname === "/app";
 
   useEffect(() => {
-    if (!promotablePage || promoClosed) {
+    if (!promotablePage || promoClosed || !shouldAutoShowPromo) {
       return undefined;
     }
 
     const timer = setTimeout(() => setShowPromoCard(true), 7000);
     return () => clearTimeout(timer);
-  }, [promotablePage, promoClosed]);
+  }, [promotablePage, promoClosed, shouldAutoShowPromo]);
 
   const handlePromoClose = () => {
     setShowPromoCard(false);

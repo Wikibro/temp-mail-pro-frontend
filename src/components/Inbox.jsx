@@ -131,7 +131,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
           {messages.map((msg) => (
             <div
               key={msg.id}
-              className="list-group-item list-group-item-action py-3"
+              className="list-group-item list-group-item-action py-3 message-list-item"
               onClick={() => setSelectedMsg(msg)}
               style={{ cursor: 'pointer' }}
             >
@@ -165,11 +165,11 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
           style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
         >
           <div
-            className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable"
+            className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable inbox-modal-dialog"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="modal-content">
-              <div className="modal-header">
+            <div className="modal-content inbox-modal-content">
+              <div className="modal-header inbox-modal-header">
                 <h5 className="modal-title">
                   {selectedMsg.subject || '(No Subject)'}
                 </h5>
@@ -180,7 +180,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">
+              <div className="modal-body inbox-modal-body">
                 <div className="mb-4">
                   <p>
                     <strong>From:</strong>{' '}
@@ -210,7 +210,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                     </div>
                   ) : contentError ? (
                     <div className="alert alert-danger">
-                      <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex justify-content-between align-items-center inbox-content-error-row">
                         <span>Error loading content: {contentError}</span>
                         <button 
                           className="btn btn-sm btn-outline-danger"
@@ -222,6 +222,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                     </div>
                   ) : messageContent?.html ? (
                     <div
+                      className="email-html-content"
                       dangerouslySetInnerHTML={{ __html: messageContent.html }}
                     />
                   ) : (
@@ -231,7 +232,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                   )}
                 </div>
               </div>
-              <div className="modal-footer">
+              <div className="modal-footer inbox-modal-footer">
                 <button
                   className="btn btn-secondary"
                   onClick={() => setSelectedMsg(null)}
