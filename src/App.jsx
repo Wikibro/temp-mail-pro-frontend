@@ -200,6 +200,25 @@ function TempMailApp({ onEmailCopied }) {
       ? options.durationMs
       : DURATIONS['1hour'];
 
+    const normalizeRequestedUsername = (value) => {
+      if (!value || typeof value !== 'string') return null;
+
+      const sanitized = value
+        .toLowerCase()
+        .replace(/[^a-z0-9._-]/g, '')
+        .replace(/^[._-]+|[._-]+$/g, '')
+        .slice(0, 24);
+
+      if (!sanitized) return null;
+      if (sanitized.length >= 3) return sanitized;
+
+      const needed = 3 - sanitized.length;
+      const pad = Math.random().toString(36).slice(2, 2 + needed);
+      return `${sanitized}${pad}`;
+    };
+
+    const requestedUsername = normalizeRequestedUsername(customName);
+
     setIsLoading(true);
     setError(null);
     setShowExpiredCard(false);
@@ -208,37 +227,20 @@ function TempMailApp({ onEmailCopied }) {
     try {
       let res;
       if (customName) {
-        const payloadCandidates = [
-          { username: customName },
-          { customName },
-          { name: customName },
-          { localPart: customName },
-          { local_part: customName }
-        ];
-
-        for (let i = 0; i < payloadCandidates.length; i += 1) {
-          const payload = payloadCandidates[i];
-          try {
-            res = await axios.post(`${API_ROOT}/accounts/create`, payload);
-            break;
-          } catch (err) {
-            const status = err.response?.status;
-            const msg = (err.response?.data?.error || err.message || '').toLowerCase();
-            const unsupportedField = status === 400 || status === 422 ||
-              msg.includes('unknown') ||
-              msg.includes('invalid') ||
-              msg.includes('not allowed') ||
-              msg.includes('unexpected');
-
-            if (!unsupportedField || i === payloadCandidates.length - 1) {
-              throw err;
-            }
-          }
+        if (!requestedUsername) {
+          setError({ message: 'Please enter a valid custom name (letters or numbers).' });
+          return;
         }
 
-        // Backward compatibility: if no custom field is accepted, create a random inbox.
-        if (!res) {
-          res = await axios.post(`${API_ROOT}/accounts/create`);
+        res = await axios.post(`${API_ROOT}/accounts/create`, { username: requestedUsername });
+
+        const createdAddress = (res.data?.address || res.data?.email || '').toLowerCase();
+        const createdLocalPart = createdAddress.split('@')[0] || '';
+        if (!createdLocalPart.startsWith(requestedUsername)) {
+          setError({
+            message: `Could not create custom email "${requestedUsername}". Please try another name.`
+          });
+          return;
         }
       } else {
         res = await axios.post(`${API_ROOT}/accounts/create`);
