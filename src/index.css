@@ -81,6 +81,17 @@ header p {
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
+@media (hover: none) {
+  .card:hover {
+    transform: none;
+    box-shadow: var(--card-shadow);
+  }
+
+  .list-group-item:hover {
+    transform: none !important;
+  }
+}
+
 .card-header {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   color: white;
@@ -457,7 +468,8 @@ footer {
 
 .yesim-card-body {
   flex: 1;
-  min-width: 220px;
+  min-width: 0;
+  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -3308,269 +3320,8 @@ body.dark-mode .email-sidebar-footer {
 .multi-inbox-main {
   flex: 1;
   min-width: 0;
-}
-
-/* ---- Responsive: tablet/mobile stack ---- */
-@media (max-width: 991.98px) {
-  .multi-inbox-layout {
-    flex-direction: column;
-    min-height: auto;
-    gap: 12px;
-  }
-
-  .email-sidebar {
-    width: 100%;
-    min-width: 0;
-    position: static;
-    max-height: none;
-    margin-right: 0;
-    margin-bottom: 0;
-  }
-
-  .email-sidebar-list {
-    max-height: min(40vh, 320px);
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .email-sidebar-delete {
-    opacity: 1;
-  }
-
-  .am-email-row {
-    display: grid;
-    grid-template-columns: 42px minmax(0, 1fr);
-    gap: 10px;
-    align-items: center;
-  }
-
-  .am-copy-btn {
-    grid-column: 1 / -1;
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-@media (max-width: 576px) {
-  .container-fluid {
-    padding-left: 12px !important;
-    padding-right: 12px !important;
-  }
-
-  .email-sidebar-row {
-    padding: 10px 12px;
-  }
-
-  .email-sidebar-header,
-  .email-sidebar-footer {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-
-  .email-sidebar-addr {
-    font-size: 0.76rem;
-  }
-
-  .inbox-modal-dialog {
-    margin: 0;
-    max-width: 100vw;
-    min-height: 100vh;
-  }
-
-  .inbox-modal-content {
-    border-radius: 0;
-    min-height: 100vh;
-  }
-
-  .inbox-modal-body {
-    max-height: calc(100vh - 132px);
-  }
-
-  .card-header {
-    gap: 8px;
-  }
-
-  footer .list-unstyled li,
-  footer .list-unstyled a,
-  footer p {
-    overflow-wrap: anywhere;
-  }
-}
-
-@media (max-width: 360px) {
-  .container-fluid {
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-  }
-
-  .email-sidebar-header,
-  .email-sidebar-footer,
-  .email-sidebar-row {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .email-sidebar-avatar {
-    width: 30px;
-    height: 30px;
-    font-size: 0.78rem;
-  }
-
-  .email-sidebar-addr {
-    font-size: 0.72rem;
-  }
-
-  .email-sidebar-expiry,
-  .email-sidebar-section-label {
-    font-size: 0.66rem;
-  }
-
-  .am-email-row {
-    grid-template-columns: 36px minmax(0, 1fr);
-    gap: 8px;
-    padding: 10px 12px;
-  }
-
-  .am-email-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-  }
-
-  .am-email-address {
-    font-size: 0.84rem;
-  }
-
-  .am-copy-btn,
-  .am-action-btn {
-    min-height: 36px;
-    font-size: 0.74rem;
-  }
-
-  .am-expiry-time {
-    font-size: 0.82rem;
-  }
-
-  .card-header h5,
-  .card-header .h5 {
-    font-size: 0.96rem;
-  }
-
-  .card-header .btn {
-    padding: 0.22rem 0.42rem;
-  }
-
-  .message-list-item {
-    padding: 0.6rem 0.62rem !important;
-  }
-
-  .message-item {
-    gap: 0.55rem;
-  }
-
-  .message-icon {
-    width: 32px;
-    height: 32px;
-    font-size: 0.84rem;
-  }
-
-  .message-subject {
-    font-size: 0.88rem;
-  }
-
-  .message-preview {
-    font-size: 0.78rem;
-  }
-
-  .message-meta {
-    font-size: 0.7rem;
-    line-height: 1.15;
-  }
-
-  .inbox-modal-header,
-  .inbox-modal-body,
-  .inbox-modal-footer {
-    padding-left: 0.68rem;
-    padding-right: 0.68rem;
-  }
-
-  .inbox-modal-header .modal-title {
-    font-size: 0.92rem;
-    line-height: 1.2;
-  }
-
-  .inbox-modal-body p,
-  .email-html-content,
-  .email-content {
-    font-size: 0.82rem;
-  }
-}
-
-@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
-  .container-fluid {
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-  }
-
-  header {
-    margin-bottom: 0.9rem;
-  }
-
-  .multi-inbox-layout {
-    gap: 8px;
-  }
-
-  .email-sidebar {
-    max-height: none;
-  }
-
-  .email-sidebar-list {
-    max-height: 30vh;
-  }
-
-  .am-email-row {
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-
-  .am-expiry-row,
-  .am-actions {
-    padding-top: 8px;
-    padding-bottom: 8px;
-  }
-
-  .message-list-item {
-    padding-top: 0.55rem !important;
-    padding-bottom: 0.55rem !important;
-  }
-
-  .inbox-modal-dialog {
-    margin: 0;
-    max-width: 100vw;
-    min-height: 100vh;
-  }
-
-  .inbox-modal-content {
-    border-radius: 0;
-    min-height: 100vh;
-  }
-
-  .inbox-modal-header,
-  .inbox-modal-footer {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-
-  .inbox-modal-body {
-    max-height: calc(100vh - 98px);
-    padding-top: 0.65rem;
-    padding-bottom: 0.65rem;
-  }
-
-  .background-polling-indicator {
-    bottom: 12px;
-    right: 12px;
-  }
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 /* ============================================================
@@ -3864,6 +3615,8 @@ body.dark-mode .eg-custom-unit {
   margin-bottom: 16px;
   border: 1.5px solid transparent;
   transition: border-color 0.3s;
+  max-width: 100%;
+  width: 100%;
 }
 
 .am-card.critical {
@@ -3886,6 +3639,8 @@ body.dark-mode .am-card {
   align-items: center;
   gap: 12px;
   padding: 16px 18px;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .am-email-icon {
@@ -3904,6 +3659,7 @@ body.dark-mode .am-card {
 .am-email-body {
   flex: 1;
   min-width: 0;
+  overflow: hidden;
 }
 
 .am-email-label {
@@ -3922,6 +3678,8 @@ body.dark-mode .am-card {
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--dark);
+  min-width: 0;
+  max-width: 100%;
 }
 
 body.dark-mode .am-email-address {
@@ -4056,36 +3814,409 @@ body.dark-mode .am-actions {
   to { transform: rotate(360deg); }
 }
 
-/* Mobile adjustments */
-@media (max-width: 480px) {
-  .eg-hero-card {
-    padding: 24px 16px 20px;
+/* ============================================================
+   /app — Comprehensive mobile layout (all screen widths)
+   These rules sit at the end to win over earlier defaults.
+   ============================================================ */
+
+/* --- Universal: prevent any element from escaping the viewport --- */
+.multi-inbox-layout *,
+.multi-inbox-main *,
+.am-card *,
+.yesim-card * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* --- ≤ 991px: stack sidebar above main --- */
+@media (max-width: 991.98px) {
+  .container-fluid {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
-  .eg-hero-title {
-    font-size: 1.3rem;
+
+  .multi-inbox-layout {
+    flex-direction: column;
+    min-height: auto;
+    gap: 12px;
   }
-  .eg-chip {
-    padding: 6px 10px;
-    font-size: 0.78rem;
+
+  .email-sidebar {
+    width: 100%;
+    min-width: 0;
+    position: static;
+    max-height: none;
+    margin-right: 0;
+    margin-bottom: 0;
   }
+
+  .email-sidebar-list {
+    max-height: min(40vh, 280px);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Always show delete btn on touch devices */
+  .email-sidebar-delete {
+    opacity: 1;
+  }
+
+  /* Active Email row: icon + info in row 1, Copy full-width in row 2 */
   .am-email-row {
-    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
     gap: 8px;
+    padding: 14px 16px;
   }
+
   .am-copy-btn {
-    padding: 7px 10px;
-    font-size: 0.76rem;
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    min-height: 40px;
+  }
+
+  /* Email address: allow wrapping, never overflow */
+  .am-email-address {
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+    line-height: 1.3;
+  }
+
+  /* General text overflow safety */
+  .yesim-card-text,
+  .yesim-card-title,
+  .email-sidebar-addr,
+  .message-preview,
+  .message-subject,
+  .am-expiry-time,
+  .am-email-label {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Yesim card */
+  .yesim-card {
+    padding: 1rem;
+    overflow: hidden;
+  }
+
+  .yesim-card-content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .yesim-card-body {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .btn-yesim-card {
+    width: 100%;
+  }
+
+  /* Inbox card header: prevent title+btn from overflowing */
+  .card-header {
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 0.9rem 1rem;
+  }
+
+  .card-header h5,
+  .card-header .h5 {
+    font-size: 0.96rem;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  /* Inbox modal: full-screen on mobile */
+  .inbox-modal-dialog {
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .inbox-modal-content {
+    border-radius: 0;
+    min-height: 100dvh;
+  }
+
+  .inbox-modal-body {
+    max-height: calc(100dvh - 130px);
+    padding: 1rem;
+  }
+
+  .inbox-modal-header,
+  .inbox-modal-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Disable hover transforms on touch */
+  .list-group-item:hover {
+    transform: none !important;
+  }
+
+  footer .list-unstyled li,
+  footer .list-unstyled a,
+  footer p {
+    overflow-wrap: anywhere;
+  }
+}
+
+/* --- ≤ 600px: tighten up spacing ---  */
+@media (max-width: 600px) {
+  .container-fluid {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  header h1 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .am-email-row {
+    padding: 12px 12px;
   }
 
   .am-expiry-row,
   .am-actions {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
+  /* Inbox expiry: stack label + time vertically */
   .am-expiry-info {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     gap: 2px;
+  }
+
+  .email-sidebar-row {
+    padding: 10px 10px;
+  }
+
+  .email-sidebar-header,
+  .email-sidebar-footer {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .email-sidebar-addr {
+    font-size: 0.74rem;
+  }
+
+  .message-list-item {
+    padding: 0.65rem 0.75rem !important;
+  }
+
+  .message-item {
+    gap: 0.7rem;
+    padding: 0.1rem;
+  }
+
+  .message-icon {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .message-subject {
+    font-size: 0.9rem;
+  }
+
+  .message-preview {
+    font-size: 0.8rem;
+  }
+
+  .message-meta {
+    font-size: 0.74rem;
+  }
+
+  .eg-hero-card {
+    padding: 20px 14px 18px;
+  }
+
+  .eg-hero-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* --- ≤ 430px: very small phones (320–430px) --- */
+@media (max-width: 430px) {
+  .am-email-row {
+    grid-template-columns: 36px minmax(0, 1fr);
+    padding: 10px 10px;
+    gap: 7px;
+  }
+
+  .am-email-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 0.92rem;
+    border-radius: 10px;
+  }
+
+  .am-copy-btn,
+  .am-action-btn {
+    font-size: 0.75rem;
+    min-height: 36px;
+    padding: 6px 10px;
+  }
+
+  .am-email-address {
+    font-size: 0.85rem;
+  }
+
+  .email-sidebar-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.76rem;
+  }
+
+  .email-sidebar-addr {
+    font-size: 0.7rem;
+  }
+
+  .eg-chip {
+    padding: 5px 9px;
+    font-size: 0.76rem;
+  }
+
+  .message-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 0.9rem;
+  }
+
+  .inbox-modal-header .modal-title {
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  .inbox-modal-header,
+  .inbox-modal-body,
+  .inbox-modal-footer {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+
+  .inbox-content-error-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+/* --- ≤ 360px: absolute minimum screen width --- */
+@media (max-width: 360px) {
+  .container-fluid {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+  }
+
+  .am-email-row {
+    grid-template-columns: 32px minmax(0, 1fr);
+    gap: 6px;
+  }
+
+  .am-email-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.84rem;
+    border-radius: 8px;
+  }
+
+  .am-email-address {
+    font-size: 0.78rem;
+  }
+
+  .am-copy-btn,
+  .am-action-btn {
+    font-size: 0.7rem;
+    min-height: 34px;
+    padding: 5px 8px;
+  }
+
+  .am-expiry-time {
+    font-size: 0.8rem;
+  }
+
+  .email-sidebar-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+
+  .email-sidebar-addr {
+    font-size: 0.68rem;
+  }
+
+  .email-sidebar-expiry,
+  .email-sidebar-section-label {
+    font-size: 0.64rem;
+  }
+
+  .message-icon {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .message-subject {
+    font-size: 0.83rem;
+  }
+
+  .message-preview,
+  .message-meta {
+    font-size: 0.72rem;
+  }
+
+  .card-header {
+    padding: 0.75rem 0.75rem;
+  }
+
+  .card-header h5,
+  .card-header .h5 {
+    font-size: 0.88rem;
+  }
+}
+
+/* --- Landscape small phones (height ≤ 500px) --- */
+@media (max-height: 500px) and (orientation: landscape) and (max-width: 900px) {
+  header {
+    margin-bottom: 0.6rem;
+    padding-top: 0.5rem !important;
+  }
+
+  .email-sidebar-list {
+    max-height: 28vh;
+  }
+
+  .am-email-row {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .am-expiry-row,
+  .am-actions {
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .inbox-modal-body {
+    max-height: calc(100dvh - 96px);
+  }
+
+  .inbox-modal-header,
+  .inbox-modal-footer {
+    padding-top: 0.45rem;
+    padding-bottom: 0.45rem;
   }
 }
