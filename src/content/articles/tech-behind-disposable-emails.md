@@ -1,7 +1,7 @@
 ---
 title: "The Tech Behind Disposable Emails"
-date: "2025-08-17"
-description: "Understand how disposable email services work under the hood."
+date: "2026-03-10"
+description: "Understand how disposable email services work under the hood — from SMTP servers to privacy-first ephemeral storage."
 ---
 
 ### How Do Disposable Email Services Work?

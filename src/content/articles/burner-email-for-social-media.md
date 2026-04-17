@@ -1,7 +1,7 @@
 ---
 title: "Why You Need a Burner Email for Social Media"
-date: "2025-08-17"
-description: "Protect your privacy by using burner emails when signing up on social platforms."
+date: "2026-04-10"
+description: "Protect your digital identity and stop spam by using burner emails when signing up on social platforms."
 ---
 
 ### Social Media = Data Harvesting

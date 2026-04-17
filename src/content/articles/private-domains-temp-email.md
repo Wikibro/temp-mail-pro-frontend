@@ -1,7 +1,7 @@
 ---
-title: "Private Domains: How to Get Your Own Temporary Email"
-description: "Learn how to set up a private domain for disposable email and protect your online identity."
-date: "2025-08-15"
+title: "Private Domains: Get Your Own Temporary Email"
+description: "Learn how to set up a private custom domain for disposable email and take full control of your online identity."
+date: "2026-04-02"
 ---
 
 

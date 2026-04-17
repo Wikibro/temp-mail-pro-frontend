@@ -8,6 +8,7 @@ import rehypeRaw from 'rehype-raw';
 import { Helmet } from 'react-helmet-async';
 import 'highlight.js/styles/github.css';
 import { articles } from '../content/articlesData';
+import { getRelatedArticles } from '../utils/relatedArticles';
 
 const markdownFiles = import.meta.glob('../content/articles/*.md', {
   query: '?raw',
@@ -96,7 +97,7 @@ export default function BlogPost() {
   const defaultImage = `${window.location.origin}/images/temp-mail-promo.png`;
   const metaImage = image ? `${window.location.origin}${image}` : defaultImage;
   const canonicalUrl = `${window.location.origin}/blog/${slug}`;
-  const relatedArticles = articles.filter((article) => article.slug !== slug).slice(0, 3);
+  const relatedArticles = getRelatedArticles(slug, articles, 3);
   const estimatedReadTime = Math.max(1, Math.ceil(content.split(/\s+/).filter(Boolean).length / 200));
 
   return (

@@ -8,7 +8,9 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
   const [contentError, setContentError] = useState(null);
   const [internalError, setInternalError] = useState(null);
 
-  const API_BASE = import.meta.env.VITE_API_BASE || '/api';
+  const RAW_API_BASE = import.meta.env.VITE_API_BASE || '';
+  const API_BASE = RAW_API_BASE.replace(/\/+$/, '');
+  const API_ROOT = API_BASE ? `${API_BASE}/api` : '/api';
 
   useEffect(() => {
     if (selectedMsg) {
@@ -21,7 +23,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
     setContentError(null);
     
     try {
-      const res = await axios.get(`${API_BASE}/api/inbox/content/${msg.token}/${msg.id}`, {
+      const res = await axios.get(`${API_ROOT}/inbox/content/${msg.token}/${msg.id}`, {
         validateStatus: (status) => status < 500 // Don't reject on 401/403
       });
 

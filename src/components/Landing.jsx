@@ -390,6 +390,18 @@ const Landing = () => {
             color: #4361ee;
             font-weight: 600;
           }
+
+          body.dark-mode .article-content {
+            color: #d7dde4;
+          }
+
+          body.dark-mode .article-content h3 {
+            color: #8ab4ff;
+          }
+
+          body.dark-mode .article-content strong {
+            color: #9bc3ff;
+          }
           
           /* Ensure consistency with existing styles */
           .section-title {
@@ -426,6 +438,10 @@ const Landing = () => {
             border-radius: 30px;
             font-weight: 600;
             transition: all 0.3s ease;
+          }
+
+          body.dark-mode .hero-section {
+            background: linear-gradient(135deg, #263d8e 0%, #35206b 100%);
           }
           
           .cta-button:hover {

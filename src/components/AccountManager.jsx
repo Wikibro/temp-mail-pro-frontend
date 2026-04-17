@@ -1,230 +1,123 @@
 import React, { useState, useEffect } from 'react';
 
-const AccountManager = ({ 
-  account, 
-  refreshInbox, 
-  onNewEmail,
+const AccountManager = ({
+  account,
+  refreshInbox,
   onEmailCopied,
-  isLoading = false
+  isLoading = false,
 }) => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
-  const [localLoading, setLocalLoading] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  
-  // Use the correct property name (address instead of email)
-  const email = account?.address || account?.email || "";
-  
-  // Copy email to clipboard
-  const copyToClipboard = (email) => {
+
+  const email = account?.address || account?.email || '';
+
+  const copyToClipboard = () => {
+    if (!email) return;
     navigator.clipboard.writeText(email).then(() => {
       setCopiedEmail(true);
       if (onEmailCopied) onEmailCopied();
-      setTimeout(() => setCopiedEmail(false), 2000);
-    }).catch(err => {
-      console.error('Failed to copy: ', err);
-    });
+      setTimeout(() => setCopiedEmail(false), 2500);
+    }).catch(() => {});
   };
 
-  // Countdown timer for email expiry
   useEffect(() => {
     if (!account?.expiration) return;
-    
-    const calculateTimeLeft = () => {
-      const expiration = new Date(account.expiration);
-      const now = new Date();
-      const difference = expiration - now;
-      
-      if (difference <= 0) {
-        return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-      }
-      
+    const calc = () => {
+      const diff = new Date(account.expiration) - new Date();
+      if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0 };
       return {
-        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-        minutes: Math.floor((difference / 1000 / 60) % 60),
-        seconds: Math.floor((difference / 1000) % 60)
+        days: Math.floor(diff / 86400000),
+        hours: Math.floor((diff % 86400000) / 3600000),
+        minutes: Math.floor((diff % 3600000) / 60000),
+        seconds: Math.floor((diff % 60000) / 1000),
       };
     };
-    
-    const updateTimer = () => {
-      const timeLeft = calculateTimeLeft();
-      setTimeLeft(timeLeft);
-    };
-    
-    // Update immediately
-    updateTimer();
-    
-    // Then update every second
-    const timer = setInterval(updateTimer, 1000);
-    
-    return () => clearInterval(timer);
+    setTimeLeft(calc());
+    const t = setInterval(() => setTimeLeft(calc()), 1000);
+    return () => clearInterval(t);
   }, [account]);
-  
+
   const formatTime = () => {
-    if (!account?.expiration) return "Loading...";
-    
-    const expiration = new Date(account.expiration);
-    const now = new Date();
-    if (expiration <= now) return "Expired";
-    
-    // Fix the undefined issue by ensuring all values are numbers
-    const days = timeLeft.days || 0;
-    const hours = timeLeft.hours || 0;
-    const minutes = timeLeft.minutes || 0;
-    const seconds = timeLeft.seconds || 0;
-    
-    if (days > 0) {
-      return `${days}d ${hours}h ${minutes}m`;
-    } else if (hours > 0) {
-      return `${hours}h ${minutes}m ${seconds}s`;
-    } else if (minutes > 0) {
-      return `${minutes}m ${seconds}s`;
-    } else {
-      return `${seconds}s`;
-    }
+    if (!account?.expiration) return '—';
+    const diff = new Date(account.expiration) - new Date();
+    if (diff <= 0) return 'Expired';
+    const { days, hours, minutes, seconds } = timeLeft;
+    if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+    if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
+    if (minutes > 0) return `${minutes}m ${seconds}s`;
+    return `${seconds}s`;
   };
 
-  const getProgressPercentage = () => {
+  const getProgress = () => {
     if (!account?.expiration) return 0;
-    
-    const expiration = new Date(account.expiration);
-    const now = new Date();
-    const createdAt = account.createdAt ? new Date(account.createdAt) : new Date(now.getTime() - 3600000);
-    const totalDuration = expiration - createdAt;
-    const elapsed = now - createdAt;
-    
-    if (elapsed >= totalDuration) return 100;
-    return Math.min(100, Math.max(0, (elapsed / totalDuration) * 100));
+    const now = Date.now();
+    const exp = new Date(account.expiration).getTime();
+    const created = account.createdAt ? new Date(account.createdAt).getTime() : exp - 3600000;
+    const total = exp - created;
+    const elapsed = now - created;
+    return Math.min(100, Math.max(0, (elapsed / total) * 100));
   };
 
-  const getExpiryType = () => {
-    if (!account?.expiration) return "unknown";
-    
-    const expiration = new Date(account.expiration);
-    const now = new Date();
-    const hoursLeft = (expiration - now) / (1000 * 60 * 60);
-    
-    if (hoursLeft <= 0.17) return "10 minutes";
-    if (hoursLeft <= 1) return "1 hour";
-    if (hoursLeft <= 24) return "24 hours";
-    return "Permanent";
-  };
-
-  const handleRefresh = async () => {
-    setLocalLoading(true);
-    try {
-      await refreshInbox();
-    } catch (error) {
-      console.error("Error refreshing inbox:", error);
-    } finally {
-      setLocalLoading(false);
-    }
-  };
-
-  const handleNewEmail = async () => {
-    setLocalLoading(true);
-    try {
-      await onNewEmail();
-    } catch (error) {
-      console.error("Error creating new email:", error);
-    } finally {
-      setLocalLoading(false);
-    }
-  };
-
-  const handleReset = () => {
-    localStorage.removeItem('tempMailAccount');
-    localStorage.removeItem('generatedEmails');
-    window.location.reload();
-  };
+  const progress = getProgress();
+  const timeStr = formatTime();
+  const isCritical = timeLeft.days === 0 && timeLeft.hours === 0 && timeLeft.minutes < 5;
+  const barColor = progress > 90 ? 'bg-danger' : progress > 70 ? 'bg-warning' : 'bg-info';
 
   return (
-    <>
-      <div className="card mb-4 border-primary">
-      <div className="card-body">
-        <div className="d-flex justify-content-between align-items-center mb-3">
-          <h5 className="card-title mb-0">Your Temporary Email</h5>
-          {/* <span className="badge bg-success">Active</span> */}
+    <div className={`am-card${isCritical ? ' critical' : ''}`}>
+      <div className="am-email-row">
+        <div className="am-email-icon">
+          <i className="bi bi-envelope-fill"></i>
         </div>
-        
-        <div className="mb-3">
-          <label className="form-label text-muted">Email Address</label>
-          <div className="input-group">
-            <input 
-              type="text" 
-              className="form-control fw-bold fs-5" 
-              value={email || "Generating email..."} 
-              readOnly 
-              placeholder="Generating email..."
-            />
-            <button 
-              className={`btn ${copiedEmail ? 'btn-success' : 'btn-outline-primary'}`}
-              type="button"
-              onClick={() => email && copyToClipboard(email)}
-              disabled={isLoading || localLoading || !email}
-            >
-              {copiedEmail ? '✓ Copied' : 'Copy'}
-            </button>
+        <div className="am-email-body">
+          <div className="am-email-label">Active Email</div>
+          <div className="am-email-address" title={email}>
+            {email || <span className="am-generating">Generating…</span>}
           </div>
         </div>
-        
-        {account?.expiration && (
-          <div className="mb-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <span className="text-muted">Expires in:</span>
-              <span className={`fw-bold ${timeLeft.minutes < 5 && timeLeft.hours === 0 && timeLeft.days === 0 ? 'text-danger' : ''}`}>
-                {formatTime()}
-              </span>
-            </div>
-            <div className="progress" style={{ height: '5px' }}>
-              <div 
-                className={`progress-bar ${getProgressPercentage() > 90 ? 'bg-danger' : getProgressPercentage() > 70 ? 'bg-warning' : 'bg-info'}`}
-                role="progressbar" 
-                style={{ width: `${getProgressPercentage()}%` }}
-              ></div>
-            </div>
-            <small className="text-muted">
-              Type: {getExpiryType()}
-            </small>
+        <button
+          className={`am-copy-btn${copiedEmail ? ' copied' : ''}`}
+          onClick={copyToClipboard}
+          disabled={!email || isLoading}
+          title="Copy to clipboard"
+        >
+          {copiedEmail
+            ? <><i className="bi bi-check2 me-1"></i>Copied</>
+            : <><i className="bi bi-clipboard me-1"></i>Copy</>}
+        </button>
+      </div>
+
+      {account?.expiration && (
+        <div className="am-expiry-row">
+          <div className="am-expiry-info">
+            <span className="am-expiry-label">
+              <i className="bi bi-clock me-1"></i>Expires in
+            </span>
+            <span className={`am-expiry-time${isCritical ? ' text-danger' : ''}`}>
+              {timeStr}
+            </span>
           </div>
-        )}
-        
-        <div className="d-flex gap-2 flex-wrap">
-          {/* <button 
-            className="btn btn-primary"
-            onClick={handleRefresh}
-            disabled={isLoading || localLoading || !account}
-          >
-            <i className="bi bi-arrow-clockwise me-1"></i> 
-            {localLoading ? "Refreshing..." : "Refresh Inbox"}
-          </button> */}
-          <button 
-            className="btn btn-outline-secondary"
-            onClick={handleNewEmail}
-            disabled={isLoading || localLoading}
-          >
-            <i className="bi bi-plus-circle me-1"></i> New Email
-          </button>
-          <button 
-            className="btn btn-outline-danger"
-            onClick={handleReset}
-            disabled={isLoading || localLoading}
-          >
-            <i className="bi bi-trash me-1"></i> Reset
-          </button>
+          <div className="am-progress">
+            <div
+              className={`am-progress-fill ${barColor}`}
+              style={{ width: `${progress}%` }}
+            ></div>
+          </div>
         </div>
-        
-        {(isLoading || localLoading) && (
-          <div className="mt-3 text-center">
-            <div className="spinner-border spinner-border-sm text-primary" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-            <small className="text-muted ms-2">Processing...</small>
-          </div>
-        )}
+      )}
+
+      <div className="am-actions">
+        <button
+          className="am-action-btn"
+          onClick={refreshInbox}
+          disabled={isLoading || !account}
+          title="Refresh inbox"
+        >
+          <i className={`bi bi-arrow-clockwise${isLoading ? ' spin' : ''} me-1`}></i>
+          {isLoading ? 'Refreshing…' : 'Refresh Inbox'}
+        </button>
       </div>
     </div>
-    </>
   );
 };
 
