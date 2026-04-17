@@ -14,9 +14,10 @@ Disposable email services let you **instantly generate an inbox** without sign-u
 - Services run **SMTP (for receiving)** and **IMAP/POP (for reading)**.  
 - Emails are accepted only for temporary domains.
 
-### 2. **Database & Expiry**
-- Emails are stored in a database.  
-- Each email has a **time-to-live (TTL)** (e.g., 10 minutes → auto-delete).
+### 2. **No Database Storage in Privacy-First Services**
+- Many providers store temporary messages in a database and delete them after a TTL.  
+- At TempMail Pro, we take a privacy-first approach: temporary email addresses are generated in your browser and handled ephemerally on our mail server without persistent database storage.
+- This reduces lasting records and keeps your temporary email activity more anonymous.
 
 ### 3. **Frontend & APIs**
 - Users get a **temporary inbox UI** (React, Vue, etc.).  

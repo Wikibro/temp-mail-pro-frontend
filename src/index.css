@@ -304,6 +304,99 @@ footer {
   line-height: 1.4;
 }
 
+.yesim-hero-card {
+  background: rgba(10, 28, 71, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.yesim-hero-title,
+.yesim-banner-title,
+.yesim-card-title {
+  color: white;
+}
+
+.yesim-hero-copy,
+.yesim-banner-copy,
+.yesim-card-text {
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.8;
+}
+
+.btn-yesim-card,
+.btn-yesim-banner,
+.btn-yesim-hero {
+  background: #ffffff;
+  color: #102040;
+  border: none;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.14);
+}
+
+.btn-yesim-card:hover,
+.btn-yesim-banner:hover,
+.btn-yesim-hero:hover {
+  background: #f0f4ff;
+  color: #081a3d;
+}
+
+.yesim-banner {
+  background: linear-gradient(135deg, #081c3b 0%, #142a5c 100%);
+  color: white;
+}
+
+.yesim-banner-copy {
+  max-width: 700px;
+  margin: 0 auto 1rem;
+}
+
+.yesim-card {
+  background: linear-gradient(135deg, #0f1b3a 0%, #162a5b 100%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.25rem;
+}
+
+.yesim-card-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.yesim-card-icon {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.3rem;
+}
+
+.yesim-card-body {
+  flex: 1;
+  min-width: 220px;
+}
+
+@media (max-width: 768px) {
+  .yesim-card-content {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .yesim-hero-card,
+  .yesim-banner {
+    padding: 1.5rem;
+  }
+
+  .btn-yesim-card,
+  .btn-yesim-banner,
+  .btn-yesim-hero {
+    width: 100%;
+  }
+}
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -1089,6 +1182,41 @@ body.dark-mode .blog-content td {
   margin: 0 auto;
 }
 
+.faq-group + .faq-group {
+  margin-top: 2.5rem;
+}
+
+.faq-group-header {
+  margin-bottom: 1rem;
+}
+
+.faq-group-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(67, 97, 238, 0.08);
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.faq-group-title {
+  margin: 0.85rem 0 0.35rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.faq-group-note {
+  margin: 0;
+  color: var(--gray);
+  line-height: 1.6;
+}
+
 .faq-item {
   background: white;
   border-radius: 16px;
@@ -1212,6 +1340,14 @@ body.dark-mode .faq-question:hover {
 
 body.dark-mode .question-text {
   color: #e0e0e0;
+}
+
+body.dark-mode .faq-group-title {
+  color: #e0e0e0;
+}
+
+body.dark-mode .faq-group-eyebrow {
+  background: rgba(67, 97, 238, 0.18);
 }
 
 body.dark-mode .search-input {

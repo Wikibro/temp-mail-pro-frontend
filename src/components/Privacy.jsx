@@ -54,7 +54,7 @@ const Privacy = () => {
                         <h5>No Database Storage</h5>
                         <p className="text-muted mb-0">
                           We don't maintain any databases. Your emails exist only in your browser
-                          and our temporary mail server.
+                        and our temporary mail server, keeping your experience private and ephemeral.
                         </p>
                       </div>
                     </div>
@@ -166,6 +166,10 @@ const Privacy = () => {
                   <li><strong>No Tracking:</strong> We don't monitor or analyze your usage</li>
                   <li><strong>Anonymous Service:</strong> Use our service without any identification</li>
                 </ul>
+                <p>
+                  We also partner with Yesim to offer a privacy-respecting virtual SMS number option for OTP verification,
+                  so you can verify accounts without exposing your personal phone number.
+                </p>
               </div>
             </div>
 

@@ -31,3 +31,34 @@
 .dark-mode .blog-list .blog-link {
   color: #f1f1f1;
 }
+
+  /* Card accent bar */
+  .blog-card-accent {
+    height: 4px;
+    width: 100%;
+  }
+
+  /* Card hover effect */
+  .blog-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  }
+
+  /* Blog card title hover color */
+  .blog-card-title:hover {
+    color: #4361ee !important;
+  }
+
+  /* Section heading */
+  .section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a1a2e;
+  }
+  .section-subtitle {
+    color: #6c757d;
+    font-size: 1.05rem;
+  }

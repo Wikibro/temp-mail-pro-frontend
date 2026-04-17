@@ -61,7 +61,7 @@ const About = () => {
                     <h5>No Database Storage</h5>
                     <p className="text-muted">
                       We don't maintain any databases or permanent storage systems.
-                      Your email data exists only temporarily in our mail server.
+                      Temporary email addresses are generated in your browser and only exist briefly on our mail server.
                     </p>
                   </div>
                 </div>
@@ -151,6 +151,16 @@ const About = () => {
                     </p>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <div className="card border-0 shadow-sm mb-4">
+              <div className="card-body">
+                <h4 className="mb-3">New: Yesim Virtual Number Service</h4>
+                <p>
+                  TempMail Pro now supports Yesim virtual numbers for secure SMS verification.
+                  This privacy-first option helps you receive OTPs without exposing your personal phone number.
+                </p>
               </div>
             </div>
 
