@@ -235,12 +235,18 @@ header p {
   border-top: 1px solid var(--light-gray);
 }
 
-/* ---- Inbox modal: controlled sizing on all screen sizes ---- */
+/* ---- Inbox modal: professional responsive sizing ---- */
 .inbox-modal-dialog {
-  /* Desktop: comfortable reading width, not full-screen */
-  max-width: min(680px, 92vw);
-  width: 100%;
-  margin: 1.75rem auto;
+  /* Reset Bootstrap defaults to have full control */
+  margin: 0 auto !important;
+  width: auto !important;
+  max-width: 650px !important;
+  padding: 0 !important;
+  /* Vertical centering */
+  display: flex !important;
+  align-items: center !important;
+  min-height: 100vh;
+  position: relative;
 }
 
 .inbox-modal-content {
@@ -248,24 +254,32 @@ header p {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: calc(100dvh - 3.5rem);
+  width: 100%;
+  max-height: 85vh;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .inbox-modal-header {
   background: linear-gradient(90deg, var(--primary), var(--secondary));
   color: white;
-  padding: 1rem 1.25rem;
+  padding: 1.2rem 1.5rem;
   border: none;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 60px;
 }
 
 .inbox-modal-header .modal-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   overflow-wrap: anywhere;
   word-break: break-word;
-  padding-right: 0.5rem;
+  flex: 1;
+  margin: 0;
 }
 
 .inbox-modal-header .btn-close {
@@ -274,16 +288,22 @@ header p {
 }
 
 .inbox-modal-body {
-  padding: 1.25rem 1.5rem;
+  padding: 1.5rem;
   overflow-y: auto;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   flex: 1;
+  background: white;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .inbox-modal-footer {
-  padding: 0.85rem 1.25rem;
+  padding: 1rem 1.5rem;
   border-top: 1px solid var(--light-gray);
   flex-shrink: 0;
+  background: white;
+  text-align: right;
 }
 
 /* ---- Email meta block (From / To / Date) ---- */
@@ -4013,32 +4033,41 @@ body.dark-mode .am-actions {
     padding: 1rem;
   }
 
-  /* Inbox modal: full-screen on mobile */
+  /* Inbox modal: responsive on mobile, not full-screen */
   .inbox-modal-dialog {
-    margin: 0;
-    max-width: 100vw;
-    width: 100vw;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
+    width: calc(100% - 0px) !important;
+    max-width: 95vw !important;
+    margin: 0.5rem auto !important;
+    min-height: auto;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: flex-start !important;
+    justify-content: center !important;
+    padding-top: 0.5rem !important;
   }
 
   .inbox-modal-content {
-    border-radius: 0;
-    min-height: 100dvh;
-    max-height: 100dvh;
-    flex: 1;
+    border-radius: 12px;
+    min-height: auto;
+    max-height: calc(100dvh - 1rem);
+    width: 100%;
   }
 
   .inbox-modal-body {
     padding: 1rem;
-    max-height: calc(100dvh - 120px);
+    max-height: calc(100dvh - 150px);
+    overflow-y: auto;
   }
 
   .inbox-modal-header,
   .inbox-modal-footer {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+
+  .inbox-modal-header .modal-title {
+    font-size: 1rem;
+    line-height: 1.2;
   }
 
   .inbox-meta-block {
