@@ -167,7 +167,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
           style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
         >
           <div
-            className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable inbox-modal-dialog"
+            className="modal-dialog modal-dialog-centered modal-dialog-scrollable inbox-modal-dialog"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-content inbox-modal-content">
@@ -183,20 +183,19 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                 ></button>
               </div>
               <div className="modal-body inbox-modal-body">
-                <div className="mb-4">
-                  <p>
-                    <strong>From:</strong>{' '}
-                    {selectedMsg.from?.address || selectedMsg.from || 'Unknown'}
-                  </p>
-                  <p>
-                    <strong>To:</strong>{' '}
-                    {selectedMsg.to?.[0]?.address ||
-                      selectedMsg.to ||
-                      'Unknown'}
-                  </p>
-                  <p>
-                    <strong>Date:</strong> {formatDate(selectedMsg.createdAt)}
-                  </p>
+                <div className="inbox-meta-block">
+                  <div className="inbox-meta-row">
+                    <span className="inbox-meta-label">From</span>
+                    <span className="inbox-meta-value">{selectedMsg.from?.address || selectedMsg.from || 'Unknown'}</span>
+                  </div>
+                  <div className="inbox-meta-row">
+                    <span className="inbox-meta-label">To</span>
+                    <span className="inbox-meta-value">{selectedMsg.to?.[0]?.address || selectedMsg.to || 'Unknown'}</span>
+                  </div>
+                  <div className="inbox-meta-row">
+                    <span className="inbox-meta-label">Date</span>
+                    <span className="inbox-meta-value">{formatDate(selectedMsg.createdAt)}</span>
+                  </div>
                 </div>
 
                 <div className="border-top pt-3">
