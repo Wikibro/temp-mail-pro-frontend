@@ -3310,22 +3310,266 @@ body.dark-mode .email-sidebar-footer {
   min-width: 0;
 }
 
-/* ---- Responsive: mobile stack ---- */
-@media (max-width: 767px) {
+/* ---- Responsive: tablet/mobile stack ---- */
+@media (max-width: 991.98px) {
   .multi-inbox-layout {
     flex-direction: column;
+    min-height: auto;
+    gap: 12px;
   }
 
   .email-sidebar {
     width: 100%;
+    min-width: 0;
     position: static;
     max-height: none;
     margin-right: 0;
-    margin-bottom: 16px;
+    margin-bottom: 0;
   }
 
   .email-sidebar-list {
-    max-height: 200px;
+    max-height: min(40vh, 320px);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .email-sidebar-delete {
+    opacity: 1;
+  }
+
+  .am-email-row {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+  }
+
+  .am-copy-btn {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .container-fluid {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+
+  .email-sidebar-row {
+    padding: 10px 12px;
+  }
+
+  .email-sidebar-header,
+  .email-sidebar-footer {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .email-sidebar-addr {
+    font-size: 0.76rem;
+  }
+
+  .inbox-modal-dialog {
+    margin: 0;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+
+  .inbox-modal-content {
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+  .inbox-modal-body {
+    max-height: calc(100vh - 132px);
+  }
+
+  .card-header {
+    gap: 8px;
+  }
+
+  footer .list-unstyled li,
+  footer .list-unstyled a,
+  footer p {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 360px) {
+  .container-fluid {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  .email-sidebar-header,
+  .email-sidebar-footer,
+  .email-sidebar-row {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .email-sidebar-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.78rem;
+  }
+
+  .email-sidebar-addr {
+    font-size: 0.72rem;
+  }
+
+  .email-sidebar-expiry,
+  .email-sidebar-section-label {
+    font-size: 0.66rem;
+  }
+
+  .am-email-row {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 8px;
+    padding: 10px 12px;
+  }
+
+  .am-email-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+  }
+
+  .am-email-address {
+    font-size: 0.84rem;
+  }
+
+  .am-copy-btn,
+  .am-action-btn {
+    min-height: 36px;
+    font-size: 0.74rem;
+  }
+
+  .am-expiry-time {
+    font-size: 0.82rem;
+  }
+
+  .card-header h5,
+  .card-header .h5 {
+    font-size: 0.96rem;
+  }
+
+  .card-header .btn {
+    padding: 0.22rem 0.42rem;
+  }
+
+  .message-list-item {
+    padding: 0.6rem 0.62rem !important;
+  }
+
+  .message-item {
+    gap: 0.55rem;
+  }
+
+  .message-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.84rem;
+  }
+
+  .message-subject {
+    font-size: 0.88rem;
+  }
+
+  .message-preview {
+    font-size: 0.78rem;
+  }
+
+  .message-meta {
+    font-size: 0.7rem;
+    line-height: 1.15;
+  }
+
+  .inbox-modal-header,
+  .inbox-modal-body,
+  .inbox-modal-footer {
+    padding-left: 0.68rem;
+    padding-right: 0.68rem;
+  }
+
+  .inbox-modal-header .modal-title {
+    font-size: 0.92rem;
+    line-height: 1.2;
+  }
+
+  .inbox-modal-body p,
+  .email-html-content,
+  .email-content {
+    font-size: 0.82rem;
+  }
+}
+
+@media (max-width: 900px) and (max-height: 500px) and (orientation: landscape) {
+  .container-fluid {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+  }
+
+  header {
+    margin-bottom: 0.9rem;
+  }
+
+  .multi-inbox-layout {
+    gap: 8px;
+  }
+
+  .email-sidebar {
+    max-height: none;
+  }
+
+  .email-sidebar-list {
+    max-height: 30vh;
+  }
+
+  .am-email-row {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .am-expiry-row,
+  .am-actions {
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+
+  .message-list-item {
+    padding-top: 0.55rem !important;
+    padding-bottom: 0.55rem !important;
+  }
+
+  .inbox-modal-dialog {
+    margin: 0;
+    max-width: 100vw;
+    min-height: 100vh;
+  }
+
+  .inbox-modal-content {
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
+  .inbox-modal-header,
+  .inbox-modal-footer {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .inbox-modal-body {
+    max-height: calc(100vh - 98px);
+    padding-top: 0.65rem;
+    padding-bottom: 0.65rem;
+  }
+
+  .background-polling-indicator {
+    bottom: 12px;
+    right: 12px;
   }
 }
 
@@ -3826,9 +4070,22 @@ body.dark-mode .am-actions {
   }
   .am-email-row {
     padding: 12px 14px;
+    gap: 8px;
   }
   .am-copy-btn {
     padding: 7px 10px;
     font-size: 0.76rem;
+  }
+
+  .am-expiry-row,
+  .am-actions {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .am-expiry-info {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2px;
   }
 }
