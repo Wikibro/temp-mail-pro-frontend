@@ -206,18 +206,39 @@ function TempMailApp({ onEmailCopied }) {
     setShowAddPanel(false);
 
     try {
-      const body = customName ? { username: customName } : {};
       let res;
       if (customName) {
-        try {
-          res = await axios.post(`${API_ROOT}/accounts/create`, body);
-        } catch (err) {
-          // Backward compatibility: older backends may reject unknown payload fields.
-          if (err.response?.status === 400 || err.response?.status === 422) {
-            res = await axios.post(`${API_ROOT}/accounts/create`);
-          } else {
-            throw err;
+        const payloadCandidates = [
+          { username: customName },
+          { customName },
+          { name: customName },
+          { localPart: customName },
+          { local_part: customName }
+        ];
+
+        for (let i = 0; i < payloadCandidates.length; i += 1) {
+          const payload = payloadCandidates[i];
+          try {
+            res = await axios.post(`${API_ROOT}/accounts/create`, payload);
+            break;
+          } catch (err) {
+            const status = err.response?.status;
+            const msg = (err.response?.data?.error || err.message || '').toLowerCase();
+            const unsupportedField = status === 400 || status === 422 ||
+              msg.includes('unknown') ||
+              msg.includes('invalid') ||
+              msg.includes('not allowed') ||
+              msg.includes('unexpected');
+
+            if (!unsupportedField || i === payloadCandidates.length - 1) {
+              throw err;
+            }
           }
+        }
+
+        // Backward compatibility: if no custom field is accepted, create a random inbox.
+        if (!res) {
+          res = await axios.post(`${API_ROOT}/accounts/create`);
         }
       } else {
         res = await axios.post(`${API_ROOT}/accounts/create`);
