@@ -30,7 +30,7 @@ const About = () => {
                 <div className="text-center mb-4">
                   <i className="bi bi-shield-check text-success" style={{fontSize: '3rem'}}></i>
                   <h3 className="mt-3">Privacy-First Temporary Email Service</h3>
-                  <p className="text-muted">Protecting your online privacy since 2024</p>
+                  <p className="text-muted">Protecting your online privacy since 2025</p>
                 </div>
 
                 <p className="lead text-center mb-4">
