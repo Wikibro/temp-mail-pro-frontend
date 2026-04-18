@@ -170,6 +170,12 @@ const Privacy = () => {
                   We also partner with Yesim to offer a privacy-respecting virtual SMS number option for OTP verification,
                   so you can verify accounts without exposing your personal phone number.
                 </p>
+                                <p>
+                    Third-Party Partners & Cookies
+To support our free service, we may participate in affiliate marketing programs. When you click on a referral link on our site, a "cookie" may be placed in your browser by the partner service to track the referral for commission purposes. These third-party services have their own privacy policies, which we encourage you to review.
+
+                </p>
+                </p>
               </div>
             </div>
 
