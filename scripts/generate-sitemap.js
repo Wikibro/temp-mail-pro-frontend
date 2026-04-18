@@ -21,6 +21,7 @@ const articles = articlesModule.articles;
 const staticPages = [
   { url: 'https://tempmailpk.com/', lastmod: '2026-04-17', changefreq: 'daily', priority: '1.0' },
   { url: 'https://tempmailpk.com/app', lastmod: '2026-04-17', changefreq: 'daily', priority: '0.9' },
+  { url: 'https://tempmailpk.com/privacy', lastmod: '2026-04-18', changefreq: 'monthly', priority: '0.7' },
   { url: 'https://tempmailpk.com/about', lastmod: '2026-04-08', changefreq: 'monthly', priority: '0.8' },
   { url: 'https://tempmailpk.com/blog', lastmod: new Date().toISOString().split('T')[0], changefreq: 'daily', priority: '0.9' },
 ];
