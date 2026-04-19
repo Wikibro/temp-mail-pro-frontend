@@ -1,15 +1,68 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import PageNavbar from "./PageNavbar";
+import Footer from "./Footer";
+import { IntroCard, FeatureGrid, SectionCard, StepsGrid, FinalCtaCard, UpdatedAt } from "./InfoPageBlocks";
 
 const Privacy = () => {
+  const featureItems = [
+    {
+      iconClass: "bi bi-browser-chrome",
+      iconColor: "text-primary",
+      title: "Browser-Generated Emails",
+      description:
+        "Temporary email addresses are generated locally in your browser using secure randomness, reducing exposure of personal identifiers.",
+    },
+    {
+      iconClass: "bi bi-database-x",
+      iconColor: "text-danger",
+      title: "No Long-Term Storage",
+      description:
+        "We do not keep permanent inbox archives. Messages are temporary and removed automatically after their expiry window.",
+    },
+    {
+      iconClass: "bi bi-eye-slash",
+      iconColor: "text-warning",
+      title: "Minimal Data Visibility",
+      description:
+        "We are not profiling users or building behavioral histories. The platform is designed for practical anonymity and low data retention.",
+    },
+    {
+      iconClass: "bi bi-clock",
+      iconColor: "text-info",
+      title: "Automatic Cleanup",
+      description:
+        "Every temporary mailbox follows expiration rules so stale data is removed without manual requests or intervention.",
+    },
+  ];
+
+  const steps = [
+    {
+      title: "Generate",
+      description: "Create a temporary address instantly in your browser with one click.",
+    },
+    {
+      title: "Receive",
+      description: "Use it for signups and verifications while keeping your personal inbox hidden.",
+    },
+    {
+      title: "Expire",
+      description: "Messages and temporary inbox data are automatically removed after expiry.",
+    },
+  ];
+
   return (
-    <div className="privacy-container">
-        {/* ADD THIS SEO SECTION */}
+    <div>
+      <PageNavbar />
       <Helmet>
         <title>Privacy Policy | TempMail Pro</title>
         <meta
           name="description"
           content="TempMail Pro privacy policy. We do not store your temporary emails permanently and your privacy is our priority."
+        />
+        <meta
+          name="keywords"
+          content="privacy policy, temp mail privacy, disposable email privacy, no tracking email"
         />
         <link rel="canonical" href="https://tempmailpk.com/privacy" />
 
@@ -25,107 +78,32 @@ const Privacy = () => {
           <div className="col-lg-8">
             <h1 className="text-center mb-5">Privacy Policy</h1>
 
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-body p-4">
-                <div className="text-center mb-4">
-                  <i className="bi bi-shield-check text-success" style={{fontSize: '3rem'}}></i>
-                  <h3 className="mt-3">Privacy-First by Design</h3>
-                  <p className="text-muted">Your privacy is our foundation, not an afterthought.</p>
-                </div>
+            <IntroCard
+              iconClass="bi bi-shield-check"
+              title="Privacy-First by Design"
+              subtitle="Your privacy is our foundation, not an afterthought."
+              lead="TempMail Pro is built to minimize data exposure by default. We collect the least possible information, avoid user tracking, and keep temporary email usage anonymous and short-lived."
+            />
 
-                <div className="row g-4">
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-start">
-                      <i className="bi bi-browser-chrome text-primary me-3 mt-1"></i>
-                      <div>
-                        <h5>Browser-Generated Emails</h5>
-                        <p className="text-muted mb-0">
-                          All temporary email addresses are generated entirely in your browser.
-                          We never see or store your email content.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+            <FeatureGrid items={featureItems} />
 
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-start">
-                      <i className="bi bi-database-x text-danger me-3 mt-1"></i>
-                      <div>
-                        <h5>No Database Storage</h5>
-                        <p className="text-muted mb-0">
-                          We don't maintain any databases. Your emails exist only in your browser
-                        and our temporary mail server, keeping your experience private and ephemeral.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+            <SectionCard title="Our Privacy Principles">
+                <p>
+                  We intentionally design TempMail Pro around privacy-respecting defaults. Our architecture avoids
+                  persistent identity mapping and minimizes retained information.
+                </p>
+                <p>
+                  Temporary addresses are session-oriented, content lifespan is limited, and we do not run invasive
+                  user tracking workflows. This helps reduce risk from spam, leaks, and long-term profiling.
+                </p>
+                <p>
+                  Privacy is not treated as a premium feature; it is the baseline operating model of the service.
+                </p>
+            </SectionCard>
 
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-start">
-                      <i className="bi bi-eye-slash text-warning me-3 mt-1"></i>
-                      <div>
-                        <h5>We Don't Know Your Data</h5>
-                        <p className="text-muted mb-0">
-                          We have no knowledge of what emails you receive or send.
-                          Our service is completely anonymous.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="col-md-6">
-                    <div className="d-flex align-items-start">
-                      <i className="bi bi-clock text-info me-3 mt-1"></i>
-                      <div>
-                        <h5>Automatic Deletion</h5>
-                        <p className="text-muted mb-0">
-                          All emails are automatically deleted after expiration.
-                          No manual cleanup or data retention.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-header bg-light">
-                <h4 className="mb-0">How It Works</h4>
-              </div>
-              <div className="card-body">
-                <ol className="list-unstyled">
-                  <li className="mb-3 d-flex">
-                    <span className="badge bg-primary me-3 align-self-start">1</span>
-                    <div>
-                      <strong>Browser Generation:</strong> Your temporary email address is created
-                      locally in your browser using secure random generation.
-                    </div>
-                  </li>
-                  <li className="mb-3 d-flex">
-                    <span className="badge bg-primary me-3 align-self-start">2</span>
-                    <div>
-                      <strong>Server Communication:</strong> Only the email address and a secure token
-                      are sent to our mail server for receiving emails.
-                    </div>
-                  </li>
-                  <li className="mb-3 d-flex">
-                    <span className="badge bg-primary me-3 align-self-start">3</span>
-                    <div>
-                      <strong>Zero Storage:</strong> We don't store your emails, personal data, or browsing history.
-                      Everything is temporary and ephemeral.
-                    </div>
-                  </li>
-                  <li className="mb-3 d-flex">
-                    <span className="badge bg-primary me-3 align-self-start">4</span>
-                    <div>
-                      <strong>Auto Cleanup:</strong> Emails expire automatically based on your chosen duration,
-                      with no data retention policies.
-                    </div>
-                  </li>
-                </ol>
-              </div>
-            </div>
+            <SectionCard title="How It Works">
+              <StepsGrid steps={steps} />
+            </SectionCard>
 
             <div className="card border-0 shadow-sm mb-4">
               <div className="card-header bg-light">
@@ -158,8 +136,10 @@ const Privacy = () => {
                 <h4 className="mb-0">Your Rights</h4>
               </div>
               <div className="card-body">
-                <p>Since we don't store any of your data, there are no data deletion requests to process.
-                Your privacy is automatically protected by our design:</p>
+                <p>
+                  Since we minimize stored data, privacy controls are built directly into the system behavior rather
+                  than relying only on account-level settings.
+                </p>
                 <ul>
                   <li><strong>No Data Collection:</strong> We never had your data to begin with</li>
                   <li><strong>Immediate Deletion:</strong> Emails expire and are gone forever</li>
@@ -180,7 +160,17 @@ To support our free service, we may participate in affiliate marketing programs.
               </div>
             </div>
 
-            <div className="card border-0 shadow-sm">
+            <div className="card border-0 shadow-sm mb-4">
+              <div className="card-body">
+                <h4 className="mb-3">New: Yesim Virtual Number Support</h4>
+                <p className="mb-0">
+                  We also support privacy-conscious virtual number options via Yesim for OTP flows,
+                  helping you avoid exposing your personal phone number when a site requires SMS verification.
+                </p>
+              </div>
+            </div>
+
+            <div className="card border-0 shadow-sm mb-4">
               <div className="card-body text-center">
                 <h5>Questions About Privacy?</h5>
                 <p className="text-muted mb-3">
@@ -193,12 +183,21 @@ To support our free service, we may participate in affiliate marketing programs.
               </div>
             </div>
 
-            <div className="text-center text-muted mt-4">
-              <small>Last updated: April 2026</small>
-            </div>
+            <FinalCtaCard
+              iconClass="bi bi-envelope-check"
+              title="Ready to Protect Your Privacy?"
+              description="Start using TempMail Pro for free — no sign-up, no tracking, instant disposable email."
+              primaryTo="/app"
+              primaryLabel="Get Free Temp Email"
+              secondaryTo="/about"
+              secondaryLabel="About TempMail Pro"
+            />
+
+            <UpdatedAt date="April 2026" topClass="mt-2" />
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

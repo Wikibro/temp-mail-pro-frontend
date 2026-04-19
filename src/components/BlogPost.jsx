@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet-async';
 import 'highlight.js/styles/github.css';
 import { articles } from '../content/articlesData';
 import { getRelatedArticles } from '../utils/relatedArticles';
+import PageNavbar from './PageNavbar';
+import Footer from './Footer';
 
 const markdownFiles = import.meta.glob('../content/articles/*.md', {
   query: '?raw',
@@ -102,6 +104,7 @@ export default function BlogPost() {
 
   return (
     <div className="blog-post-container">
+      <PageNavbar />
       <Helmet>
         <title>{title ? `${title} | TempMail Pro Blog` : 'Blog Post | TempMail Pro'}</title>
         <meta
@@ -304,6 +307,7 @@ export default function BlogPost() {
           </footer>
         </article>
       </main>
+      <Footer />
     </div>
   );
 }

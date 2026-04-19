@@ -23,6 +23,25 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
       },
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules/react") || id.includes("node_modules/react-dom")) {
+            return "vendor-react";
+          }
+          if (id.includes("node_modules/react-router-dom") || id.includes("node_modules/react-router")) {
+            return "vendor-router";
+          }
+          if (id.includes("node_modules/axios")) {
+            return "vendor-axios";
+          }
+          if (id.includes("node_modules/react-helmet-async")) {
+            return "vendor-helmet";
+          }
+          if (id.includes("node_modules/react-markdown") || id.includes("node_modules/remark") || id.includes("node_modules/rehype")) {
+            return "vendor-markdown";
+          }
+        },
+      },
     },
   },
   base: "/",

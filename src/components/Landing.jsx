@@ -40,21 +40,31 @@
 
 
 
-import React from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import FAQSection from "./FAQSection";
-import BlogList from "./BlogList";
 import Footer from "./Footer";
-import YesimRecommendation from "./YesimRecommendation";
 import { Helmet } from "react-helmet-async";
 
+const FAQSection = lazy(() => import("./FAQSection"));
+const BlogList = lazy(() => import("./BlogList"));
+const YesimRecommendation = lazy(() => import("./YesimRecommendation"));
+
 const Landing = () => {
-  // Smooth scroll function for anchor links
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+    setMenuOpen(false);
   };
 
   return (
@@ -64,22 +74,22 @@ const Landing = () => {
         <title>TempMail Pro - Free Temporary Email Service</title>
         <meta 
           name="description" 
-          content="TempMail Pro provides free disposable email addresses to protect your inbox from spam. Create, use, and delete emails instantly." 
+          content="Create multiple inboxes and multiple temporary emails for free with custom name options. TempMail Pro gives premium-level features without extra charges." 
         />
         <meta name="keywords" content="temporary email, disposable email, temp mail, spam protection, free email service, anonymous email" />
          <link rel="canonical" href="https://tempmailpk.com/" />
         {/* Open Graph */}
-        <meta property="og:title" content="TempMail Pro - Free Disposable Email Service" />
-        <meta property="og:description" content="Protect your inbox with free disposable emails from TempMail Pro. No registration required." />
-        <meta property="og:image" content="https://tempmailpro.com/images/temp-mail-promo.png" />
-        <meta property="og:url" content="https://tempmailpro.com" />
+        <meta property="og:title" content="TempMail Pro - Free Multi Inbox & Custom Name Temp Emails" />
+        <meta property="og:description" content="Create multiple inboxes, generate multiple temp emails, and use custom names for free with TempMail Pro." />
+        <meta property="og:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
+        <meta property="og:url" content="https://tempmailpk.com/" />
         <meta property="og:type" content="website" />
         
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="TempMail Pro - Free Disposable Email Service" />
-        <meta name="twitter:description" content="Protect your inbox with free disposable emails from TempMail Pro." />
-        <meta name="twitter:image" content="https://tempmailpro.com/images/temp-mail-promo.png" />
+        <meta name="twitter:title" content="TempMail Pro - Free Multi Inbox & Custom Name Temp Emails" />
+        <meta name="twitter:description" content="Create multiple inboxes, multiple temporary emails, and custom-name inboxes for free." />
+        <meta name="twitter:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
         
         {/* Structured Data */}
         <script type="application/ld+json">
@@ -87,7 +97,7 @@ const Landing = () => {
             "@context": "https://schema.org",
             "@type": "WebApplication",
             "name": "TempMail Pro",
-            "url": "https://tempmailpro.com",
+            "url": "https://tempmailpk.com/",
             "description": "Free temporary email service for anonymous and secure communication.",
             "applicationCategory": "CommunicationApplication",
             "operatingSystem": "Web Browser",
@@ -102,81 +112,55 @@ const Landing = () => {
       </Helmet>
 
       {/* Navigation */}
-      <nav className="navbar navbar-expand-lg navbar-dark sticky-top py-3">
-        <div className="container">
-          <Link className="navbar-brand d-flex align-items-center" to="/">
-            <i className="fas fa-envelope me-2"></i>
-            <strong>TempMail<span className="brand-highlight">Pro</span></strong>
+      <nav className={`landing-navbar sticky-top${scrolled ? " landing-navbar--scrolled" : ""}`}>
+        <div className="container landing-navbar__inner">
+          {/* Brand */}
+          <Link className="landing-navbar__brand" to="/">
+            <span className="landing-navbar__logo-icon">
+              <i className="fas fa-shield-alt"></i>
+            </span>
+            <span className="landing-navbar__brand-text">
+              TempMail<span className="landing-navbar__brand-accent">Pro</span>
+            </span>
           </Link>
-          <button 
-            className="navbar-toggler" 
-            type="button" 
-            data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav"
+
+          {/* Mobile toggler */}
+          <button
+            className={`landing-navbar__toggler${menuOpen ? " is-open" : ""}`}
+            type="button"
             aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(v => !v)}
           >
-            <span className="navbar-toggler-icon"></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Link className="nav-link active" to="/">Home</Link>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link landing-nav-btn" 
-                  onClick={() => scrollToSection('features')}
-                >
-                  Features
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link landing-nav-btn" 
-                  onClick={() => scrollToSection('how-it-works')}
-                >
-                  How It Works
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link landing-nav-btn" 
-                  onClick={() => scrollToSection('seo-article')}
-                >
-                  Email Security Guide
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link landing-nav-btn" 
-                  onClick={() => scrollToSection('faq')}
-                >
-                  FAQ
-                </button>
-              </li>
-              <li className="nav-item">
-                <button 
-                  className="nav-link btn btn-link landing-nav-btn" 
-                  onClick={() => scrollToSection('blog')}
-                >
-                  Blog
-                </button>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/app">Use App</Link>
-              </li>
+
+          {/* Links */}
+          <div className={`landing-navbar__menu${menuOpen ? " is-open" : ""}`}>
+            <ul className="landing-navbar__nav">
+              <li><Link className="landing-navbar__link" to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
+              <li><button className="landing-navbar__link landing-navbar__link--btn" onClick={() => scrollToSection('features')}>Features</button></li>
+              <li><button className="landing-navbar__link landing-navbar__link--btn" onClick={() => scrollToSection('how-it-works')}>How It Works</button></li>
+              <li><button className="landing-navbar__link landing-navbar__link--btn" onClick={() => scrollToSection('faq')}>FAQ</button></li>
+              <li><button className="landing-navbar__link landing-navbar__link--btn" onClick={() => scrollToSection('blog')}>Blog</button></li>
             </ul>
+            <Link to="/app" className="landing-navbar__cta" onClick={() => setMenuOpen(false)}>
+              <i className="fas fa-bolt me-1"></i> Use App
+            </Link>
           </div>
         </div>
       </nav>
 
+      <main id="main-content">
       {/* Hero Section */}
       <section className="hero-section">
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-6">
-              <h1 className="display-4 fw-bold mb-4 hero-title">Secure Your Privacy with <span className="brand-highlight">Temporary Email</span></h1>
-              <p className="lead mb-5">TempMail Pro provides free disposable email addresses to protect your personal inbox from spam, phishing, and unwanted marketing emails. No registration required!</p>
+              <h1 className="display-4 fw-bold mb-4 hero-title">Get <span className="brand-highlight">Multi Inbox + Multi Email</span> Free</h1>
+              <p className="lead mb-5">Create multiple inboxes, generate multiple temporary emails, and even use custom names at no cost. While many services charge for these features, TempMail Pro gives them free for everyone.</p>
               <div className="d-flex flex-wrap gap-3">
                 <Link to="/app" className="btn cta-button">
                   <i className="fas fa-bolt me-2"></i>Generate Temp Email
@@ -203,6 +187,122 @@ const Landing = () => {
         </div>
       </section>
 
+      {/* Compact App Preview */}
+      <section className="app-preview-section py-5">
+        <div className="container">
+          <div className="text-center mb-4">
+            <h2 className="fw-bold section-title d-inline-block">What You Get Inside /app</h2>
+            <p className="text-muted mb-0">
+              Transparent, real-looking inbox data with multiple accounts, expiry timers, and custom-name options.
+            </p>
+          </div>
+
+          <div className="row g-4">
+            <div className="col-lg-4">
+              <div className="app-preview-shell app-preview-shell--compact">
+                <div className="app-preview-topbar" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <p>Inboxes (3)</p>
+                </div>
+
+                <div className="app-preview-body">
+                  <div className="app-preview-account-row is-active">
+                    <span className="app-preview-avatar">P</span>
+                    <div className="app-preview-account-meta">
+                      <span>peter2026@delta.com</span>
+                      <small>⏱ 133h 31m</small>
+                    </div>
+                    <b className="app-preview-count">1</b>
+                  </div>
+
+                  <div className="app-preview-account-row">
+                    <span className="app-preview-avatar">A</span>
+                    <div className="app-preview-account-meta">
+                      <span>alpha2026@delta.com</span>
+                      <small>⏱ 29h 58m</small>
+                    </div>
+                  </div>
+
+                  <div className="app-preview-account-row mb-0">
+                    <span className="app-preview-avatar">B</span>
+                    <div className="app-preview-account-meta">
+                      <span>beta2026@delta.com</span>
+                      <small>⏱ 59m</small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-4">
+              <div className="app-preview-shell app-preview-shell--compact">
+                <div className="app-preview-topbar" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <p>Active Email + Inbox</p>
+                </div>
+
+                <div className="app-preview-body">
+                  <div className="app-preview-stat-line">
+                    <small>Active Email</small>
+                    <span>peter2026@delta.com</span>
+                  </div>
+                  <div className="app-preview-stat-line">
+                    <small>Expires in</small>
+                    <span>5d 13h 31m</span>
+                  </div>
+
+                  <div className="app-preview-mini-btn">Refresh Inbox</div>
+
+                  <div className="app-preview-mail-row mb-0">
+                    <span>Amazon</span>
+                    <small>From: updates@amazon-mailer.com</small>
+                    <b>4/18/2026, 8:00:37 PM</b>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="col-lg-4">
+              <div className="app-preview-shell app-preview-shell--compact">
+                <div className="app-preview-topbar" aria-hidden="true">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <p>Create Custom Email</p>
+                </div>
+
+                <div className="app-preview-body">
+                  <label className="app-preview-label">username (optional)</label>
+                  <div className="app-preview-input">david</div>
+                  <div className="app-preview-result">david@delta.com</div>
+
+                  <div className="app-preview-duration-row">
+                    <span>10 min</span>
+                    <span className="is-active">1 hour</span>
+                    <span>24 hours</span>
+                    <span>7 days</span>
+                    <span>Custom</span>
+                  </div>
+
+                  <div className="app-preview-custom-dropdown" aria-hidden="true">
+                    30 minutes / hours / day
+                    <i className="fas fa-chevron-down"></i>
+                  </div>
+
+                  <Link to="/app" className="btn cta-button app-preview-cta mt-3 w-100">
+                    <i className="fas fa-bolt me-2"></i>Open Full App
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section id="features" className="py-5">
         <div className="container">
@@ -218,7 +318,7 @@ const Landing = () => {
                   <div className="feature-icon">
                     <i className="fas fa-user-shield"></i>
                   </div>
-                  <h4 className="card-title">Complete Anonymity</h4>
+                  <h3 className="card-title">Complete Anonymity</h3>
                   <p className="card-text">No personal information required. Use our service without revealing your identity or providing any personal details.</p>
                 </div>
               </div>
@@ -230,7 +330,7 @@ const Landing = () => {
                   <div className="feature-icon">
                     <i className="fas fa-shield-alt"></i>
                   </div>
-                  <h4 className="card-title">Spam Protection</h4>
+                  <h3 className="card-title">Spam Protection</h3>
                   <p className="card-text">Keep your primary inbox clean by using disposable addresses for sign-ups, downloads, and online registrations.</p>
                 </div>
               </div>
@@ -242,7 +342,7 @@ const Landing = () => {
                   <div className="feature-icon">
                     <i className="fas fa-bolt"></i>
                   </div>
-                  <h4 className="card-title">Instant Setup</h4>
+                  <h3 className="card-title">Instant Setup</h3>
                   <p className="card-text">Get a temporary email address instantly with just one click. No registration or credit card required.</p>
                 </div>
               </div>
@@ -251,7 +351,9 @@ const Landing = () => {
         </div>
       </section>
 
-      <YesimRecommendation />
+      <Suspense fallback={<div className="py-4" aria-hidden="true" />}>
+        <YesimRecommendation />
+      </Suspense>
 
       {/* How It Works */}
       <section id="how-it-works" className="py-5 bg-light">
@@ -266,7 +368,7 @@ const Landing = () => {
               <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: "80px", height: "80px"}}>
                 <span className="fs-1 fw-bold">1</span>
               </div>
-              <h4>Generate Address</h4>
+              <h3>Generate Address</h3>
               <p>Click the generate button to create a random email address instantly</p>
             </div>
             
@@ -274,7 +376,7 @@ const Landing = () => {
               <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: "80px", height: "80px"}}>
                 <span className="fs-1 fw-bold">2</span>
               </div>
-              <h4>Use It Anywhere</h4>
+              <h3>Use It Anywhere</h3>
               <p>Use this email for sign-ups, downloads, or any temporary need across the web</p>
             </div>
             
@@ -282,7 +384,7 @@ const Landing = () => {
               <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: "80px", height: "80px"}}>
                 <span className="fs-1 fw-bold">3</span>
               </div>
-              <h4>Stay Protected</h4>
+              <h3>Stay Protected</h3>
               <p>All spam stays in your temporary inbox, protecting your main email account</p>
             </div>
           </div>
@@ -340,149 +442,24 @@ const Landing = () => {
       {/* FAQ Section */}
       <section id="faq" className="py-5 bg-light">
         <div className="container">
-          <FAQSection />
+          <Suspense fallback={<div className="py-4" aria-hidden="true" />}>
+            <FAQSection />
+          </Suspense>
         </div>
       </section>
 
       {/* Blog Section */}
       <section id="blog" className="py-5">
         <div className="container">
-          <BlogList limit={4} showHeader={false} />
+          <Suspense fallback={<div className="py-4" aria-hidden="true" />}>
+            <BlogList limit={4} showHeader={false} />
+          </Suspense>
         </div>
       </section>
 
+      </main>
       {/* Footer */}
       <Footer />
-
-      {/* Add CSS styles to fix the mismatch */}
-      <style>
-        {`
-          .article-content {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.7;
-            color: #495057;
-          }
-          
-          .article-content h3 {
-            font-weight: 600;
-            color: #4361ee;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-          }
-          
-          .article-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.05rem;
-          }
-          
-          .article-content ul {
-            padding-left: 1.5rem;
-            margin-bottom: 1.5rem;
-          }
-          
-          .article-content li {
-            margin-bottom: 0.5rem;
-            font-size: 1.05rem;
-          }
-          
-          .article-content strong {
-            color: #4361ee;
-            font-weight: 600;
-          }
-
-          body.dark-mode .article-content {
-            color: #d7dde4;
-          }
-
-          body.dark-mode .article-content h3 {
-            color: #8ab4ff;
-          }
-
-          body.dark-mode .article-content strong {
-            color: #9bc3ff;
-          }
-          
-          /* Ensure consistency with existing styles */
-          .section-title {
-            position: relative;
-            padding-bottom: 15px;
-          }
-          
-          .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: #4361ee;
-            border-radius: 2px;
-          }
-          
-          .brand-highlight {
-            color: #f72585;
-          }
-          
-          .hero-section {
-            background: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
-            color: white;
-            padding: 100px 0;
-          }
-          
-          .cta-button {
-            background-color: #f72585;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-          }
-
-          body.dark-mode .hero-section {
-            background: linear-gradient(135deg, #263d8e 0%, #35206b 100%);
-          }
-          
-          .cta-button:hover {
-            background-color: #e51276;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-          }
-          
-          .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(67, 97, 238, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-            color: #4361ee;
-          }
-          
-          .feature-card {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-          }
-          
-          .feature-card:hover {
-            transform: translateY(-5px);
-          }
-          
-          .promo-image {
-            max-width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-          }
-        `}
-      </style>
     </div>
   );
 };

@@ -1,56 +1,74 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Footer = ({ isDarkMode = false }) => {
+const Footer = () => {
   const yesimUrl = 'https://yesim.app/?partner_id=3317';
+  const year = new Date().getFullYear();
 
   return (
-    <footer className={`${isDarkMode ? 'bg-dark text-white' : 'bg-light'} py-5 mt-5`}>
+    <footer className="site-footer">
       <div className="container">
-        <div className="row">
-          <div className="col-lg-6 mb-4">
-            <h5>TempMail Pro</h5>
-            <p>
-              Free temporary email service to protect your privacy online. No registration required.
+        <div className="site-footer__grid">
+
+          {/* Brand column */}
+          <div className="site-footer__brand-col">
+            <Link to="/" className="site-footer__brand">
+              <span className="site-footer__brand-icon">
+                <i className="fas fa-shield-alt"></i>
+              </span>
+              <span className="site-footer__brand-name">
+                TempMail<span>Pro</span>
+              </span>
+            </Link>
+            <p className="site-footer__tagline">
+              Free disposable email service — protect your real inbox from spam, tracking, and data leaks.
+              No registration. No storage. No nonsense.
             </p>
-            <p className={`small mb-0 ${isDarkMode ? 'text-light' : 'text-muted'}`}>
-              Partner notice: We may include optional partner links (such as Yesim) for travel eSIM and virtual-number tools.
+            <Link to="/app" className="site-footer__cta">
+              <i className="fas fa-bolt me-2"></i>Get Free Temp Email
+            </Link>
+            <p className="site-footer__disclaimer">
+              <i className="fas fa-info-circle me-1 opacity-50"></i>
+              Partner notice: We may include optional partner links (e.g. Yesim) for virtual-number tools.
               TempMail Pro and partner services are separate products.
             </p>
           </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <h5>Quick Links</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2"><Link to="/" className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}>Home</Link></li>
-              <li className="mb-2"><Link to="/about" className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}>About</Link></li>
-              <li className="mb-2"><Link to="/app" className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}>Use App</Link></li>
-              <li className="mb-2"><Link to="/blog" className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}>Blog</Link></li>
-              <li className="mb-2"><Link to="/privacy" className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}>Privacy Policy</Link></li>
+
+          {/* Quick Links */}
+          <div className="site-footer__col">
+            <h6 className="site-footer__heading">Quick Links</h6>
+            <ul className="site-footer__links">
+              <li><Link to="/"><i className="fas fa-home me-2"></i>Home</Link></li>
+              <li><Link to="/app"><i className="fas fa-envelope me-2"></i>Use App</Link></li>
+              <li><Link to="/blog"><i className="fas fa-newspaper me-2"></i>Blog</Link></li>
+              <li><Link to="/about"><i className="fas fa-info-circle me-2"></i>About</Link></li>
+              <li><Link to="/privacy"><i className="fas fa-shield-alt me-2"></i>Privacy Policy</Link></li>
             </ul>
           </div>
-          <div className="col-lg-3 col-md-6 mb-4">
-            <h5>Information</h5>
-            <ul className="list-unstyled">
-              <li className="mb-2"><i className="fas fa-globe me-2"></i> https://tempmailpk.com</li>
-              <li className="mb-2">
-                <a
-                  href={yesimUrl}
-                  target="_blank"
-                  rel="noopener noreferrer sponsored"
-                  className={`text-decoration-none ${isDarkMode ? 'text-white' : 'text-dark'}`}
-                >
+
+          {/* Resources */}
+          <div className="site-footer__col">
+            <h6 className="site-footer__heading">Resources</h6>
+            <ul className="site-footer__links">
+              <li>
+                <a href={yesimUrl} target="_blank" rel="noopener noreferrer sponsored">
                   <i className="fas fa-sim-card me-2"></i>Get Virtual Number
+                  <span className="site-footer__badge">via Yesim</span>
                 </a>
-                <div className={`small mt-1 ${isDarkMode ? 'text-light' : 'text-muted'}`}>
-                  via Yesim
-                </div>
               </li>
+              <li><Link to="/blog/how-to-use-temp-email-for-free-trials"><i className="fas fa-book me-2"></i>How to Use Temp Email</Link></li>
+              <li><Link to="/blog/is-free-temp-mail-legal"><i className="fas fa-balance-scale me-2"></i>Is Temp Mail Legal?</Link></li>
+              <li><Link to="/blog/temp-email-vs-email-alias"><i className="fas fa-code-branch me-2"></i>Temp Mail vs Alias</Link></li>
             </ul>
           </div>
+
         </div>
-        <hr className={`${isDarkMode ? 'bg-light' : 'bg-dark'} my-4`} />
-        <div className="text-center py-3">
-          <p className="mb-0">&copy; {new Date().getFullYear()} TempMail Pro. All rights reserved.</p>
+
+        {/* Bottom bar */}
+        <div className="site-footer__bottom">
+          <p className="site-footer__copyright">
+            &copy; {year} TempMail Pro &mdash; All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from 'react-helmet-async';
 import { articles } from "../content/articlesData";
+import PageNavbar from "./PageNavbar";
+import Footer from "./Footer";
 
 /**
  * BlogList
@@ -12,7 +14,7 @@ import { articles } from "../content/articlesData";
 export default function BlogList({ limit, showSEO = false, showHeader = true }) {
   const displayed = limit ? articles.slice(0, limit) : articles;
 
-  return (
+  const content = (
     <>
       {showSEO && (
         <Helmet>
@@ -102,4 +104,16 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
       </section>
     </>
   );
+
+  if (showSEO) {
+    return (
+      <div className="bloglist-page">
+        <PageNavbar />
+        {content}
+        <Footer />
+      </div>
+    );
+  }
+
+  return content;
 }

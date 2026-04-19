@@ -1,9 +1,59 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
+import PageNavbar from "./PageNavbar";
+import Footer from "./Footer";
+import { IntroCard, FeatureGrid, SectionCard, StepsGrid, FinalCtaCard, UpdatedAt } from "./InfoPageBlocks";
 
 const About = () => {
+  const featureItems = [
+    {
+      iconClass: "bi bi-browser-chrome",
+      iconColor: "text-primary",
+      title: "Browser-Generated",
+      description:
+        "All temporary email addresses are generated directly in your browser using secure, random algorithms. No server-side generation or storage.",
+    },
+    {
+      iconClass: "bi bi-database-x",
+      iconColor: "text-danger",
+      title: "No Database Storage",
+      description:
+        "We don't maintain any databases or permanent storage systems. Temporary email addresses are generated in your browser and only exist briefly on our mail server.",
+    },
+    {
+      iconClass: "bi bi-eye-slash",
+      iconColor: "text-warning",
+      title: "Complete Anonymity",
+      description:
+        "We have no knowledge of what emails you receive or send. Our service operates on a zero-knowledge principle.",
+    },
+    {
+      iconClass: "bi bi-clock",
+      iconColor: "text-info",
+      title: "Automatic Cleanup",
+      description:
+        "All emails are automatically deleted after expiration. No manual intervention or data retention policies required.",
+    },
+  ];
+
+  const steps = [
+    {
+      title: "Generate",
+      description: "Click to create a temporary email address instantly in your browser",
+    },
+    {
+      title: "Use Anywhere",
+      description: "Use the temporary email for sign-ups, downloads, or any online service",
+    },
+    {
+      title: "Auto-Delete",
+      description: "Email expires automatically, protecting your privacy permanently",
+    },
+  ];
+
   return (
     <div className="about-container">
+      <PageNavbar />
       <Helmet>
         <title>About TempMail Pro - Free Temporary Email Service</title>
         <meta
@@ -25,80 +75,16 @@ const About = () => {
           <div className="col-lg-8">
             <h1 className="text-center mb-5">About TempMail Pro</h1>
 
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-body p-4">
-                <div className="text-center mb-4">
-                  <i className="bi bi-shield-check text-success" style={{fontSize: '3rem'}}></i>
-                  <h3 className="mt-3">Privacy-First Temporary Email Service</h3>
-                  <p className="text-muted">Protecting your online privacy since 2025</p>
-                </div>
+            <IntroCard
+              iconClass="bi bi-shield-check"
+              title="Privacy-First Temporary Email Service"
+              subtitle="Protecting your online privacy since 2024"
+              lead="TempMail Pro is a free, privacy-focused temporary email service designed to protect your personal inbox from spam, unwanted marketing, and potential security threats."
+            />
 
-                <p className="lead text-center mb-4">
-                  TempMail Pro is a free, privacy-focused temporary email service designed to protect your personal inbox
-                  from spam, unwanted marketing, and potential security threats.
-                </p>
-              </div>
-            </div>
+            <FeatureGrid items={featureItems} />
 
-            <div className="row g-4 mb-4">
-              <div className="col-md-6">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <i className="bi bi-browser-chrome text-primary mb-3" style={{fontSize: '2rem'}}></i>
-                    <h5>Browser-Generated</h5>
-                    <p className="text-muted">
-                      All temporary email addresses are generated directly in your browser using secure,
-                      random algorithms. No server-side generation or storage.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <i className="bi bi-database-x text-danger mb-3" style={{fontSize: '2rem'}}></i>
-                    <h5>No Database Storage</h5>
-                    <p className="text-muted">
-                      We don't maintain any databases or permanent storage systems.
-                      Temporary email addresses are generated in your browser and only exist briefly on our mail server.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <i className="bi bi-eye-slash text-warning mb-3" style={{fontSize: '2rem'}}></i>
-                    <h5>Complete Anonymity</h5>
-                    <p className="text-muted">
-                      We have no knowledge of what emails you receive or send.
-                      Our service operates on a zero-knowledge principle.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-6">
-                <div className="card h-100 border-0 shadow-sm">
-                  <div className="card-body text-center">
-                    <i className="bi bi-clock text-info mb-3" style={{fontSize: '2rem'}}></i>
-                    <h5>Automatic Cleanup</h5>
-                    <p className="text-muted">
-                      All emails are automatically deleted after expiration.
-                      No manual intervention or data retention policies required.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-header bg-light">
-                <h4 className="mb-0">Our Mission</h4>
-              </div>
-              <div className="card-body">
+            <SectionCard title="Our Mission">
                 <p>
                   In today's digital world, maintaining privacy online has become increasingly challenging.
                   Websites and services collect email addresses for various purposes, often leading to
@@ -114,45 +100,11 @@ const About = () => {
                   By generating temporary email addresses directly in your browser and maintaining
                   zero permanent storage, we ensure that your online activities remain private and secure.
                 </p>
-              </div>
-            </div>
+            </SectionCard>
 
-            <div className="card border-0 shadow-sm mb-4">
-              <div className="card-header bg-light">
-                <h4 className="mb-0">How It Works</h4>
-              </div>
-              <div className="card-body">
-                <div className="row">
-                  <div className="col-md-4 text-center mb-4">
-                    <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: '60px', height: '60px'}}>
-                      <span className="fw-bold fs-4">1</span>
-                    </div>
-                    <h6>Generate</h6>
-                    <p className="text-muted small">
-                      Click to create a temporary email address instantly in your browser
-                    </p>
-                  </div>
-                  <div className="col-md-4 text-center mb-4">
-                    <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: '60px', height: '60px'}}>
-                      <span className="fw-bold fs-4">2</span>
-                    </div>
-                    <h6>Use Anywhere</h6>
-                    <p className="text-muted small">
-                      Use the temporary email for sign-ups, downloads, or any online service
-                    </p>
-                  </div>
-                  <div className="col-md-4 text-center mb-4">
-                    <div className="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style={{width: '60px', height: '60px'}}>
-                      <span className="fw-bold fs-4">3</span>
-                    </div>
-                    <h6>Auto-Delete</h6>
-                    <p className="text-muted small">
-                      Email expires automatically, protecting your privacy permanently
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <SectionCard title="How It Works">
+              <StepsGrid steps={steps} />
+            </SectionCard>
 
             <div className="card border-0 shadow-sm mb-4">
               <div className="card-body">
@@ -206,25 +158,20 @@ const About = () => {
               </div>
             </div>
 
-            <div className="card border-0 shadow-sm">
-              <div className="card-body text-center">
-                <h5>Ready to Protect Your Privacy?</h5>
-                <p className="text-muted mb-4">
-                  Join thousands of users who trust TempMail Pro for their temporary email needs.
-                </p>
-                <a href="/app" className="btn btn-primary btn-lg">
-                  <i className="bi bi-envelope me-2"></i>
-                  Create Temporary Email
-                </a>
-              </div>
-            </div>
+            <FinalCtaCard
+              title="Ready to Protect Your Privacy?"
+              description="Join thousands of users who trust TempMail Pro for their temporary email needs."
+              primaryTo="/app"
+              primaryLabel="Create Temporary Email"
+              secondaryTo="/privacy"
+              secondaryLabel="Privacy Policy"
+            />
 
-            <div className="text-center text-muted mt-4">
-              <small>Last updated: April 2026</small>
-            </div>
+            <UpdatedAt date="April 2026" />
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
