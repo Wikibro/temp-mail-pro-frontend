@@ -1,14 +1,12 @@
-
-
 import React, { useState, useEffect, lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
-import PromoCard from "./components/PromoCard.jsx";
 import ScrollToTop from "./components/ScrollToTop";
+import Landing from "./components/Landing.jsx";
 
 const TempMailApp = lazy(() => import("./components/TempMailApp.jsx"));
-const Landing = lazy(() => import("./components/Landing.jsx"));
+const PromoCard = lazy(() => import("./components/PromoCard.jsx"));
 const BlogList = lazy(() => import("./components/BlogList"));
 const BlogPost = lazy(() => import("./components/BlogPost"));
 const Privacy = lazy(() => import("./components/Privacy"));
@@ -22,8 +20,8 @@ function AppContent() {
   const shouldAutoShowPromo = location.pathname !== "/app";
 
   useEffect(() => {
-    const savedDarkMode = localStorage.getItem("darkMode") === "true";
-    document.body.classList.toggle("dark-mode", savedDarkMode);
+    document.body.classList.remove("dark-mode");
+    localStorage.removeItem("darkMode");
   }, []);
 
   const promotablePage = ["/", "/blog"].includes(location.pathname) ||
@@ -75,11 +73,12 @@ function AppContent() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-
-      <PromoCard
-        visible={showPromoCard && !promoClosed && promotablePage}
-        onClose={handlePromoClose}
-      />
+      <Suspense fallback={null}>
+        <PromoCard
+          visible={showPromoCard && !promoClosed && promotablePage}
+          onClose={handlePromoClose}
+        />
+      </Suspense>
     </>
   );
 }

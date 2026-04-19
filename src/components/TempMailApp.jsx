@@ -42,10 +42,6 @@ function TempMailApp({ onEmailCopied }) {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [darkMode, setDarkMode] = useState(() => {
-    const saved = localStorage.getItem("darkMode");
-    return saved === "true";
-  });
   const [emailDuration, setEmailDuration] = useState(() => {
     const saved = localStorage.getItem("emailDuration");
     return saved || "1hour";
@@ -95,13 +91,6 @@ function TempMailApp({ onEmailCopied }) {
     setError({ message: "Session expired. Please create a new email address." });
   };
 
-  const toggleDarkMode = () => {
-    const newMode = !darkMode;
-    setDarkMode(newMode);
-    localStorage.setItem("darkMode", newMode.toString());
-    document.body.classList.toggle("dark-mode", newMode);
-  };
-
   const setDuration = (duration) => {
     setEmailDuration(duration);
     localStorage.setItem("emailDuration", duration);
@@ -111,10 +100,6 @@ function TempMailApp({ onEmailCopied }) {
     setPollingInterval(speed);
     localStorage.setItem("pollingInterval", speed.toString());
   };
-
-  useEffect(() => {
-    document.body.classList.toggle("dark-mode", darkMode);
-  }, [darkMode]);
 
   useEffect(() => {
     if (account) {
@@ -362,7 +347,7 @@ function TempMailApp({ onEmailCopied }) {
         </div>
       )}
 
-      <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Header />
 
       {error && (
         <ErrorAlert error={error} setError={setError} onRetry={fetchInbox} />
@@ -426,7 +411,7 @@ function TempMailApp({ onEmailCopied }) {
             </>
           )}
 
-          <Footer isDarkMode={darkMode} />
+          <Footer />
         </div>
       </div>
     </div>
