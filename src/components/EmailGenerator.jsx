@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AppIcon from './AppIcon';
 
 const PRESETS = [
   { label: '10 min', ms: 10 * 60 * 1000 },
@@ -121,7 +122,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
           {isLoading ? (
             <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Generating…</>
           ) : (
-            <><i className="bi bi-lightning-charge-fill me-1"></i>Generate Email</>
+            <><AppIcon iconClass="bi bi-lightning-charge-fill me-1" />Generate Email</>
           )}
         </button>
       </div>
@@ -133,7 +134,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
     <div className="eg-hero">
       <div className="eg-hero-card">
         <div className="eg-hero-icon">
-          <i className="bi bi-envelope-plus-fill"></i>
+          <AppIcon iconClass="bi bi-envelope-plus-fill" size={30} />
         </div>
         <h2 className="eg-hero-title">Create Your Temp Email</h2>
         <p className="eg-hero-sub">
@@ -143,7 +144,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
         {/* Custom username field */}
         <div className="eg-field-group">
           <label className="eg-label">
-            <i className="bi bi-person me-1"></i>Username <span className="eg-optional">(optional)</span>
+            <AppIcon iconClass="bi bi-person me-1" />Username <span className="eg-optional">(optional)</span>
           </label>
           <div className="eg-name-input-wrap">
             <input
@@ -166,7 +167,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
         {/* Duration selector */}
         <div className="eg-field-group">
           <label className="eg-label">
-            <i className="bi bi-clock me-1"></i>Email Duration
+            <AppIcon iconClass="bi bi-clock me-1" />Email Duration
           </label>
           <div className="eg-chips">
             {PRESETS.map((p, i) => (
@@ -184,7 +185,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
               className={`eg-chip eg-chip-custom${isCustom ? ' active' : ''}`}
               onClick={() => setIsCustom(true)}
             >
-              <i className="bi bi-sliders me-1"></i>Custom
+              <AppIcon iconClass="bi bi-sliders me-1" />Custom
             </button>
           </div>
 
@@ -225,12 +226,12 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
           {isLoading ? (
             <><span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Generating your email…</>
           ) : (
-            <><i className="bi bi-lightning-charge-fill me-2"></i>Generate Email</>
+            <><AppIcon iconClass="bi bi-lightning-charge-fill me-2" />Generate Email</>
           )}
         </button>
 
         <p className="eg-note">
-          <i className="bi bi-shield-check me-1 text-success"></i>
+          <AppIcon iconClass="bi bi-shield-check me-1 text-success" />
           Free &amp; anonymous — no sign-up required
         </p>
       </div>

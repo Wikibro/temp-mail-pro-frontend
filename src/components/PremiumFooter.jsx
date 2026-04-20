@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+import AppIcon from './AppIcon';
 const PremiumFooter = () => {
   return (
     <footer className="premium-footer">
@@ -13,33 +13,33 @@ const PremiumFooter = () => {
             Protect your privacy with our disposable email solution.
           </p>
           <div className="social-links">
-            <a href="#"><i className="fab fa-twitter"></i></a>
-            <a href="#"><i className="fab fa-facebook-f"></i></a>
-            <a href="#"><i className="fab fa-instagram"></i></a>
-            <a href="#"><i className="fab fa-linkedin-in"></i></a>
-            <a href="#"><i className="fab fa-github"></i></a>
+            <a href="#"><AppIcon iconClass="fab fa-twitter" /></a>
+            <a href="#"><AppIcon iconClass="fab fa-facebook-f" /></a>
+            <a href="#"><AppIcon iconClass="fab fa-instagram" /></a>
+            <a href="#"><AppIcon iconClass="fab fa-linkedin-in" /></a>
+            <a href="#"><AppIcon iconClass="fab fa-github" /></a>
           </div>
         </div>
         
         <div className="footer-column">
           <h3>Quick Links</h3>
           <ul className="footer-links">
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Home</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Features</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> How It Works</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Pricing</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Testimonials</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Home</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Features</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> How It Works</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Pricing</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Testimonials</a></li>
           </ul>
         </div>
         
         <div className="footer-column">
           <h3>Features</h3>
           <ul className="footer-links">
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Disposable Email</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Email Forwarding</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Spam Protection</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Attachment Support</a></li>
-            <li><a href="#"><i className="fas fa-chevron-right"></i> Custom Domains</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Disposable Email</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Email Forwarding</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Spam Protection</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Attachment Support</a></li>
+            <li><a href="#"><AppIcon iconClass="fas fa-chevron-right" /> Custom Domains</a></li>
           </ul>
         </div>
         
@@ -48,7 +48,7 @@ const PremiumFooter = () => {
           <p>Subscribe to our newsletter to receive updates and security tips.</p>
           <form className="newsletter-form">
             <input type="email" className="newsletter-input" placeholder="Your email address" />
-            <button type="submit" className="subscribe-btn"><i className="fas fa-paper-plane"></i></button>
+            <button type="submit" className="subscribe-btn"><AppIcon iconClass="fas fa-paper-plane" /></button>
           </form>
         </div>
       </div>

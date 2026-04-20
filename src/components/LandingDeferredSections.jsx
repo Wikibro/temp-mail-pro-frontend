@@ -1,5 +1,6 @@
 import React, { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
+import AppIcon from "./AppIcon";
 
 const FAQSection = lazy(() => import("./FAQSection"));
 const BlogList = lazy(() => import("./BlogList"));
@@ -111,11 +112,11 @@ const LandingDeferredSections = () => {
 
                   <div className="app-preview-custom-dropdown" aria-hidden="true">
                     30 minutes / hours / day
-                    <i className="fas fa-chevron-down"></i>
+                    <AppIcon iconClass="fas fa-chevron-down" />
                   </div>
 
                   <Link to="/app" className="btn cta-button app-preview-cta mt-3 w-100">
-                    <i className="fas fa-bolt me-2"></i>Open Full App
+                    <AppIcon iconClass="fas fa-bolt me-2" />Open Full App
                   </Link>
                 </div>
               </div>
@@ -137,7 +138,7 @@ const LandingDeferredSections = () => {
               <div className="card feature-card h-100">
                 <div className="card-body text-center p-4">
                   <div className="feature-icon">
-                    <i className="fas fa-user-shield"></i>
+                    <AppIcon iconClass="fas fa-user-shield" />
                   </div>
                   <h3 className="card-title">Complete Anonymity</h3>
                   <p className="card-text">No personal information required. Use our service without revealing your identity or providing any personal details.</p>
@@ -149,7 +150,7 @@ const LandingDeferredSections = () => {
               <div className="card feature-card h-100">
                 <div className="card-body text-center p-4">
                   <div className="feature-icon">
-                    <i className="fas fa-shield-alt"></i>
+                    <AppIcon iconClass="fas fa-shield-alt" />
                   </div>
                   <h3 className="card-title">Spam Protection</h3>
                   <p className="card-text">Keep your primary inbox clean by using disposable addresses for sign-ups, downloads, and online registrations.</p>
@@ -161,7 +162,7 @@ const LandingDeferredSections = () => {
               <div className="card feature-card h-100">
                 <div className="card-body text-center p-4">
                   <div className="feature-icon">
-                    <i className="fas fa-bolt"></i>
+                    <AppIcon iconClass="fas fa-bolt" />
                   </div>
                   <h3 className="card-title">Instant Setup</h3>
                   <p className="card-text">Get a temporary email address instantly with just one click. No registration or credit card required.</p>
@@ -251,7 +252,7 @@ const LandingDeferredSections = () => {
 
                 <div className="text-center mt-5">
                   <Link to="/app" className="btn btn-primary btn-lg px-5">
-                    <i className="fas fa-envelope me-2"></i>Start Using TempMail Pro Today
+                    <AppIcon iconClass="fas fa-envelope me-2" />Start Using TempMail Pro Today
                   </Link>
                 </div>
               </article>

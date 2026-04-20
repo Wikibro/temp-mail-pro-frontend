@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AppIcon from './AppIcon';
 
 const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
   const [selectedMsg, setSelectedMsg] = useState(null);
@@ -70,7 +71,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
       <div className="card border-0 shadow-sm">
         <div className="card-body text-center py-5">
           <div className="text-danger mb-3">
-            <i className="bi bi-exclamation-triangle-fill fs-1"></i>
+            <AppIcon iconClass="bi bi-exclamation-triangle-fill fs-1" />
           </div>
           <h5 className="text-danger">Failed to load inbox</h5>
           <p className="text-muted">Could not retrieve your messages</p>
@@ -79,7 +80,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
               className="btn btn-primary mt-3"
               onClick={onRetry}
             >
-              <i className="bi bi-arrow-clockwise me-2"></i>Retry
+              <AppIcon iconClass="bi bi-arrow-clockwise me-2" />Retry
             </button>
           )}
         </div>
@@ -105,7 +106,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
       <div className="card border-0 shadow-sm">
         <div className="card-body text-center py-5">
           <div className="text-muted mb-3">
-            <i className="bi bi-inbox fs-1"></i>
+            <AppIcon iconClass="bi bi-inbox fs-1" />
           </div>
           <h5 className="text-muted">Your inbox is empty</h5>
           <p className="text-muted">Emails will appear here automatically</p>
@@ -125,7 +126,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
               onClick={onRetry}
               title="Refresh inbox"
             >
-              <i className="bi bi-arrow-clockwise"></i>
+              <AppIcon iconClass="bi bi-arrow-clockwise" />
             </button>
           )}
         </div>
@@ -217,7 +218,7 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
                           className="btn btn-sm btn-outline-danger"
                           onClick={() => fetchMessageContent(selectedMsg)}
                         >
-                          <i className="bi bi-arrow-clockwise me-1"></i>Retry
+                          <AppIcon iconClass="bi bi-arrow-clockwise me-1" />Retry
                         </button>
                       </div>
                     </div>

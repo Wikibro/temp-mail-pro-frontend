@@ -1,4 +1,5 @@
 import React from 'react';
+import AppIcon from './AppIcon';
 
 const PremiumNavbar = () => {
   return (
@@ -6,22 +7,22 @@ const PremiumNavbar = () => {
       <div className="nav-container">
         <div className="logo-brand">
           <div className="logo-icon">
-            <i className="fas fa-envelope"></i>
+            <AppIcon iconClass="fas fa-envelope" />
           </div>
           <div className="logo-text">Temp<span>Mail</span> Pro</div>
         </div>
         
         <div className="nav-menu">
           <div className="nav-links">
-            <a href="#"><i className="fas fa-home"></i> Home</a>
-            <a href="#"><i className="fas fa-inbox"></i> Inbox</a>
-            <a href="#"><i className="fas fa-history"></i> History</a>
-            <a href="#"><i className="fas fa-cog"></i> Settings</a>
+            <a href="#"><AppIcon iconClass="fas fa-home" /> Home</a>
+            <a href="#"><AppIcon iconClass="fas fa-inbox" /> Inbox</a>
+            <a href="#"><AppIcon iconClass="fas fa-history" /> History</a>
+            <a href="#"><AppIcon iconClass="fas fa-cog" /> Settings</a>
           </div>
           
           <div className="nav-actions">
             <button className="upgrade-btn">
-              <i className="fas fa-crown"></i>
+              <AppIcon iconClass="fas fa-crown" />
               <span>Upgrade to Premium</span>
             </button>
             

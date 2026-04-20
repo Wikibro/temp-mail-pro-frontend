@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import AppIcon from './AppIcon';
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -43,7 +44,7 @@ const ScrollToTop = () => {
           aria-label="Scroll to top"
           title="Back to top"
         >
-          <i className="bi bi-arrow-up"></i>
+          <AppIcon iconClass="bi bi-arrow-up" />
         </button>
       )}
     </>

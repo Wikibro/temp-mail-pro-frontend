@@ -1,4 +1,5 @@
 import React from 'react';
+import AppIcon from './AppIcon';
 
 const EmailSidebar = ({
   generatedEmails = [],
@@ -76,7 +77,7 @@ const EmailSidebar = ({
     <div className="email-sidebar">
       <div className="email-sidebar-header">
         <span className="email-sidebar-title">
-          <i className="bi bi-inbox-fill me-2"></i>Inboxes
+          <AppIcon iconClass="bi bi-inbox-fill me-2" />Inboxes
         </span>
         <span className="badge bg-primary rounded-pill">{activeEmails.length}</span>
       </div>
@@ -112,7 +113,7 @@ const EmailSidebar = ({
             </>
           ) : (
             <>
-              <i className="bi bi-plus-lg"></i> New Email
+              <AppIcon iconClass="bi bi-plus-lg" /> New Email
             </>
           )}
         </button>

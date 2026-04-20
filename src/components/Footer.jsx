@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import AppIcon from './AppIcon';
 
 const Footer = () => {
   const { pathname } = useLocation();
@@ -22,7 +23,7 @@ const Footer = () => {
           <div className="site-footer__brand-col">
             <Link to="/" className="site-footer__brand">
               <span className="site-footer__brand-icon">
-                <i className="fas fa-shield-alt"></i>
+                <AppIcon iconClass="fas fa-shield-alt" />
               </span>
               <span className="site-footer__brand-name">
                 TempMail<span>Pro</span>
@@ -33,10 +34,10 @@ const Footer = () => {
               No registration. No storage. No nonsense.
             </p>
             <Link to="/app" className="site-footer__cta" onClick={handleAppCtaClick}>
-              <i className="fas fa-bolt me-2"></i>Get Free Temp Email
+              <AppIcon iconClass="fas fa-bolt me-2" />Get Free Temp Email
             </Link>
             <p className="site-footer__disclaimer">
-              <i className="fas fa-info-circle me-1 opacity-50"></i>
+              <AppIcon iconClass="fas fa-info-circle me-1 opacity-50" />
               Partner notice: We may include optional partner links (e.g. Yesim) for virtual-number tools.
               TempMail Pro and partner services are separate products.
             </p>
@@ -46,11 +47,11 @@ const Footer = () => {
           <div className="site-footer__col">
             <h3 className="site-footer__heading">Quick Links</h3>
             <ul className="site-footer__links">
-              <li><Link to="/"><i className="fas fa-home me-2"></i>Home</Link></li>
-              <li><Link to="/app"><i className="fas fa-envelope me-2"></i>Use App</Link></li>
-              <li><Link to="/blog"><i className="fas fa-newspaper me-2"></i>Blog</Link></li>
-              <li><Link to="/about"><i className="fas fa-info-circle me-2"></i>About</Link></li>
-              <li><Link to="/privacy"><i className="fas fa-shield-alt me-2"></i>Privacy Policy</Link></li>
+              <li><Link to="/"><AppIcon iconClass="fas fa-home me-2" />Home</Link></li>
+              <li><Link to="/app"><AppIcon iconClass="fas fa-envelope me-2" />Use App</Link></li>
+              <li><Link to="/blog"><AppIcon iconClass="fas fa-newspaper me-2" />Blog</Link></li>
+              <li><Link to="/about"><AppIcon iconClass="fas fa-info-circle me-2" />About</Link></li>
+              <li><Link to="/privacy"><AppIcon iconClass="fas fa-shield-alt me-2" />Privacy Policy</Link></li>
             </ul>
           </div>
 
@@ -60,13 +61,13 @@ const Footer = () => {
             <ul className="site-footer__links">
               <li>
                 <a href={yesimUrl} target="_blank" rel="noopener noreferrer sponsored">
-                  <i className="fas fa-sim-card me-2"></i>Get Virtual Number
+                  <AppIcon iconClass="fas fa-sim-card me-2" />Get Virtual Number
                   <span className="site-footer__badge">via Yesim</span>
                 </a>
               </li>
-              <li><Link to="/blog/how-to-use-temp-email-for-free-trials"><i className="fas fa-book me-2"></i>How to Use Temp Email</Link></li>
-              <li><Link to="/blog/is-free-temp-mail-legal"><i className="fas fa-balance-scale me-2"></i>Is Temp Mail Legal?</Link></li>
-              <li><Link to="/blog/temp-email-vs-email-alias"><i className="fas fa-code-branch me-2"></i>Temp Mail vs Alias</Link></li>
+              <li><Link to="/blog/how-to-use-temp-email-for-free-trials"><AppIcon iconClass="fas fa-book me-2" />How to Use Temp Email</Link></li>
+              <li><Link to="/blog/is-free-temp-mail-legal"><AppIcon iconClass="fas fa-balance-scale me-2" />Is Temp Mail Legal?</Link></li>
+              <li><Link to="/blog/temp-email-vs-email-alias"><AppIcon iconClass="fas fa-code-branch me-2" />Temp Mail vs Alias</Link></li>
             </ul>
           </div>
 

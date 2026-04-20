@@ -1,7 +1,7 @@
 // Service Worker for aggressive performance optimization
 // Handles caching strategy for 95-100 PageSpeed score
 
-const CACHE_VERSION = 'v1.1.0';
+const CACHE_VERSION = 'v1.2.0';
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const ASSETS_CACHE = `assets-${CACHE_VERSION}`;
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
@@ -59,8 +59,9 @@ self.addEventListener('fetch', (event) => {
       fetch(request)
         .then((response) => {
           if (response.ok) {
+            const clone = response.clone();
             caches.open(RUNTIME_CACHE).then((cache) => {
-              cache.put(request, response.clone());
+              cache.put(request, clone);
             });
           }
           return response;
@@ -77,12 +78,19 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.match(request).then((response) => {
         if (response) {
-          return response;
+          // Reject stale HTML responses cached for asset URLs
+          const contentType = response.headers.get('content-type') || '';
+          if (contentType.includes('text/html')) {
+            caches.open(ASSETS_CACHE).then(c => c.delete(request));
+          } else {
+            return response;
+          }
         }
         return fetch(request).then((response) => {
           if (response.ok) {
+            const clone = response.clone();
             caches.open(ASSETS_CACHE).then((cache) => {
-              cache.put(request, response.clone());
+              cache.put(request, clone);
             });
           }
           return response;
@@ -98,8 +106,9 @@ self.addEventListener('fetch', (event) => {
       fetch(request)
         .then((response) => {
           if (response.ok) {
+            const clone = response.clone();
             caches.open(STATIC_CACHE).then((cache) => {
-              cache.put(request, response.clone());
+              cache.put(request, clone);
             });
           }
           return response;
@@ -120,8 +129,9 @@ self.addEventListener('fetch', (event) => {
         }
         return fetch(request).then((response) => {
           if (response.ok) {
+            const clone = response.clone();
             caches.open(ASSETS_CACHE).then((cache) => {
-              cache.put(request, response.clone());
+              cache.put(request, clone);
             });
           }
           return response;
@@ -138,7 +148,11 @@ self.addEventListener('fetch', (event) => {
         return response;
       })
       .catch(() => {
-        return caches.match(request);
+        return caches.match(request) || new Response('Network error while offline', {
+          status: 503,
+          statusText: 'Service Unavailable',
+          headers: new Headers({ 'Content-Type': 'text/plain' })
+        });
       })
   );
 });

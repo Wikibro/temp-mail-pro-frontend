@@ -1,12 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AppIcon from "./AppIcon";
 
 export function IntroCard({ iconClass, title, subtitle, lead }) {
   return (
     <div className="card border-0 shadow-sm mb-4">
       <div className="card-body p-4">
         <div className="text-center mb-4">
-          <i className={`${iconClass} text-success`} style={{ fontSize: "3rem" }}></i>
+          <AppIcon iconClass={`${iconClass} text-success`} size={48} />
           <h3 className="mt-3">{title}</h3>
           <p className="text-muted">{subtitle}</p>
         </div>
@@ -23,7 +24,7 @@ export function FeatureGrid({ items }) {
         <div className="col-md-6" key={item.title}>
           <div className="card h-100 border-0 shadow-sm">
             <div className="card-body text-center">
-              <i className={`${item.iconClass} ${item.iconColor} mb-3`} style={{ fontSize: "2rem" }}></i>
+              <AppIcon iconClass={`${item.iconClass} ${item.iconColor} mb-3`} size={32} />
               <h5>{item.title}</h5>
               <p className="text-muted">{item.description}</p>
             </div>
@@ -76,11 +77,11 @@ export function FinalCtaCard({
   return (
     <div className="card border-0 shadow-sm mb-4">
       <div className="card-body text-center py-5">
-        {iconClass && <i className={`${iconClass} text-primary mb-3`} style={{ fontSize: "2.5rem" }}></i>}
+        {iconClass && <AppIcon iconClass={`${iconClass} text-primary mb-3`} size={40} />}
         <h4 className="mb-3">{title}</h4>
         <p className="text-muted mb-4">{description}</p>
         <Link to={primaryTo} className="btn btn-primary btn-lg me-3">
-          <i className="bi bi-envelope me-2"></i>
+          <AppIcon iconClass="bi bi-envelope me-2" />
           {primaryLabel}
         </Link>
         <Link to={secondaryTo} className="btn btn-outline-secondary btn-lg">

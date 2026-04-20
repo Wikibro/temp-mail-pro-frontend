@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { articles } from "../content/articlesData";
 import PageNavbar from "./PageNavbar";
 import Footer from "./Footer";
+import AppIcon from "./AppIcon";
 
 /**
  * BlogList
@@ -44,11 +45,11 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
                     {/* Category badge + read time */}
                     <div className="d-flex align-items-center justify-content-between mb-3">
                       <span className={`badge bg-${article.categoryColor} bg-opacity-10 text-${article.categoryColor} fw-semibold px-3 py-1`}>
-                        <i className={`bi ${article.icon} me-1`}></i>
+                        <AppIcon iconClass={`bi ${article.icon} me-1`} />
                         {article.category}
                       </span>
                       <span className="text-muted small">
-                        <i className="bi bi-clock me-1"></i>
+                        <AppIcon iconClass="bi bi-clock me-1" />
                         {article.readTime}
                       </span>
                     </div>
@@ -75,7 +76,7 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
 
                     <div className="d-flex align-items-center justify-content-between mt-auto pt-2 border-top">
                       <span className="text-muted small">
-                        <i className="bi bi-calendar3 me-1"></i>
+                        <AppIcon iconClass="bi bi-calendar3 me-1" />
                         {new Date(article.date).toLocaleDateString('en-US', {
                           year: 'numeric',
                           month: 'short',
@@ -83,7 +84,7 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
                         })}
                       </span>
                       <span className={`text-${article.categoryColor} fw-semibold small`}>
-                        Read Article <i className="bi bi-arrow-right"></i>
+                        Read Article <AppIcon iconClass="bi bi-arrow-right" />
                       </span>
                     </div>
                   </div>
@@ -96,7 +97,7 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
             <div className="text-center mt-5">
               <Link to="/blog" className="btn btn-outline-primary btn-lg px-5">
                 View All Articles
-                <i className="bi bi-arrow-right ms-2"></i>
+                <AppIcon iconClass="bi bi-arrow-right ms-2" />
               </Link>
             </div>
           )}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AppIcon from './AppIcon';
 
 const AccountManager = ({
   account,
@@ -80,7 +81,7 @@ const AccountManager = ({
     <div className={`am-card${isCritical ? ' critical' : ''}`}>
       <div className="am-email-row">
         <div className="am-email-icon">
-          <i className="bi bi-envelope-fill"></i>
+          <AppIcon iconClass="bi bi-envelope-fill" />
         </div>
         <div className="am-email-body">
           <div className="am-email-label">Active Email</div>
@@ -95,8 +96,8 @@ const AccountManager = ({
           title="Copy to clipboard"
         >
           {copiedEmail
-            ? <><i className="bi bi-check2 me-1"></i>Copied</>
-            : <><i className="bi bi-clipboard me-1"></i>Copy</>}
+            ? <><AppIcon iconClass="bi bi-check2 me-1" />Copied</>
+            : <><AppIcon iconClass="bi bi-clipboard me-1" />Copy</>}
         </button>
       </div>
 
@@ -104,7 +105,7 @@ const AccountManager = ({
         <div className="am-expiry-row">
           <div className="am-expiry-info">
             <span className="am-expiry-label">
-              <i className="bi bi-clock me-1"></i>Expires in
+              <AppIcon iconClass="bi bi-clock me-1" />Expires in
             </span>
             <span className={`am-expiry-time${isCritical ? ' text-danger' : ''}`}>
               {timeStr}
@@ -126,7 +127,7 @@ const AccountManager = ({
           disabled={isLoading || !account}
           title="Refresh inbox"
         >
-          <i className={`bi bi-arrow-clockwise${isLoading ? ' spin' : ''} me-1`}></i>
+          <AppIcon iconClass={`bi bi-arrow-clockwise${isLoading ? ' spin' : ''} me-1`} />
           {isLoading ? 'Refreshing…' : 'Refresh Inbox'}
         </button>
       </div>

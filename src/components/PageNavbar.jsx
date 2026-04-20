@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import AppIcon from "./AppIcon";
 
 const PageNavbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,12 +15,12 @@ const PageNavbar = () => {
   ];
 
   return (
-    <nav className="page-navbar sticky-top">
-      <div className="container page-navbar__inner">
+    <nav className="page-navbar">
+      <div className="page-navbar__inner">
         {/* Brand */}
         <Link to="/" className="page-navbar__brand">
           <span className="page-navbar__logo-icon">
-            <i className="fas fa-shield-alt"></i>
+            <AppIcon iconClass="fas fa-shield-alt" />
           </span>
           <span className="page-navbar__brand-text">
             TempMail<span className="page-navbar__brand-accent">Pro</span>
@@ -48,14 +49,14 @@ const PageNavbar = () => {
                   className={`page-navbar__link${pathname === to ? " active" : ""}`}
                   onClick={() => setMenuOpen(false)}
                 >
-                  <i className={`${icon} me-1`}></i>
+                  <AppIcon iconClass={`${icon} me-1`} />
                   {label}
                 </Link>
               </li>
             ))}
           </ul>
           <Link to="/app" className="page-navbar__cta" onClick={() => setMenuOpen(false)}>
-            <i className="fas fa-envelope"></i> Get Free Email
+            <AppIcon iconClass="fas fa-envelope" /> Get Free Email
           </Link>
         </div>
       </div>

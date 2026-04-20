@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AppIcon from "./AppIcon";
 
 const FAQSection = () => {
   const [activeKey, setActiveKey] = useState("core-0");
@@ -118,7 +119,7 @@ const FAQSection = () => {
               <span className="question-text">{item.q}</span>
             </div>
             <span className="faq-toggle">
-              <i className={`bi ${activeKey === itemKey ? 'bi-chevron-up' : 'bi-chevron-down'}`}></i>
+              <AppIcon iconClass={`bi ${activeKey === itemKey ? 'bi-chevron-up' : 'bi-chevron-down'}`} />
             </span>
           </button>
           <div className="faq-answer">
@@ -140,7 +141,7 @@ const FAQSection = () => {
           
           <div className="faq-search">
             <div className="search-container">
-              <i className="bi bi-search"></i>
+              <AppIcon iconClass="bi bi-search" />
               <input
                 type="text"
                 placeholder="Search questions..."
@@ -153,7 +154,7 @@ const FAQSection = () => {
                   className="clear-search"
                   onClick={() => setSearchTerm("")}
                 >
-                  <i className="bi bi-x"></i>
+                  <AppIcon iconClass="bi bi-x" />
                 </button>
               )}
             </div>
@@ -186,7 +187,7 @@ const FAQSection = () => {
             </>
           ) : (
             <div className="no-results">
-              <i className="bi bi-search"></i>
+              <AppIcon iconClass="bi bi-search" />
               <p>No results found for "{searchTerm}"</p>
               <button 
                 className="btn btn-primary"
@@ -201,7 +202,7 @@ const FAQSection = () => {
         <div className="faq-footer text-center">
           <p>Need a temporary inbox right now?</p>
           <Link to="/app" className="btn btn-outline-primary">
-            Use TempMail Pro <i className="bi bi-arrow-right"></i>
+            Use TempMail Pro <AppIcon iconClass="bi bi-arrow-right" />
           </Link>
         </div>
       </div>

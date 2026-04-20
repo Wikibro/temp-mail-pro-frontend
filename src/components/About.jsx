@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import PageNavbar from "./PageNavbar";
 import Footer from "./Footer";
 import { IntroCard, FeatureGrid, SectionCard, StepsGrid, FinalCtaCard, UpdatedAt } from "./InfoPageBlocks";
+import AppIcon from "./AppIcon";
 
 const About = () => {
   const featureItems = [
@@ -125,15 +126,15 @@ const About = () => {
                   <div className="col-md-6">
                     <ul className="list-unstyled">
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Online Shopping:</strong> Avoid spam from e-commerce sites
                       </li>
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Social Media:</strong> Test new platforms without exposing your real email
                       </li>
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Software Downloads:</strong> Protect against unwanted newsletters
                       </li>
                     </ul>
@@ -141,15 +142,15 @@ const About = () => {
                   <div className="col-md-6">
                     <ul className="list-unstyled">
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Forum Registration:</strong> Keep discussions separate from personal email
                       </li>
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Newsletter Testing:</strong> Try services without commitment
                       </li>
                       <li className="mb-3">
-                        <i className="bi bi-check-circle text-success me-2"></i>
+                        <AppIcon iconClass="bi bi-check-circle text-success me-2" />
                         <strong>Account Verification:</strong> Secure temporary access to services
                       </li>
                     </ul>

@@ -11,6 +11,7 @@ import { articles } from '../content/articlesData';
 import { getRelatedArticles } from '../utils/relatedArticles';
 import PageNavbar from './PageNavbar';
 import Footer from './Footer';
+import AppIcon from './AppIcon';
 
 const markdownFiles = import.meta.glob('../content/articles/*.md', {
   query: '?raw',
@@ -89,7 +90,7 @@ export default function BlogPost() {
     return (
       <div className="blog-post-container">
         <div className="alert alert-danger text-center my-5">
-          <i className="bi bi-exclamation-triangle-fill me-2"></i>
+          <AppIcon iconClass="bi bi-exclamation-triangle-fill me-2" />
           {error}
         </div>
       </div>
@@ -183,7 +184,7 @@ export default function BlogPost() {
             <div className="text-muted d-flex align-items-center gap-3 flex-wrap">
               {date && (
                 <small>
-                  <i className="bi bi-calendar me-1"></i>
+                  <AppIcon iconClass="bi bi-calendar me-1" />
                   {new Date(date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -192,7 +193,7 @@ export default function BlogPost() {
                 </small>
               )}
               <small>
-                <i className="bi bi-clock me-1"></i>
+                <AppIcon iconClass="bi bi-clock me-1" />
                 {estimatedReadTime} min read
               </small>
             </div>
@@ -205,7 +206,7 @@ export default function BlogPost() {
                 className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center"
                 style={{ width: '50px', height: '50px' }}
               >
-                <i className="fas fa-user-shield"></i>
+                <AppIcon iconClass="fas fa-user-shield" />
               </div>
             </div>
             <div className="flex-grow-1">
@@ -244,7 +245,7 @@ export default function BlogPost() {
                 </div>
                 <div className="col-md-4 text-md-end mt-3 mt-md-0">
                   <Link to="/app" className="btn btn-primary btn-lg">
-                    <i className="fas fa-envelope me-2"></i>
+                    <AppIcon iconClass="fas fa-envelope me-2" />
                     Generate Free Email
                   </Link>
                 </div>
@@ -265,7 +266,7 @@ export default function BlogPost() {
                           style={{ height: '3px', borderRadius: '2px' }}
                         />
                         <span className={`badge bg-${article.categoryColor} bg-opacity-10 text-${article.categoryColor} mb-2 align-self-start`}>
-                          <i className={`bi ${article.icon} me-1`}></i>
+                          <AppIcon iconClass={`bi ${article.icon} me-1`} />
                           {article.category}
                         </span>
                         <h6 className="text-dark fw-semibold mb-1">{article.title}</h6>
@@ -290,7 +291,7 @@ export default function BlogPost() {
                   rel="noopener noreferrer"
                   className="btn btn-outline-primary btn-sm"
                 >
-                  <i className="bi bi-twitter me-1"></i>
+                  <AppIcon iconClass="bi bi-twitter me-1" />
                   Tweet
                 </a>
                 <a
@@ -299,7 +300,7 @@ export default function BlogPost() {
                   rel="noopener noreferrer"
                   className="btn btn-outline-primary btn-sm"
                 >
-                  <i className="bi bi-linkedin me-1"></i>
+                  <AppIcon iconClass="bi bi-linkedin me-1" />
                   Share
                 </a>
               </div>

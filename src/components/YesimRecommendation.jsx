@@ -1,11 +1,12 @@
 import React from 'react';
+import AppIcon from './AppIcon';
 
 const YesimRecommendation = () => {
   return (
     <div className="yesim-card mb-4">
       <div className="yesim-card-content">
         <div className="yesim-card-icon">
-          <i className="bi bi-shield-check"></i>
+          <AppIcon iconClass="bi bi-shield-check" />
         </div>
         <div className="yesim-card-body">
           <h4 className="yesim-card-title">
@@ -20,7 +21,7 @@ const YesimRecommendation = () => {
             rel="noopener noreferrer sponsored"
             className="btn btn-yesim-card"
           >
-            <i className="bi bi-arrow-right-circle me-2"></i>
+            <AppIcon iconClass="bi bi-arrow-right-circle me-2" />
             View Yesim Options
           </a>
         </div>

@@ -2,6 +2,7 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet-async";
+import AppIcon from "./AppIcon";
 
 const LandingDeferredSections = lazy(() => import("./LandingDeferredSections.jsx"));
 
@@ -131,11 +132,11 @@ const Landing = () => {
         </script>
       </Helmet>
 
-      <nav className={`landing-navbar sticky-top${scrolled ? " landing-navbar--scrolled" : ""}`}>
-        <div className="container landing-navbar__inner">
+      <nav className={`landing-navbar${scrolled ? " landing-navbar--scrolled" : ""}`}>
+        <div className="landing-navbar__inner">
           <Link className="landing-navbar__brand" to="/">
             <span className="landing-navbar__logo-icon">
-              <i className="fas fa-shield-alt"></i>
+              <AppIcon iconClass="fas fa-shield-alt" />
             </span>
             <span className="landing-navbar__brand-text">
               TempMail<span className="landing-navbar__brand-accent">Pro</span>
@@ -183,7 +184,7 @@ const Landing = () => {
               </li>
             </ul>
             <Link to="/app" className="landing-navbar__cta" onClick={() => setMenuOpen(false)}>
-              <i className="fas fa-bolt me-1"></i> Use App
+              <AppIcon iconClass="fas fa-bolt me-1" /> Use App
             </Link>
           </div>
         </div>
@@ -191,22 +192,22 @@ const Landing = () => {
 
       <main id="main-content">
         <section className="hero-section">
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-6">
-                <h1 className="display-4 fw-bold mb-4 hero-title">
+          <div className="container landing-hero-container">
+            <div className="landing-hero-grid">
+              <div className="landing-hero-content">
+                <h1 className="hero-title landing-hero-title">
                   Get <span className="brand-highlight">Multi Inbox + Multi Email</span> Free
                 </h1>
-                <p className="lead mb-5">
+                <p className="landing-hero-lead">
                   Create multiple inboxes, generate multiple temporary emails, and even use custom names at no cost. While
                   many services charge for these features, TempMail Pro gives them free for everyone.
                 </p>
-                <div className="d-flex flex-wrap gap-3">
-                  <Link to="/app" className="btn cta-button">
-                    <i className="fas fa-bolt me-2"></i>Generate Temp Email
+                <div className="landing-hero-actions">
+                  <Link to="/app" className="cta-button landing-hero-primary-btn">
+                    <AppIcon iconClass="fas fa-bolt me-2" />Generate Temp Email
                   </Link>
-                  <button className="btn btn-outline-light" onClick={() => scrollToSection("features")}>
-                    <i className="fas fa-question-circle me-2"></i>Learn More
+                  <button className="landing-hero-secondary-btn" onClick={() => scrollToSection("features")}>
+                    <AppIcon iconClass="fas fa-question-circle me-2" />Learn More
                   </button>
                 </div>
               </div>

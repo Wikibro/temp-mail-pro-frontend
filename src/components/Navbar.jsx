@@ -1,11 +1,12 @@
 import React from "react";
+import AppIcon from "./AppIcon";
 
 const Navbar = ({ emailDuration, setDuration, isNavExpanded, setIsNavExpanded }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded">
       <div className="container-fluid">
         <span className="navbar-brand me-3">
-          <i className="fas fa-clock me-2"></i>
+          <AppIcon iconClass="fas fa-clock me-2" />
           New Email Duration:
         </span>
         <button 

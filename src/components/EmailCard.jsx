@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import AppIcon from './AppIcon';
 
 const EmailCard = ({ email, expiration, isActive = false, onDelete, onSwitch, onRenew }) => {
   const [timeRemaining, setTimeRemaining] = useState('');
@@ -92,7 +93,7 @@ const EmailCard = ({ email, expiration, isActive = false, onDelete, onSwitch, on
               className="btn btn-sm btn-success"
               onClick={onRenew}
             >
-              <i className="fas fa-sync-alt me-1"></i> Renew
+              <AppIcon iconClass="fas fa-sync-alt me-1" /> Renew
             </button>
           )}
           
@@ -101,7 +102,7 @@ const EmailCard = ({ email, expiration, isActive = false, onDelete, onSwitch, on
               className="btn btn-sm btn-outline-primary"
               onClick={onSwitch}
             >
-              <i className="fas fa-exchange-alt me-1"></i> Switch
+              <AppIcon iconClass="fas fa-exchange-alt me-1" /> Switch
             </button>
           )}
           
@@ -110,7 +111,7 @@ const EmailCard = ({ email, expiration, isActive = false, onDelete, onSwitch, on
               className="btn btn-sm btn-outline-danger ms-auto"
               onClick={onDelete}
             >
-              <i className="fas fa-trash-alt me-1"></i> Delete
+              <AppIcon iconClass="fas fa-trash-alt me-1" /> Delete
             </button>
           )}
         </div>

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import PageNavbar from "./PageNavbar";
 import Footer from "./Footer";
 import { IntroCard, FeatureGrid, SectionCard, StepsGrid, FinalCtaCard, UpdatedAt } from "./InfoPageBlocks";
+import AppIcon from "./AppIcon";
 
 const Privacy = () => {
   const featureItems = [
@@ -113,18 +114,18 @@ const Privacy = () => {
                 <div className="row">
                   <div className="col-md-6">
                     <ul className="list-unstyled">
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Email addresses</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Email content</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> IP addresses</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Personal information</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Email addresses</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Email content</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> IP addresses</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Personal information</li>
                     </ul>
                   </div>
                   <div className="col-md-6">
                     <ul className="list-unstyled">
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Browser fingerprints</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Usage analytics</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Cookies or tracking</li>
-                      <li className="mb-2"><i className="bi bi-x-circle text-danger me-2"></i> Third-party sharing</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Browser fingerprints</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Usage analytics</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Cookies or tracking</li>
+                      <li className="mb-2"><AppIcon iconClass="bi bi-x-circle text-danger me-2" /> Third-party sharing</li>
                     </ul>
                   </div>
                 </div>
@@ -150,12 +151,8 @@ const Privacy = () => {
                   We also partner with Yesim to offer a privacy-respecting virtual SMS number option for OTP verification,
                   so you can verify accounts without exposing your personal phone number.
                 </p>
-                                <p>
-                                     <p>
-                    Third-Party Partners & Cookies
-To support our free service, we may participate in affiliate marketing programs. When you click on a referral link on our site, a "cookie" may be placed in your browser by the partner service to track the referral for commission purposes. These third-party services have their own privacy policies, which we encourage you to review.
-
-                 </p>
+                <p>
+                  Third-Party Partners &amp; Cookies: To support our free service, we may participate in affiliate marketing programs. When you click on a referral link on our site, a &ldquo;cookie&rdquo; may be placed in your browser by the partner service to track the referral for commission purposes. These third-party services have their own privacy policies, which we encourage you to review.
                 </p>
               </div>
             </div>

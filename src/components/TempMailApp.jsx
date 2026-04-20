@@ -12,6 +12,7 @@ import Header from "./Header";
 import ErrorAlert from "./ErrorAlert";
 import YesimRecommendation from "./YesimRecommendation.jsx";
 import PageNavbar from "./PageNavbar";
+import AppIcon from "./AppIcon";
 
 const RAW_API_BASE = import.meta.env.VITE_API_BASE || '';
 const API_BASE = RAW_API_BASE.replace(/\/+$/, '');
@@ -418,7 +419,7 @@ function TempMailApp({ onEmailCopied }) {
             <>
               {showExpiredCard && (
                 <div className="alert alert-warning d-flex align-items-center gap-2 mb-3">
-                  <i className="bi bi-exclamation-triangle-fill"></i>
+                  <AppIcon iconClass="bi bi-exclamation-triangle-fill" />
                   <span>This email has expired. Use <strong>+ Add Inbox</strong> in the sidebar to create a new one.</span>
                 </div>
               )}
