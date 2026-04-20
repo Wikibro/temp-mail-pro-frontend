@@ -1,7 +1,7 @@
 // Service Worker for aggressive performance optimization
 // Handles caching strategy for 95-100 PageSpeed score
 
-const CACHE_VERSION = 'v1.0.0';
+const CACHE_VERSION = 'v1.1.0';
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const ASSETS_CACHE = `assets-${CACHE_VERSION}`;
 const STATIC_CACHE = `static-${CACHE_VERSION}`;

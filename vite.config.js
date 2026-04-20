@@ -55,10 +55,7 @@ export default defineConfig({
             return "vendor-axios";
           }
           
-          // SEO - needed early
-          if (id.includes("node_modules/react-helmet")) {
-            return "vendor-helmet";
-          }
+          // SEO - keep in main bundle to avoid init order issues
         },
         chunkFileNames: "assets/[name]-[hash].js",
         entryFileNames: "assets/[name]-[hash].js",
