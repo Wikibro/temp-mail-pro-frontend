@@ -363,93 +363,95 @@ function TempMailApp({ onEmailCopied }) {
   }, [account, pollingInterval, tokenValid]);
 
   return (
-    <div className="container-fluid py-3 px-3 px-md-4">
-      <PageNavbar />
-      <Helmet>
+    <>
+      <div className="container-fluid py-3 px-3 px-md-4">
+        <PageNavbar />
+        <Helmet>
         <title>{account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro - Free Temporary Email Service'}</title>
         <meta name="description" content={account ? `Your temporary email address is ${account.address || account.email}. Protect your inbox with TempMail Pro.` : 'Get free disposable email addresses with TempMail Pro. Protect your inbox from spam and stay secure.'} />
         <meta property="og:title" content={account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro - Free Temporary Email Service'} />
         <meta property="og:description" content={account ? `Your temporary email address is ${account.address || account.email}.` : 'Get free disposable email addresses with TempMail Pro.'} />
         <link rel="canonical" href={`https://tempmailpk.com${location.pathname}`} />
         <meta property="og:url" content={`https://tempmailpk.com${location.pathname}`} />
-      </Helmet>
+        </Helmet>
 
-      {isBackgroundPolling && (
-        <div className="background-polling-indicator">
-          <div className="spinner-border spinner-border-sm text-primary" role="status">
-            <span className="visually-hidden">Checking for new messages...</span>
+        {isBackgroundPolling && (
+          <div className="background-polling-indicator">
+            <div className="spinner-border spinner-border-sm text-primary" role="status">
+              <span className="visually-hidden">Checking for new messages...</span>
+            </div>
+          </div>
+        )}
+
+        <Header />
+
+        {error && !showExpiredCard && (
+          <ErrorAlert error={error} setError={setError} onRetry={fetchInbox} />
+        )}
+
+        {/* Two-column layout — sidebar + main */}
+        <div className="multi-inbox-layout">
+
+          {/* ── Left Sidebar ── */}
+          <EmailSidebar
+            generatedEmails={generatedEmails}
+            activeToken={account?.token}
+            inboxCounts={inboxCounts}
+            isCreating={isLoading}
+            onSwitch={switchAccount}
+            onDelete={deleteEmail}
+            onCreateNew={() => setShowAddPanel(v => !v)}
+          />
+
+          {/* ── Main Content ── */}
+          <div className="multi-inbox-main">
+
+            {/* Generator: full-hero when no account, compact panel when adding */}
+            {(!account || showAddPanel) && (
+              <EmailGenerator
+                onGenerate={(opts) => createNewAccount(opts)}
+                isLoading={isLoading}
+                compact={!!account}
+              />
+            )}
+
+            {/* Active inbox view */}
+            {account && !showAddPanel && (
+              <>
+                {showExpiredCard && (
+                  <div className="alert alert-warning d-flex align-items-center gap-2 mb-3">
+                    <AppIcon iconClass="bi bi-exclamation-triangle-fill" />
+                    <span>This email has expired. Use <strong>+ Add Inbox</strong> in the sidebar to create a new one.</span>
+                  </div>
+                )}
+
+                <AccountManager
+                  account={account}
+                  refreshInbox={() => fetchInbox(true)}
+                  onEmailCopied={onEmailCopied}
+                  isLoading={isLoading || isInboxLoading}
+                />
+
+                {!showExpiredCard && tokenValid && (
+                  <div className="mt-3">
+                    <YesimRecommendation />
+                  </div>
+                )}
+
+                <Inbox
+                  messages={messages.map(msg => ({ ...msg, token: account.token }))}
+                  isLoading={isInboxLoading}
+                  onRetry={() => fetchInbox(true)}
+                  onTokenExpired={handleTokenExpired}
+                />
+              </>
+            )}
           </div>
         </div>
-      )}
-
-      <Header />
-
-      {error && !showExpiredCard && (
-        <ErrorAlert error={error} setError={setError} onRetry={fetchInbox} />
-      )}
-
-      {/* Two-column layout — sidebar + main */}
-      <div className="multi-inbox-layout">
-
-        {/* ── Left Sidebar ── */}
-        <EmailSidebar
-          generatedEmails={generatedEmails}
-          activeToken={account?.token}
-          inboxCounts={inboxCounts}
-          isCreating={isLoading}
-          onSwitch={switchAccount}
-          onDelete={deleteEmail}
-          onCreateNew={() => setShowAddPanel(v => !v)}
-        />
-
-        {/* ── Main Content ── */}
-        <div className="multi-inbox-main">
-
-          {/* Generator: full-hero when no account, compact panel when adding */}
-          {(!account || showAddPanel) && (
-            <EmailGenerator
-              onGenerate={(opts) => createNewAccount(opts)}
-              isLoading={isLoading}
-              compact={!!account}
-            />
-          )}
-
-          {/* Active inbox view */}
-          {account && !showAddPanel && (
-            <>
-              {showExpiredCard && (
-                <div className="alert alert-warning d-flex align-items-center gap-2 mb-3">
-                  <AppIcon iconClass="bi bi-exclamation-triangle-fill" />
-                  <span>This email has expired. Use <strong>+ Add Inbox</strong> in the sidebar to create a new one.</span>
-                </div>
-              )}
-
-              <AccountManager
-                account={account}
-                refreshInbox={() => fetchInbox(true)}
-                onEmailCopied={onEmailCopied}
-                isLoading={isLoading || isInboxLoading}
-              />
-
-              {!showExpiredCard && tokenValid && (
-                <div className="mt-3">
-                  <YesimRecommendation />
-                </div>
-              )}
-
-              <Inbox
-                messages={messages.map(msg => ({ ...msg, token: account.token }))}
-                isLoading={isInboxLoading}
-                onRetry={() => fetchInbox(true)}
-                onTokenExpired={handleTokenExpired}
-              />
-            </>
-          )}
-
-          <Footer />
-        </div>
       </div>
-    </div>
+
+      <Footer />
+    </>
   );
 }
 
