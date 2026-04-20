@@ -8,3 +8,20 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <App />
   </React.StrictMode>
 );
+
+// Register Service Worker for aggressive caching and offline support
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js', { scope: '/' })
+      .then((registration) => {
+        console.log('SW registered:', registration);
+        // Check for updates periodically (every 6 hours)
+        setInterval(() => {
+          registration.update();
+        }, 21600000);
+      })
+      .catch((err) => {
+        console.log('SW registration failed:', err);
+      });
+  });
+}

@@ -30,6 +30,18 @@ const POLLING_INTERVALS = {
   SLOW: 30000
 };
 
+const AUTO_DISMISS_ERROR_MS = 4500;
+
+const isPersistentError = (message = "") => {
+  const text = String(message).toLowerCase();
+  return (
+    text.includes("expired") ||
+    text.includes("session") ||
+    text.includes("token") ||
+    text.includes("unauthorized")
+  );
+};
+
 function TempMailApp({ onEmailCopied }) {
   const [account, setAccount] = useState(() => {
     const saved = localStorage.getItem("tempMailAccount");
@@ -116,12 +128,29 @@ function TempMailApp({ onEmailCopied }) {
   useEffect(() => {
     if (error?.message?.includes('expired')) {
       setTokenValid(false);
+      setShowExpiredCard(true);
       // Clear any stored data for this token
       if (account) {
         localStorage.removeItem(`inbox-${account.token}`);
       }
     }
   }, [error, account]);
+
+  // Auto-dismiss temporary alerts so they behave like toasts.
+  useEffect(() => {
+    if (!error) return;
+
+    const message = typeof error === "string" ? error : error?.message;
+    if (isPersistentError(message)) {
+      return;
+    }
+
+    const timerId = window.setTimeout(() => {
+      setError(null);
+    }, AUTO_DISMISS_ERROR_MS);
+
+    return () => window.clearTimeout(timerId);
+  }, [error]);
 
   useEffect(() => {
     localStorage.setItem("generatedEmails", JSON.stringify(generatedEmails));
@@ -312,7 +341,12 @@ function TempMailApp({ onEmailCopied }) {
       else if (err.response?.data?.error) errorMessage = err.response.data.error;
       else if (err.message) errorMessage = err.message;
       console.error('Inbox fetch failed:', err);
-      setError({ message: errorMessage });
+
+      // Only show visible alerts for user-triggered fetches or token/session issues.
+      const isSessionError = err.response?.status === 401 || errorMessage.toLowerCase().includes('expired');
+      if (showLoading || isSessionError) {
+        setError({ message: errorMessage });
+      }
     } finally {
       if (showLoading) setIsInboxLoading(false);
       else setTimeout(() => setIsBackgroundPolling(false), 300);
@@ -349,7 +383,7 @@ function TempMailApp({ onEmailCopied }) {
 
       <Header />
 
-      {error && (
+      {error && !showExpiredCard && (
         <ErrorAlert error={error} setError={setError} onRetry={fetchInbox} />
       )}
 

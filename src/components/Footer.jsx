@@ -1,9 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const Footer = () => {
+  const { pathname } = useLocation();
   const yesimUrl = 'https://yesim.app/?partner_id=3317';
   const year = new Date().getFullYear();
+
+  const handleAppCtaClick = (e) => {
+    if (pathname === '/app') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <footer className="site-footer">
@@ -24,7 +32,7 @@ const Footer = () => {
               Free disposable email service — protect your real inbox from spam, tracking, and data leaks.
               No registration. No storage. No nonsense.
             </p>
-            <Link to="/app" className="site-footer__cta">
+            <Link to="/app" className="site-footer__cta" onClick={handleAppCtaClick}>
               <i className="fas fa-bolt me-2"></i>Get Free Temp Email
             </Link>
             <p className="site-footer__disclaimer">
@@ -36,7 +44,7 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div className="site-footer__col">
-            <h6 className="site-footer__heading">Quick Links</h6>
+            <h3 className="site-footer__heading">Quick Links</h3>
             <ul className="site-footer__links">
               <li><Link to="/"><i className="fas fa-home me-2"></i>Home</Link></li>
               <li><Link to="/app"><i className="fas fa-envelope me-2"></i>Use App</Link></li>
@@ -48,7 +56,7 @@ const Footer = () => {
 
           {/* Resources */}
           <div className="site-footer__col">
-            <h6 className="site-footer__heading">Resources</h6>
+            <h3 className="site-footer__heading">Resources</h3>
             <ul className="site-footer__links">
               <li>
                 <a href={yesimUrl} target="_blank" rel="noopener noreferrer sponsored">

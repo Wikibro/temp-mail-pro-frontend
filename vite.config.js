@@ -19,28 +19,50 @@ export default defineConfig({
     },
   },
   build: {
+    target: "ES2020",
+    minify: "esbuild",
+    reportCompressedSize: false,
+    cssCodeSplit: true,
+    sourcemap: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
       },
       output: {
         manualChunks(id) {
-          if (id.includes("node_modules/react") || id.includes("node_modules/react-dom")) {
+          // Core vendor chunks - small, always needed
+          if (id.includes("node_modules/react-dom")) {
+            return "vendor-react-dom";
+          }
+          if (id.includes("node_modules/react/")) {
             return "vendor-react";
           }
-          if (id.includes("node_modules/react-router-dom") || id.includes("node_modules/react-router")) {
+          
+          // Router - needed early for navigation
+          if (id.includes("node_modules/react-router-dom")) {
             return "vendor-router";
           }
+          
+          // Blog-only: markdown rendering (lazy loaded)
+          if (id.includes("node_modules/react-markdown") || 
+              id.includes("node_modules/remark") || 
+              id.includes("node_modules/rehype")) {
+            return "vendor-markdown";
+          }
+          
+          // HTTP client
           if (id.includes("node_modules/axios")) {
             return "vendor-axios";
           }
-          if (id.includes("node_modules/react-helmet-async")) {
+          
+          // SEO - needed early
+          if (id.includes("node_modules/react-helmet")) {
             return "vendor-helmet";
           }
-          if (id.includes("node_modules/react-markdown") || id.includes("node_modules/remark") || id.includes("node_modules/rehype")) {
-            return "vendor-markdown";
-          }
         },
+        chunkFileNames: "assets/[name]-[hash].js",
+        entryFileNames: "assets/[name]-[hash].js",
+        assetFileNames: "assets/[name]-[hash][extname]",
       },
     },
   },

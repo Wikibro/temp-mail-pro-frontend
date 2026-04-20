@@ -8,6 +8,7 @@ const AccountManager = ({
 }) => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [copyResetTimer, setCopyResetTimer] = useState(null);
 
   const email = account?.address || account?.email || '';
 
@@ -16,9 +17,21 @@ const AccountManager = ({
     navigator.clipboard.writeText(email).then(() => {
       setCopiedEmail(true);
       if (onEmailCopied) onEmailCopied();
-      setTimeout(() => setCopiedEmail(false), 2500);
+      if (copyResetTimer) {
+        clearTimeout(copyResetTimer);
+      }
+      const timerId = setTimeout(() => setCopiedEmail(false), 2500);
+      setCopyResetTimer(timerId);
     }).catch(() => {});
   };
+
+  useEffect(() => {
+    return () => {
+      if (copyResetTimer) {
+        clearTimeout(copyResetTimer);
+      }
+    };
+  }, [copyResetTimer]);
 
   useEffect(() => {
     if (!account?.expiration) return;
