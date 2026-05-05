@@ -10,13 +10,39 @@ const PromoCard = lazy(() => import("./components/PromoCard.jsx"));
 const BlogList = lazy(() => import("./components/BlogList"));
 const BlogPost = lazy(() => import("./components/BlogPost"));
 const Privacy = lazy(() => import("./components/Privacy"));
+const PrivacyStack = lazy(() => import("./components/PrivacyStack"));
 const About = lazy(() => import("./components/About.jsx"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+
+const PROMO_COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000;
+
+function isPromoSuppressed() {
+  const dismissedAtRaw = localStorage.getItem("promoDismissedAt");
+  const legacyClosed = localStorage.getItem("promoClosed") === "true";
+
+  if (!dismissedAtRaw && legacyClosed) {
+    localStorage.setItem("promoDismissedAt", String(Date.now()));
+    localStorage.removeItem("promoClosed");
+    return true;
+  }
+
+  if (!dismissedAtRaw) {
+    return false;
+  }
+
+  const dismissedAt = Number(dismissedAtRaw);
+  if (Number.isNaN(dismissedAt)) {
+    localStorage.removeItem("promoDismissedAt");
+    return false;
+  }
+
+  return Date.now() - dismissedAt < PROMO_COOLDOWN_MS;
+}
 
 function AppContent() {
   const location = useLocation();
   const [showPromoCard, setShowPromoCard] = useState(false);
-  const [promoClosed, setPromoClosed] = useState(() => localStorage.getItem("promoClosed") === "true");
+  const [promoSuppressed, setPromoSuppressed] = useState(() => isPromoSuppressed());
   const shouldAutoShowPromo = location.pathname !== "/app";
 
   useEffect(() => {
@@ -29,22 +55,33 @@ function AppContent() {
     location.pathname === "/app";
 
   useEffect(() => {
-    if (!promotablePage || promoClosed || !shouldAutoShowPromo) {
+    if (!promoSuppressed) {
+      return;
+    }
+
+    if (!isPromoSuppressed()) {
+      setPromoSuppressed(false);
+      localStorage.removeItem("promoDismissedAt");
+    }
+  }, [location.pathname, promoSuppressed]);
+
+  useEffect(() => {
+    if (!promotablePage || promoSuppressed || !shouldAutoShowPromo) {
       return undefined;
     }
 
     const timer = setTimeout(() => setShowPromoCard(true), 7000);
     return () => clearTimeout(timer);
-  }, [promotablePage, promoClosed, shouldAutoShowPromo]);
+  }, [promotablePage, promoSuppressed, shouldAutoShowPromo]);
 
   const handlePromoClose = () => {
     setShowPromoCard(false);
-    setPromoClosed(true);
-    localStorage.setItem("promoClosed", "true");
+    setPromoSuppressed(true);
+    localStorage.setItem("promoDismissedAt", String(Date.now()));
   };
 
   const handleEmailCopied = () => {
-    if (!promoClosed) {
+    if (!promoSuppressed) {
       setShowPromoCard(true);
     }
   };
@@ -69,13 +106,14 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/blog" element={<BlogList showSEO={true} />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/privacy-stack" element={<PrivacyStack />} />
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
       <Suspense fallback={null}>
         <PromoCard
-          visible={showPromoCard && !promoClosed && promotablePage}
+          visible={showPromoCard && !promoSuppressed && promotablePage}
           onClose={handlePromoClose}
         />
       </Suspense>

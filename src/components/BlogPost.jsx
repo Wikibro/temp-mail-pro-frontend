@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
@@ -9,6 +9,8 @@ import { Helmet } from 'react-helmet-async';
 import 'highlight.js/styles/github.css';
 import { articles } from '../content/articlesData';
 import { getRelatedArticles } from '../utils/relatedArticles';
+import { AFFILIATE_REL, getAffiliateLink } from '../utils/affiliateLinks';
+import { trackAffiliateClick } from '../utils/affiliateTracking';
 import PageNavbar from './PageNavbar';
 import Footer from './Footer';
 import AppIcon from './AppIcon';
@@ -23,8 +25,35 @@ function formatFallbackTitle(slug) {
   return slug.replace(/-/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
+const NORD_RECOMMENDATION_SLUGS = {
+  vpn: new Set([
+    'temp-email-for-dating-apps',
+    'temp-email-for-craigslist',
+    'burner-email-social-media-signups-guide',
+    'is-free-temp-mail-legal',
+  ]),
+  pass: new Set([
+    'temp-email-for-account-testing',
+    'temp-mail-for-qa-and-account-testing-teams',
+    'how-to-manage-multiple-temp-emails',
+    'free-temp-mail-multiple-inboxes-guide',
+  ]),
+};
+
+const NORD_INTENT_KEYWORDS = {
+  vpn: ['vpn', 'public wi-fi', 'public wifi', 'phishing', 'privacy', 'anonymous', 'tracking', 'legal'],
+  pass: ['password', 'account', 'credentials', 'qa', 'testing', 'multiple inboxes', 'security'],
+};
+
+function hasNordIntent(type, slug, title, description, content) {
+  const haystack = `${slug} ${title} ${description} ${content}`.toLowerCase();
+  return NORD_RECOMMENDATION_SLUGS[type].has(slug)
+    || NORD_INTENT_KEYWORDS[type].some((keyword) => haystack.includes(keyword));
+}
+
 export default function BlogPost() {
   const { slug } = useParams();
+  const blogContentRef = useRef(null);
   const [content, setContent] = useState('');
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
@@ -59,7 +88,13 @@ export default function BlogPost() {
         setDate(dateMatch ? dateMatch[1] : '');
         setDescription(descriptionMatch ? descriptionMatch[1] : '');
         setImage(imageMatch ? imageMatch[1] : '');
-        setContent(contentText);
+
+        const normalizedContent = contentText.replace(
+          /https:\/\/yesim\.app\/global\/global-package-esim\/\?partner_id=3317/gi,
+          getAffiliateLink('yesim', `blog_${slug}_yesim_markdown`)
+        );
+
+        setContent(normalizedContent);
       } else {
         setTitle(formatFallbackTitle(slug));
         setDate('');
@@ -75,6 +110,48 @@ export default function BlogPost() {
       setLoading(false);
     }
   }, [slug]);
+
+  useEffect(() => {
+    const root = blogContentRef.current;
+    if (!root) {
+      return undefined;
+    }
+
+    const handleContentAffiliateClick = (event) => {
+      const link = event.target.closest('a[href]');
+      if (!link) {
+        return;
+      }
+
+      const href = link.getAttribute('href') || '';
+      let partner = '';
+
+      if (href.includes('yesim.app')) {
+        partner = 'yesim';
+      } else if (href.includes('go.nordvpn.net')) {
+        partner = 'nordvpn';
+      } else if (href.includes('go.nordpass.io')) {
+        partner = 'nordpass';
+      } else if (href.includes('hostinger.com')) {
+        partner = 'hostinger';
+      }
+
+      if (!partner) {
+        return;
+      }
+
+      trackAffiliateClick({
+        partner,
+        placement: `blog_${slug}_content`,
+        href,
+        articleSlug: slug,
+        source: 'blog-markdown',
+      });
+    };
+
+    root.addEventListener('click', handleContentAffiliateClick);
+    return () => root.removeEventListener('click', handleContentAffiliateClick);
+  }, [slug, content]);
 
   if (loading) {
     return (
@@ -102,6 +179,11 @@ export default function BlogPost() {
   const canonicalUrl = `${window.location.origin}/blog/${slug}`;
   const relatedArticles = getRelatedArticles(slug, articles, 3);
   const estimatedReadTime = Math.max(1, Math.ceil(content.split(/\s+/).filter(Boolean).length / 200));
+  const showNordVPN = hasNordIntent('vpn', slug, title, description, content);
+  const showNordPass = hasNordIntent('pass', slug, title, description, content);
+  const showNordRecommendations = showNordVPN || showNordPass;
+  const nordVpnHref = getAffiliateLink('nordvpn', `blog_${slug}_nordvpn_card`);
+  const nordPassHref = getAffiliateLink('nordpass', `blog_${slug}_nordpass_card`);
 
   return (
     <div className="blog-post-container">
@@ -228,7 +310,7 @@ export default function BlogPost() {
             </div>
           )}
 
-          <div className="blog-content">
+          <div className="blog-content" ref={blogContentRef}>
             <ReactMarkdown rehypePlugins={[rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}>
               {content}
             </ReactMarkdown>
@@ -252,6 +334,69 @@ export default function BlogPost() {
               </div>
             </div>
           </div>
+
+          {showNordRecommendations && (
+            <div className="card border-0 shadow-sm mb-4" aria-label="Optional partner recommendations">
+              <div className="card-body">
+                <div className="d-flex align-items-start gap-3 flex-wrap">
+                  <div className="rounded-circle bg-light d-flex align-items-center justify-content-center" style={{ width: '44px', height: '44px' }}>
+                    <AppIcon iconClass="bi bi-shield-lock" />
+                  </div>
+                  <div className="flex-grow-1">
+                    <h5 className="mb-2">Optional Security Add-Ons</h5>
+                    <p className="text-muted mb-3">
+                      TempMail Pro handles disposable inbox privacy. If you want extra account protection, you can also use partner tools for secure browsing and password management.
+                    </p>
+                    <div className="d-flex gap-2 flex-wrap">
+                      {showNordVPN && (
+                        <a
+                          href={nordVpnHref}
+                          target="_blank"
+                          rel={AFFILIATE_REL}
+                          className="btn btn-outline-primary btn-sm"
+                          onClick={() =>
+                            trackAffiliateClick({
+                              partner: 'nordvpn',
+                              placement: `blog_${slug}_nordvpn_card`,
+                              href: nordVpnHref,
+                              articleSlug: slug,
+                              source: 'blog-card',
+                            })
+                          }
+                        >
+                          <AppIcon iconClass="fas fa-shield-alt me-2" />
+                          Explore NordVPN
+                        </a>
+                      )}
+                      {showNordPass && (
+                        <a
+                          href={nordPassHref}
+                          target="_blank"
+                          rel={AFFILIATE_REL}
+                          className="btn btn-outline-primary btn-sm"
+                          onClick={() =>
+                            trackAffiliateClick({
+                              partner: 'nordpass',
+                              placement: `blog_${slug}_nordpass_card`,
+                              href: nordPassHref,
+                              articleSlug: slug,
+                              source: 'blog-card',
+                            })
+                          }
+                        >
+                          <AppIcon iconClass="fas fa-key me-2" />
+                          Explore NordPass
+                        </a>
+                      )}
+                    </div>
+                    <small className="text-muted d-block mt-2">
+                      Partner notice: These are optional external services and not part of TempMail Pro.
+                    </small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {relatedArticles.length > 0 && (
             <section className="mt-5" aria-labelledby="related-articles-heading">

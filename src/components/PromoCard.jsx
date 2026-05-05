@@ -1,6 +1,6 @@
 import React from 'react';
-
-const PROMO_REFERRAL_URL = 'https://www.hostinger.com/pk?REFERRALCODE=ZKDWAQASAVSO';
+import { AFFILIATE_REL, getAffiliateLink } from '../utils/affiliateLinks';
+import { trackAffiliateClick } from '../utils/affiliateTracking';
 
 const PromoCard = ({ visible, onClose }) => {
   if (!visible) return null;
@@ -25,10 +25,18 @@ const PromoCard = ({ visible, onClose }) => {
 
         <a
           className="promo-card-button"
-          href={PROMO_REFERRAL_URL}
+          href={getAffiliateLink('hostinger', 'promo_card_hostinger')}
           target="_blank"
-          rel="noopener noreferrer"
-          onClick={onClose}
+          rel={AFFILIATE_REL}
+          onClick={() => {
+            trackAffiliateClick({
+              partner: 'hostinger',
+              placement: 'promo_card_hostinger',
+              href: getAffiliateLink('hostinger', 'promo_card_hostinger'),
+              source: 'promo-card',
+            });
+            onClose();
+          }}
         >
           Explore Hostinger →
         </a>

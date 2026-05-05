@@ -1,5 +1,7 @@
 import React from 'react';
 import AppIcon from './AppIcon';
+import { AFFILIATE_REL, getAffiliateLink } from '../utils/affiliateLinks';
+import { trackAffiliateClick } from '../utils/affiliateTracking';
 
 const YesimRecommendation = () => {
   return (
@@ -16,10 +18,18 @@ const YesimRecommendation = () => {
             Need travel data or a second number too? Yesim publicly offers eSIM plans, Pay&Fly, and virtual numbers as a separate service.
           </p>
           <a
-            href="https://yesim.app/?partner_id=3317"
+            href={getAffiliateLink('yesim', 'landing_yesim_recommendation')}
             target="_blank"
-            rel="noopener noreferrer sponsored"
+            rel={AFFILIATE_REL}
             className="btn btn-yesim-card"
+            onClick={() =>
+              trackAffiliateClick({
+                partner: 'yesim',
+                placement: 'landing_yesim_recommendation',
+                href: getAffiliateLink('yesim', 'landing_yesim_recommendation'),
+                source: 'landing',
+              })
+            }
           >
             <AppIcon iconClass="bi bi-arrow-right-circle me-2" />
             View Yesim Options
