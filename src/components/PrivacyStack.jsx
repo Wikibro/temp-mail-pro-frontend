@@ -648,11 +648,10 @@ export default function PrivacyStack() {
           <div className="container">
             <div className="privacy-stack__bridge-card">
               <div>
-                <span className="privacy-stack__eyebrow">Privacy Gateway</span>
-                <h2>TempMail Pro is the entry point. The stack is the moat.</h2>
+                <span className="privacy-stack__eyebrow">You're Almost Fully Protected</span>
+                <h2>One tool isn't enough. The full stack is.</h2>
                 <p>
-                  This page turns your app into a branded privacy workflow instead of a single disposable-email utility. That gives you a stronger pitch,
-                  cleaner partner positioning, and a better path to monetizing privacy-focused traffic.
+                  A temporary inbox stops spam. A virtual number protects your identity during OTP and verification flows. A VPN hides your IP and encrypts your connection. Together, they close every gap that a single signup can open.
                 </p>
               </div>
               <div className="privacy-stack__bridge-actions">
