@@ -367,12 +367,39 @@ function TempMailApp({ onEmailCopied }) {
       <div className="container-fluid py-3 px-3 px-md-4">
         <PageNavbar />
         <Helmet>
-        <title>{account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro - Free Temporary Email Service'}</title>
-        <meta name="description" content={account ? `Your temporary email address is ${account.address || account.email}. Protect your inbox with TempMail Pro.` : 'Get free disposable email addresses with TempMail Pro. Protect your inbox from spam and stay secure.'} />
-        <meta property="og:title" content={account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro - Free Temporary Email Service'} />
-        <meta property="og:description" content={account ? `Your temporary email address is ${account.address || account.email}.` : 'Get free disposable email addresses with TempMail Pro.'} />
-        <link rel="canonical" href={`https://tempmailpk.com${location.pathname}`} />
-        <meta property="og:url" content={`https://tempmailpk.com${location.pathname}`} />
+          <title>
+            {account
+              ? `TempMail Pro - ${account.address || account.email}`
+              : 'TempMail Pro App - Free Multi Emails, Multi Inbox, Custom Time & Name'}
+          </title>
+          <meta
+            name="description"
+            content={account
+              ? `Your temporary email address is ${account.address || account.email}. Create multi emails, use multi inbox, and protect your privacy with TempMail Pro.`
+              : 'Create free multi emails with multi inbox, custom expiry time, and custom name options. No sign-in required. Protect your inbox from spam and phishing with TempMail Pro.'}
+          />
+          <meta
+            property="og:title"
+            content={account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro App - Free Multi Emails, No Sign-In'}
+          />
+          <meta
+            property="og:description"
+            content={account
+              ? `Your temporary email address is ${account.address || account.email}. Manage multi emails and inboxes securely.`
+              : 'Generate free multi emails with multi inbox support, custom time, and custom names. No sign-in needed.'}
+          />
+          <meta
+            name="twitter:title"
+            content={account ? `TempMail Pro - ${account.address || account.email}` : 'TempMail Pro App - Free Multi Emails, No Sign-In'}
+          />
+          <meta
+            name="twitter:description"
+            content={account
+              ? `Your temporary email address is ${account.address || account.email}. Manage multi emails privately.`
+              : 'Free multi emails, multi inbox, custom time and names, and no sign-in required.'}
+          />
+          <link rel="canonical" href={`https://tempmailpk.com${location.pathname}`} />
+          <meta property="og:url" content={`https://tempmailpk.com${location.pathname}`} />
         </Helmet>
 
         {isBackgroundPolling && (

@@ -86,30 +86,30 @@ const Landing = () => {
   return (
     <div className="landing-page">
       <Helmet>
-        <title>TempMail Pro - Free Temporary Email Service</title>
+        <title>TempMail Pro - Free Multi Inbox Temp Email, Custom Time & Name</title>
         <meta
           name="description"
-          content="Create multiple inboxes and multiple temporary emails for free with custom name options. TempMail Pro gives premium-level features without extra charges."
+          content="Create free temporary email addresses with multi inbox support, custom expiry time, custom name options, and no sign-in required. Protect your inbox from spam, phishing, and unwanted marketing."
         />
         <meta
           name="keywords"
           content="temporary email, disposable email, temp mail, spam protection, free email service, anonymous email"
         />
         <link rel="canonical" href="https://tempmailpk.com/" />
-        <meta property="og:title" content="TempMail Pro - Free Multi Inbox & Custom Name Temp Emails" />
+        <meta property="og:title" content="TempMail Pro - Free Multi Inbox Temp Email, No Sign-In" />
         <meta
           property="og:description"
-          content="Create multiple inboxes, generate multiple temp emails, and use custom names for free with TempMail Pro."
+          content="Get free multi inbox temporary emails with custom time and custom name options. No sign-in needed."
         />
         <meta property="og:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
         <meta property="og:url" content="https://tempmailpk.com/" />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="TempMail Pro - Free Multi Inbox & Custom Name Temp Emails" />
+        <meta name="twitter:title" content="TempMail Pro - Free Multi Inbox Temp Email, No Sign-In" />
         <meta
           name="twitter:description"
-          content="Create multiple inboxes, multiple temporary emails, and custom-name inboxes for free."
+          content="Create temporary emails with multi inbox, custom time, and custom names for free. No sign-in required."
         />
         <meta name="twitter:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
 
@@ -119,7 +119,7 @@ const Landing = () => {
             "@type": "WebApplication",
             name: "TempMail Pro",
             url: "https://tempmailpk.com/",
-            description: "Free temporary email service for anonymous and secure communication.",
+            description: "Free temporary email service with multi inbox, custom expiry time, custom names, and no sign-in.",
             applicationCategory: "CommunicationApplication",
             operatingSystem: "Web Browser",
             permissions: "browser",
