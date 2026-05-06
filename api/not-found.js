@@ -1,4 +1,5 @@
 export default function handler(request, response) {
+  response.setHeader('Content-Type', 'text/html; charset=utf-8');
   response.status(404).send(`
     <!DOCTYPE html>
     <html>

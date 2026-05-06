@@ -91,9 +91,10 @@
     { "source": "/app/:path*", "destination": "/index.html" }, 
     { "source": "/blog", "destination": "/index.html" },
     { "source": "/blog/:slug", "destination": "/index.html" },
+    { "source": "/privacy-stack", "destination": "/index.html" },
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
    
-    { "source": "/(.*)", "destination": "/api/not-found" }
+    { "source": "/((?!assets/|fonts/|images/|icons/|api/).*)", "destination": "/api/not-found" }
   ]
 }
