@@ -1,7 +1,7 @@
 // Service Worker for aggressive performance optimization
 // Handles caching strategy for 95-100 PageSpeed score
 
-const CACHE_VERSION = 'v1.2.0';
+const CACHE_VERSION = 'v1.2.1';
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const ASSETS_CACHE = `assets-${CACHE_VERSION}`;
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
@@ -53,6 +53,22 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  const offlineHtmlResponse = () =>
+    caches.match('/index.html').then((response) => {
+      return response || new Response('Offline', {
+        status: 503,
+        statusText: 'Service Unavailable',
+        headers: new Headers({ 'Content-Type': 'text/html' })
+      });
+    });
+
+  const offlineTextResponse = () =>
+    new Response('Network error while offline', {
+      status: 503,
+      statusText: 'Service Unavailable',
+      headers: new Headers({ 'Content-Type': 'text/plain' })
+    });
+
   // API calls - network first, fallback to cache
   if (url.pathname.startsWith('/api/')) {
     event.respondWith(
@@ -67,7 +83,9 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          return caches.match(request);
+          return caches.match(request).then((response) => {
+            return response || offlineTextResponse();
+          });
         })
     );
     return;
@@ -86,16 +104,40 @@ self.addEventListener('fetch', (event) => {
             return response;
           }
         }
-        return fetch(request).then((response) => {
+        return fetch(request)
+          .then((response) => {
+            if (response.ok) {
+              const clone = response.clone();
+              caches.open(ASSETS_CACHE).then((cache) => {
+                cache.put(request, clone);
+              });
+            }
+            return response;
+          })
+          .catch(() => {
+            return caches.match(request).then((fallback) => {
+              return fallback || offlineTextResponse();
+            });
+          });
+      })
+    );
+    return;
+  }
+
+  // SPA navigations - network first, fallback to cached shell
+  if (request.mode === 'navigate') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
           if (response.ok) {
             const clone = response.clone();
-            caches.open(ASSETS_CACHE).then((cache) => {
-              cache.put(request, clone);
+            caches.open(STATIC_CACHE).then((cache) => {
+              cache.put('/index.html', clone);
             });
           }
           return response;
-        });
-      })
+        })
+        .catch(() => offlineHtmlResponse())
     );
     return;
   }
@@ -114,7 +156,9 @@ self.addEventListener('fetch', (event) => {
           return response;
         })
         .catch(() => {
-          return caches.match(request);
+          return caches.match(request).then((response) => {
+            return response || offlineHtmlResponse();
+          });
         })
     );
     return;
@@ -127,15 +171,17 @@ self.addEventListener('fetch', (event) => {
         if (response) {
           return response;
         }
-        return fetch(request).then((response) => {
-          if (response.ok) {
-            const clone = response.clone();
-            caches.open(ASSETS_CACHE).then((cache) => {
-              cache.put(request, clone);
-            });
-          }
-          return response;
-        });
+        return fetch(request)
+          .then((response) => {
+            if (response.ok) {
+              const clone = response.clone();
+              caches.open(ASSETS_CACHE).then((cache) => {
+                cache.put(request, clone);
+              });
+            }
+            return response;
+          })
+          .catch(() => offlineTextResponse());
       })
     );
     return;
@@ -148,10 +194,8 @@ self.addEventListener('fetch', (event) => {
         return response;
       })
       .catch(() => {
-        return caches.match(request) || new Response('Network error while offline', {
-          status: 503,
-          statusText: 'Service Unavailable',
-          headers: new Headers({ 'Content-Type': 'text/plain' })
+        return caches.match(request).then((response) => {
+          return response || offlineTextResponse();
         });
       })
   );

@@ -176,7 +176,7 @@ export default function BlogPost() {
 
   const defaultImage = `${window.location.origin}/images/temp-mail-promo.png`;
   const metaImage = image ? `${window.location.origin}${image}` : defaultImage;
-  const canonicalUrl = `${window.location.origin}/blog/${slug}`;
+  const canonicalUrl = `https://tempmailpk.com/blog/${slug}`;
   const relatedArticles = getRelatedArticles(slug, articles, 3);
   const estimatedReadTime = Math.max(1, Math.ceil(content.split(/\s+/).filter(Boolean).length / 200));
   const showNordVPN = hasNordIntent('vpn', slug, title, description, content);
@@ -211,7 +211,7 @@ export default function BlogPost() {
           content={description || 'TempMail Pro Blog article about email privacy and security'}
         />
         <meta name="twitter:image" content={metaImage} />
-        <meta name="twitter:site" content="@tempmailpro" />
+        <meta name="twitter:site" content="@tempmailpk" />
         <script type="application/ld+json">
           {JSON.stringify({
             '@context': 'https://schema.org',
