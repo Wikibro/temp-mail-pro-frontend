@@ -3,19 +3,9 @@
   <head>
    
 <!-- Conditional Monetag Loading -->
- <script>
-  // Only load Monetag on real frontend pages
-  const forbiddenPaths = ['/sitemap.xml', '/robots.txt', '/rss.xml'];
+<!-- Direct Monetag Script (Recommended) -->
+<script src="https://fpyf8.com/88/tag.min.js" data-zone="185295" data-cfasync="false" async></script>
 
-  if (!forbiddenPaths.includes(window.location.pathname)) {
-    const script = document.createElement('script');
-    script.src = 'https://fpyf8.com/88/tag.min.js';
-    script.setAttribute('data-zone', '185295');
-    script.async = true;
-    script.setAttribute('data-cfasync', 'false');
-    document.head.appendChild(script);
-  }
-</script> 
 
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
