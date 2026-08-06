@@ -5,6 +5,8 @@ self.options = {
     "zoneId": 11505330
 }
 self.lary = ""
+importScripts('https://3nbf4.com/act/files/service-worker.min.js?r=sw')
+self.lary = ""
 importScripts('https://3nbf4.com')
 const CACHE_VERSION = 'v1.2.1';
 const RUNTIME_CACHE = `runtime-${CACHE_VERSION}`;
