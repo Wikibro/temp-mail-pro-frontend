@@ -194,6 +194,7 @@ export default function BlogPost() {
           name="description"
           content={description || 'Read the latest article on TempMail Pro Blog about email privacy and security.'}
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         <link rel="canonical" href={canonicalUrl} />
         <meta property="og:title" content={title || 'TempMail Pro Blog'} />
         <meta

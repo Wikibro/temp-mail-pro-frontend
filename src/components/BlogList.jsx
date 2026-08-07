@@ -21,6 +21,7 @@ export default function BlogList({ limit, showSEO = false, showHeader = true }) 
         <Helmet>
           <title>Email Privacy & Security Blog | TempMail Pk</title>
           <meta name="description" content="Expert guides on temporary emails, online privacy, and protecting your inbox from spam. Learn from TempMail Pk security experts." />
+          <meta name="robots" content="index, follow, max-image-preview:large" />
           <link rel="canonical" href="https://tempmailpk.com/blog" />
         </Helmet>
       )}
