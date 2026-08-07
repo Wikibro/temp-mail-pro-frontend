@@ -95,6 +95,8 @@
     { "source": "/privacy", "destination": "/index.html" },
     { "source": "/about", "destination": "/index.html" },
     { "source": "/sw.js", "destination": "/sw.js" },
-    { "source": "/((?!assets/|fonts/|images/|icons/|api/|sw\\.js|robots\\.txt|sitemap\\.xml).*)", "destination": "/api/not-found" }
+    { "source": "/cache-worker.js", "destination": "/cache-worker.js" },
+    { "source": "/((?!assets/|fonts/|images/|icons/|api/|sw\\.js|cache-worker\\.js|robots\\.txt|sitemap\\.xml).*)", "destination": "/api/not-found" }
   ]
+
 }
