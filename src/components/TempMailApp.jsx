@@ -412,6 +412,13 @@ function TempMailApp({ onEmailCopied }) {
 
         <Header />
 
+        <section className="monetag-app-ad-section" aria-label="Sponsored content">
+          <div className="monetag-app-ad-slot">
+            <div className="monetag-ad-slot__label">Sponsored</div>
+            <div className="monetag-ads monetag-ads--compact" data-zone="11505330" data-ad-format="auto" aria-live="polite"></div>
+          </div>
+        </section>
+
         {error && !showExpiredCard && (
           <ErrorAlert error={error} setError={setError} onRetry={fetchInbox} />
         )}

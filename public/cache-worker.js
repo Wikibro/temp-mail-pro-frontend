@@ -40,13 +40,20 @@ self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // MONETAG REQUESTS BYPASS: Monetag ke domains ko cache na karein taake ads sahi chalein
-  if (
-    url.hostname.includes('quge5.com') || 
-    url.hostname.includes('3nbf4.com') || 
-    url.hostname.includes('bngpt.com') ||
-    url.hostname.includes('v977v.com')
-  ) {
+  const isMonetagRequest = (hostname) => {
+    const blockedHosts = [
+      'quge5.com',
+      'monetag.com',
+      '3nbf4.com',
+      'bngpt.com',
+      'v977v.com'
+    ];
+
+    return blockedHosts.some((host) => hostname === host || hostname.endsWith(`.${host}`));
+  };
+
+  // Monetag and ad image/script requests must bypass the cache worker so ads can load reliably.
+  if (isMonetagRequest(url.hostname)) {
     return;
   }
 

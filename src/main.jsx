@@ -13,24 +13,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   </React.StrictMode>
 );
 
-// Service Workers Registration
+// Service workers: avoid blocking third-party ad requests. Register only in production.
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    
-    // 1. MONETAG SERVICE WORKER REGISTER
-    navigator.serviceWorker.register('/sw.js', { scope: '/' })
-      .then((registration) => {
-        console.log('Monetag SW registered successfully:', registration);
-      })
-      .catch((err) => {
-        console.log('Monetag SW registration failed:', err);
-      });
+    const isProductionSecureHost = location.protocol === 'https:' && !['localhost', '127.0.0.1'].includes(location.hostname);
 
-    // 2. PERFORMANCE CACHING WORKER REGISTER
+    if (!isProductionSecureHost) {
+      return;
+    }
+
     navigator.serviceWorker.register('/cache-worker.js', { scope: '/' })
       .then((registration) => {
         console.log('Cache SW registered successfully:', registration);
-        // Caching ko update karne ke liye interval check
         setInterval(() => {
           registration.update();
         }, 21600000);
@@ -38,6 +32,5 @@ if ('serviceWorker' in navigator) {
       .catch((err) => {
         console.log('Cache SW registration failed:', err);
       });
-
   });
 }

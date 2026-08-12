@@ -215,6 +215,15 @@ const Landing = () => {
           </div>
         </section>
 
+        <section className="monetag-ad-section" aria-label="Sponsored content">
+          <div className="container">
+            <div className="monetag-ad-slot">
+              <div className="monetag-ad-slot__label">Sponsored</div>
+              <div className="monetag-ads" data-zone="11505330" data-ad-format="auto" aria-live="polite"></div>
+            </div>
+          </div>
+        </section>
+
         <Suspense fallback={<div className="landing-lazy-placeholder landing-lazy-placeholder--deferred" aria-hidden="true" />}>
           {showDeferredSections ? (
             <LandingDeferredSections />

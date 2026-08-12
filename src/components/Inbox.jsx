@@ -160,6 +160,13 @@ const Inbox = ({ messages, isLoading, onRetry, onTokenExpired }) => {
         </div>
       </div>
 
+      <section className="monetag-inbox-ad-section" aria-label="Sponsored content">
+        <div className="monetag-app-ad-slot monetag-app-ad-slot--compact">
+          <div className="monetag-ad-slot__label">Sponsored</div>
+          <div className="monetag-ads monetag-ads--compact" data-zone="11505330" data-ad-format="auto" aria-live="polite"></div>
+        </div>
+      </section>
+
       {selectedMsg && (
         <div
           className="modal show d-block"
