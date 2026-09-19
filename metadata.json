@@ -1,0 +1,8 @@
+{
+  "name": "TempMail Pro",
+  "description": "Free temporary email service with multiple inboxes, custom expiry options, and spam protection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
