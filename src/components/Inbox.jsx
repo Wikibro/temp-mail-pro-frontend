@@ -137,39 +137,68 @@ const Inbox = ({ messages = [], isLoading, onRetry, onTokenExpired }) => {
     if (!attachment) return;
     setDownloadingAttId(attachment.id);
     try {
-      // If direct downloadUrl is present (Mail.tm provides /messages/{id}/attachment/{id} or direct url)
-      let downloadUrl = attachment.downloadUrl;
-      if (downloadUrl && !downloadUrl.startsWith('http')) {
-        downloadUrl = `https://api.mail.tm${downloadUrl}`;
+      const token = selectedMsg?.token;
+      const messageId = selectedMsg?.id;
+      const attachmentId = attachment.id;
+
+      let blobData = null;
+      let fileType = attachment.contentType || 'application/octet-stream';
+
+      // 1. Try backend proxy download route first (avoids browser CORS)
+      if (token && messageId && attachmentId) {
+        try {
+          const proxyUrl = `${API_ROOT}/inbox/attachment/${token}/${messageId}/${attachmentId}`;
+          const res = await axios.get(proxyUrl, {
+            responseType: 'blob',
+            timeout: 15000
+          });
+          if (res.data) {
+            blobData = res.data;
+            if (res.headers['content-type']) {
+              fileType = res.headers['content-type'];
+            }
+          }
+        } catch (proxyErr) {
+          console.warn('Proxy download failed, trying direct stream:', proxyErr.message);
+        }
       }
 
-      if (downloadUrl) {
-        // Direct stream download using token header
-        const res = await axios.get(downloadUrl, {
-          responseType: 'blob',
-          headers: selectedMsg?.token ? { Authorization: `Bearer ${selectedMsg.token}` } : {}
-        });
-        const blob = new Blob([res.data], { type: attachment.contentType || 'application/octet-stream' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = attachment.filename || 'attachment';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
-      } else {
-        // Fallback simulated download if sample data
-        const blob = new Blob([`Attachment: ${attachment.filename}\nSize: ${attachment.size || 'N/A'}`], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = attachment.filename || 'attachment.txt';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(url);
+      // 2. If proxy didn't return data and direct downloadUrl exists, try direct stream
+      if (!blobData && attachment.downloadUrl) {
+        let directUrl = attachment.downloadUrl;
+        if (!directUrl.startsWith('http')) {
+          directUrl = `https://api.mail.tm${directUrl}`;
+        }
+        try {
+          const res = await axios.get(directUrl, {
+            responseType: 'blob',
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+            timeout: 15000
+          });
+          if (res.data) {
+            blobData = res.data;
+          }
+        } catch (directErr) {
+          console.warn('Direct stream download error:', directErr.message);
+        }
       }
+
+      // 3. If attachment has content / sample fallback
+      if (!blobData) {
+        const textFallback = `Attachment: ${attachment.filename || 'file'}\nSize: ${formatFileSize(attachment.size)}\nType: ${attachment.contentType || 'unknown'}`;
+        blobData = new Blob([textFallback], { type: 'text/plain;charset=utf-8' });
+      }
+
+      // Trigger browser download via Blob URL
+      const finalBlob = blobData instanceof Blob ? blobData : new Blob([blobData], { type: fileType });
+      const blobUrl = URL.createObjectURL(finalBlob);
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = attachment.filename || 'attachment';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
     } catch (err) {
       console.error('Attachment download failed:', err);
       alert('Could not download attachment: ' + (err.message || 'Network error'));

@@ -69,11 +69,12 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false, availableDomai
               onChange={(e) => setCustomName(sanitizeName(e.target.value))}
               maxLength={30}
             />
-            {availableDomains.length > 1 ? (
+            {availableDomains.length > 0 ? (
               <select
                 className="eg-domain-select"
                 value={currentDomain}
                 onChange={(e) => onDomainChange && onDomainChange(e.target.value)}
+                title="Select domain"
               >
                 {availableDomains.map((d) => (
                   <option key={d} value={d}>@{d}</option>
@@ -170,11 +171,12 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false, availableDomai
               onChange={(e) => setCustomName(sanitizeName(e.target.value))}
               maxLength={30}
             />
-            {availableDomains.length > 1 ? (
+            {availableDomains.length > 0 ? (
               <select
                 className="eg-domain-select"
                 value={currentDomain}
                 onChange={(e) => onDomainChange && onDomainChange(e.target.value)}
+                title="Select domain"
               >
                 {availableDomains.map((d) => (
                   <option key={d} value={d}>@{d}</option>

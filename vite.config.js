@@ -107,6 +107,17 @@ function tempMailDevApiPlugin() {
       return;
     }
 
+    // GET /api/inbox/attachment/:token/:id/:attId
+    const attMatch = pathname.match(/^\/api\/inbox\/attachment\/([^/]+)\/([^/]+)\/([^/]+)$/);
+    if (req.method === 'GET' && attMatch) {
+      const [, token, id, attId] = attMatch;
+      res.statusCode = 200;
+      res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+      res.setHeader('Content-Disposition', 'attachment; filename="QuickStart_Guide.txt"');
+      res.end("Welcome to Temp Mail Pro!\n\nYour temporary mailbox is active and ready to receive emails and verification codes.\n\nEnjoy 100% private, anonymous and zero-log email service.");
+      return;
+    }
+
     // GET /api/inbox/:token
     const inboxMatch = pathname.match(/^\/api\/inbox\/([^/]+)$/);
     if (req.method === 'GET' && inboxMatch) {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { QRCodeSVG } from 'qrcode.react';
 import AppIcon from './AppIcon';
 
 const AccountManager = ({
@@ -152,16 +153,18 @@ const AccountManager = ({
       </div>
 
       {showQr && email && (
-        <div className="text-center p-3 mt-2 bg-light rounded-3 border">
-          <div className="fw-bold small text-muted mb-2">Scan with your phone camera:</div>
-          <img
-            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(email)}`}
-            alt={`QR Code for ${email}`}
-            width="150"
-            height="150"
-            className="img-fluid rounded border bg-white p-1"
-          />
-          <div className="font-monospace small text-primary mt-2">{email}</div>
+        <div className="text-center p-3 mt-3 bg-light rounded-3 border shadow-sm">
+          <div className="fw-semibold small text-dark mb-2">Scan with your phone camera to copy:</div>
+          <div className="d-inline-flex p-3 bg-white rounded-3 border shadow-sm">
+            <QRCodeSVG
+              value={email}
+              size={160}
+              level="M"
+              includeMargin={false}
+            />
+          </div>
+          <div className="font-monospace small text-primary fw-medium mt-2 user-select-all">{email}</div>
+          <div className="text-muted" style={{ fontSize: '0.75rem' }}>Instant access on your mobile device</div>
         </div>
       )}
     </div>
