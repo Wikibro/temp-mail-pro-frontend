@@ -468,7 +468,7 @@ function TempMailApp({ onEmailCopied }) {
 
                 {!showExpiredCard && tokenValid && (
                   <div className="mt-3">
-                    <YesimRecommendation />
+                    <YesimRecommendation context="app" />
                   </div>
                 )}
 

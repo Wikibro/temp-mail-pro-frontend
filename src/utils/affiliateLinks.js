@@ -5,6 +5,11 @@ export const AFFILIATE_LINKS = {
   nordpass: 'https://go.nordpass.io/aff_c?offer_id=488&aff_id=146034&url_id=9356',
 };
 
+export const PARTNER_DESTINATIONS = {
+  pst: 'https://pst.net',
+  cashmaal: 'https://cashmaal.com',
+};
+
 export const AFFILIATE_REL = 'noopener noreferrer sponsored';
 
 function sanitizePlacement(placement) {

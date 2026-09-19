@@ -44,6 +44,8 @@ The right choice depends on your timeline. If you only need one verification cod
 
 Many products send trial reminders, bonus onboarding emails, and renewal notices after signup. A long-duration temp inbox keeps those messages accessible until your decision is final.
 
+**Keep the payment layer separate too:** Some longer trials may request payment details before activation or renewal. For eligible workflows, review [PST.NET virtual cards](https://pst.net) or [CashMaal Visa cards](https://cashmaal.com), and confirm current fees, verification, billing, and cancellation terms before proceeding.
+
 ### 2. Multi-account testing and QA
 
 Testing account flows usually needs repeated logins and staged checks. Separate temporary inboxes per test scenario help teams stay organized.

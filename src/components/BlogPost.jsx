@@ -14,6 +14,7 @@ import { trackAffiliateClick } from '../utils/affiliateTracking';
 import PageNavbar from './PageNavbar';
 import Footer from './Footer';
 import AppIcon from './AppIcon';
+import BlogPartnerBanner from './BlogPartnerBanner';
 
 const markdownFiles = import.meta.glob('../content/articles/*.md', {
   query: '?raw',
@@ -128,6 +129,10 @@ export default function BlogPost() {
 
       if (href.includes('yesim.app')) {
         partner = 'yesim';
+      } else if (href.includes('pst.net')) {
+        partner = 'pst';
+      } else if (href.includes('cashmaal.com')) {
+        partner = 'cashmaal';
       } else if (href.includes('go.nordvpn.net')) {
         partner = 'nordvpn';
       } else if (href.includes('go.nordpass.io')) {
@@ -184,6 +189,17 @@ export default function BlogPost() {
   const showNordRecommendations = showNordVPN || showNordPass;
   const nordVpnHref = getAffiliateLink('nordvpn', `blog_${slug}_nordvpn_card`);
   const nordPassHref = getAffiliateLink('nordpass', `blog_${slug}_nordpass_card`);
+  let paragraphCount = 0;
+
+  const renderBlogParagraph = ({ children }) => {
+    paragraphCount += 1;
+    return (
+      <React.Fragment>
+        <p>{children}</p>
+        {paragraphCount === 3 && <BlogPartnerBanner articleSlug={slug} />}
+      </React.Fragment>
+    );
+  };
 
   return (
     <div className="blog-post-container">
@@ -312,7 +328,10 @@ export default function BlogPost() {
           )}
 
           <div className="blog-content" ref={blogContentRef}>
-            <ReactMarkdown rehypePlugins={[rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}>
+            <ReactMarkdown
+              rehypePlugins={[rehypeHighlight, rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}
+              components={{ p: renderBlogParagraph }}
+            >
               {content}
             </ReactMarkdown>
           </div>

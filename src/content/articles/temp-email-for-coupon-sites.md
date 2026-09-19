@@ -65,6 +65,8 @@ Coupon emails often have fine print. Copy the code and coupon terms before your 
 **Combine with shopping strategy**
 See [How Temporary Email Helps You Shop Online Without Spam](/blog/temp-email-for-online-shopping) for a complete privacy-friendly shopping workflow.
 
+> 🛍️ **Secure Shopping Tip:** Coupon and e-commerce websites can collect substantial marketing and payment data. Along with a disposable email, consider a virtual card where appropriate. Review [PST Virtual Cards](https://pst.net) or [CashMaal Visa](https://cashmaal.com), and check current fees, verification requirements, and retailer acceptance before purchasing.
+
 ## Risks to Avoid
 
 **Don't use temp email if:**

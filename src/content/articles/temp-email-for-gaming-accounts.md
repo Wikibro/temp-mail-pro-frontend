@@ -95,6 +95,8 @@ Best for: Long-term progression, streaming alts, community participation.
 
 Many platforms allow email changes within 24-48 hours of account creation.
 
+> 🎮 **Gamers Note:** Creating alternative gaming accounts on PlayStation, Xbox, or Steam may require payment authorization for some trial bundles. If you want to keep payment details separate, compare [PST.NET VCC options](https://pst.net) and [CashMaal Virtual Cards](https://cashmaal.com), subject to each provider's verification policy and the gaming platform's terms.
+
 ## Gaming Performance Considerations
 
 **Temporary email does NOT affect:**

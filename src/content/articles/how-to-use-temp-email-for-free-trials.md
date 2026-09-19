@@ -47,6 +47,8 @@ Temporary email is strongest when the relationship is **transactional and short-
 
 It is a weaker choice for services where you may need account recovery, billing history, or repeated login links.
 
+**Payment note for trials:** Some streaming, design, AI, and subscription platforms may request a card before starting a trial. If you want to keep an everyday card separate, you can review [PST.NET virtual-card options](https://pst.net) or [CashMaal Visa options](https://cashmaal.com). Check current fees, verification requirements, renewal terms, and platform acceptance before using any payment provider.
+
 ## A Safer Trial Signup Checklist
 
 Before you start a trial, check these points:

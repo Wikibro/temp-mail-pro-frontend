@@ -1,17 +1,17 @@
-import React, { lazy, Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { Helmet } from "react-helmet-async";
 import AppIcon from "./AppIcon";
 
-const LandingDeferredSections = lazy(() => import("./LandingDeferredSections.jsx"));
+import LandingDeferredSections from "./LandingDeferredSections.jsx";
 
 const deferredSectionIds = new Set(["features", "how-it-works", "seo-article", "faq", "blog"]);
 
 const Landing = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showDeferredSections, setShowDeferredSections] = useState(false);
+  const [showDeferredSections, setShowDeferredSections] = useState(true);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -86,30 +86,30 @@ const Landing = () => {
   return (
     <div className="landing-page">
       <Helmet>
-        <title>TempMail Pro - Free Multi Inbox Temp Email, Custom Time & Name</title>
+        <title>Free Temporary Email with Multiple Inboxes | TempMail Pro</title>
         <meta
           name="description"
-          content="Create free temporary email addresses with multi inbox support, custom expiry time, custom name options, and no sign-in required. Protect your inbox from spam, phishing, and unwanted marketing."
+          content="Create free temporary email addresses with multiple inboxes, custom expiry options, custom names, and no sign-in required. Learn how temp mail protects your inbox and when to use it safely."
         />
         <meta
           name="keywords"
           content="temporary email, disposable email, temp mail, spam protection, free email service, anonymous email"
         />
         <link rel="canonical" href="https://tempmailpk.com/" />
-        <meta property="og:title" content="TempMail Pro - Free Multi Inbox Temp Email, No Sign-In" />
+        <meta property="og:title" content="Free Temporary Email with Multiple Inboxes | TempMail Pro" />
         <meta
           property="og:description"
-          content="Get free multi inbox temporary emails with custom time and custom name options. No sign-in needed."
+          content="Create temporary email addresses with custom time, custom names, and multiple inboxes. No sign-in required."
         />
         <meta property="og:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
         <meta property="og:url" content="https://tempmailpk.com/" />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="TempMail Pro - Free Multi Inbox Temp Email, No Sign-In" />
+        <meta name="twitter:title" content="Free Temporary Email with Multiple Inboxes | TempMail Pro" />
         <meta
           name="twitter:description"
-          content="Create temporary emails with multi inbox, custom time, and custom names for free. No sign-in required."
+          content="Create free temporary emails with multiple inboxes, custom time, and custom names. Use temp mail for low-risk signups and inbox protection."
         />
         <meta name="twitter:image" content="https://tempmailpk.com/images/temp-mail-promo.png" />
 
@@ -224,16 +224,10 @@ const Landing = () => {
           </div>
         </section>
 
-        <Suspense fallback={<div className="landing-lazy-placeholder landing-lazy-placeholder--deferred" aria-hidden="true" />}>
-          {showDeferredSections ? (
-            <LandingDeferredSections />
-          ) : (
-            <div className="landing-lazy-placeholder landing-lazy-placeholder--deferred" aria-hidden="true" />
-          )}
-        </Suspense>
+        <LandingDeferredSections />
       </main>
 
-      {showDeferredSections ? <Footer /> : null}
+      <Footer />
     </div>
   );
 };

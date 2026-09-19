@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import AppIcon from './AppIcon';
-import { AFFILIATE_REL, getAffiliateLink } from '../utils/affiliateLinks';
+import { AFFILIATE_REL, getAffiliateLink, PARTNER_DESTINATIONS } from '../utils/affiliateLinks';
 import { trackAffiliateClick } from '../utils/affiliateTracking';
 
 const Footer = () => {
@@ -48,8 +48,7 @@ const Footer = () => {
             </Link>
             <p className="site-footer__disclaimer">
               <AppIcon iconClass="fas fa-info-circle me-1 opacity-50" />
-              Partner notice: We may include optional partner links (e.g. Yesim, NordVPN, NordPass) for privacy and account-security tools.
-              TempMail Pro and partner services are separate products.
+              Partner notice: We may include optional partner links (e.g. Yesim, PST.NET, CashMaal) for privacy, connectivity, and financial account-security tools. TempMail Pro and partner services are separate products.
             </p>
           </div>
 
@@ -77,30 +76,27 @@ const Footer = () => {
                   rel={AFFILIATE_REL}
                   onClick={() => handleAffiliateClick('yesim', 'footer_yesim')}
                 >
-                  <AppIcon iconClass="fas fa-sim-card me-2" />Get Virtual Number
-                  <span className="site-footer__badge">via Yesim</span>
+                  <AppIcon iconClass="fas fa-sim-card me-2" />Get Virtual Number (via Yesim)
                 </a>
               </li>
               <li>
                 <a
-                  href={getAffiliateLink('nordvpn', 'footer_nordvpn')}
+                  href={PARTNER_DESTINATIONS.pst}
                   target="_blank"
                   rel={AFFILIATE_REL}
-                  onClick={() => handleAffiliateClick('nordvpn', 'footer_nordvpn')}
+                  onClick={() => handleAffiliateClick('pst', 'footer_pst')}
                 >
-                  <AppIcon iconClass="fas fa-shield-alt me-2" />Get VPN Privacy
-                  <span className="site-footer__badge">via NordVPN</span>
+                  <AppIcon iconClass="fas fa-credit-card me-2" />Get Ads &amp; Trial VCC (via PST.NET)
                 </a>
               </li>
               <li>
                 <a
-                  href={getAffiliateLink('nordpass', 'footer_nordpass')}
+                  href={PARTNER_DESTINATIONS.cashmaal}
                   target="_blank"
                   rel={AFFILIATE_REL}
-                  onClick={() => handleAffiliateClick('nordpass', 'footer_nordpass')}
+                  onClick={() => handleAffiliateClick('cashmaal', 'footer_cashmaal')}
                 >
-                  <AppIcon iconClass="fas fa-key me-2" />Manage Passwords
-                  <span className="site-footer__badge">via NordPass</span>
+                  <AppIcon iconClass="fas fa-credit-card me-2" />Get Visa Prepaid Card (via CashMaal)
                 </a>
               </li>
               <li><Link to="/blog/how-to-use-temp-email-for-free-trials"><AppIcon iconClass="fas fa-book me-2" />How to Use Temp Email</Link></li>

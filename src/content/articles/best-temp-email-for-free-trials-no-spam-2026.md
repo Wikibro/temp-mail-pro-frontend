@@ -8,6 +8,8 @@ description: "A practical guide to choosing temporary email for free trials so y
 
 Many trial funnels trigger follow-up campaigns, upsells, and reminder sequences. Temporary email helps isolate that traffic.
 
+> 💡 **Important Tip for Free Trials:** Some premium platforms (like Netflix, Spotify, or Canva) may ask for a payment method during registration. If you need to keep payment details separate, review [PST.NET Premium Virtual Cards](https://pst.net) or [CashMaal Visa Cards](https://cashmaal.com), then confirm current fees, verification requirements, and platform terms before use.
+
 ## What to Look For
 
 - fast OTP delivery

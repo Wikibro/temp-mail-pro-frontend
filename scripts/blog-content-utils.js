@@ -79,6 +79,19 @@ export function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 
+function renderInlineMarkdown(value) {
+  return escapeHtml(value)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, (match, label, href) => {
+      if (href.startsWith('/')) {
+        return `<a href="${href}">${label}</a>`;
+      }
+
+      return `<a href="${href}" target="_blank" rel="noopener noreferrer sponsored">${label}</a>`;
+    });
+}
+
 function renderSimpleMarkdown(markdown) {
   const lines = markdown.split(/\r?\n/);
   const htmlParts = [];
@@ -90,7 +103,7 @@ function renderSimpleMarkdown(markdown) {
     }
 
     const text = paragraphLines.join(' ').trim();
-    htmlParts.push(`<p>${escapeHtml(text)}</p>`);
+    htmlParts.push(`<p>${renderInlineMarkdown(text)}</p>`);
     paragraphLines = [];
   };
 
@@ -126,7 +139,28 @@ export function buildStaticBlogPageHtml(article, siteUrl) {
   const canonicalUrl = `${siteUrl}/blog/${article.slug}`;
   const title = article.title || article.slug.replace(/-/g, ' ');
   const description = article.description || 'Read this blog post from TempMail Pk.';
+  const publishedDate = article.date || '';
   const bodyHtml = renderSimpleMarkdown(article.content || '');
+  const articleSchema = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: title,
+    description,
+    datePublished: publishedDate,
+    dateModified: publishedDate,
+    author: {
+      '@type': 'Organization',
+      name: 'TempMail Pro Team',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'TempMail Pro',
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': canonicalUrl,
+    },
+  });
 
   return `<!doctype html>
 <html lang="en">
@@ -135,6 +169,7 @@ export function buildStaticBlogPageHtml(article, siteUrl) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${escapeHtml(title)} | TempMail Pro Blog</title>
     <meta name="description" content="${escapeHtml(description)}" />
+    <meta name="author" content="TempMail Pro Team" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <link rel="canonical" href="${canonicalUrl}" />
     <meta property="og:title" content="${escapeHtml(title)}" />
@@ -145,13 +180,40 @@ export function buildStaticBlogPageHtml(article, siteUrl) {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escapeHtml(title)}" />
     <meta name="twitter:description" content="${escapeHtml(description)}" />
+    <script type="application/ld+json">${articleSchema}</script>
   </head>
   <body>
+    <header>
+      <nav aria-label="Primary navigation">
+        <a href="${siteUrl}/">TempMail Pro</a>
+        <a href="${siteUrl}/app">Use the app</a>
+        <a href="${siteUrl}/blog">All articles</a>
+        <a href="${siteUrl}/privacy">Privacy</a>
+        <a href="${siteUrl}/about">About</a>
+      </nav>
+    </header>
     <main>
+      <nav aria-label="Breadcrumb">
+        <a href="${siteUrl}/">Home</a> &rsaquo;
+        <a href="${siteUrl}/blog">Blog</a> &rsaquo;
+        <span>${escapeHtml(title)}</span>
+      </nav>
       <h1>${escapeHtml(title)}</h1>
+      ${publishedDate ? `<time datetime="${escapeHtml(publishedDate)}">Published ${escapeHtml(publishedDate)}</time>` : ''}
       <p>${escapeHtml(description)}</p>
       <article>${bodyHtml}</article>
+      <aside aria-label="Continue reading">
+        <h2>Continue with TempMail Pro</h2>
+        <p>Use a temporary inbox for suitable low-risk signups, or read more privacy guidance.</p>
+        <a href="${siteUrl}/app">Create a temporary email</a>
+        <a href="${siteUrl}/privacy-stack">Read the Privacy Stack guide</a>
+        <a href="${siteUrl}/blog">Browse more articles</a>
+      </aside>
     </main>
+    <footer>
+      <a href="${siteUrl}/privacy">Privacy Policy</a>
+      <a href="${siteUrl}/about">About TempMail Pro</a>
+    </footer>
   </body>
 </html>`;
 }

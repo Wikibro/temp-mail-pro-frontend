@@ -610,6 +610,218 @@ footer {
   width: 100%;
 }
 
+.privacy-stack-recommendation {
+  position: relative;
+  overflow: hidden;
+  padding: 1.35rem;
+  color: #e2e8f0;
+  background: linear-gradient(145deg, #0f172a 0%, #172554 100%);
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.2);
+}
+
+.privacy-stack-recommendation::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: linear-gradient(90deg, #38bdf8, #a78bfa, #fbbf24);
+}
+
+.privacy-stack-recommendation__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.privacy-stack-recommendation__icon {
+  display: grid;
+  flex: 0 0 44px;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  color: #bae6fd;
+  background: rgba(56, 189, 248, 0.14);
+  border: 1px solid rgba(125, 211, 252, 0.25);
+  border-radius: 12px;
+  font-size: 1.15rem;
+}
+
+.privacy-stack-recommendation__eyebrow,
+.blog-partner-banner__eyebrow {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #93c5fd;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.privacy-stack-recommendation h4 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(1.05rem, 2vw, 1.3rem);
+  line-height: 1.35;
+}
+
+.privacy-stack-recommendation p {
+  max-width: 900px;
+  margin: 0.5rem 0 0;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.privacy-stack-recommendation__actions,
+.blog-partner-banner__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+  align-items: stretch;
+}
+
+.privacy-stack-recommendation__action,
+.blog-partner-banner__item {
+  display: flex;
+  min-width: 0;
+  min-height: 112px;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem;
+  color: #f8fafc;
+  background: rgba(30, 41, 59, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.privacy-stack-recommendation__action:hover,
+.blog-partner-banner__item:hover {
+  color: #fff;
+  background: rgba(51, 65, 85, 0.95);
+  border-color: rgba(125, 211, 252, 0.55);
+  transform: translateY(-2px);
+}
+
+.privacy-stack-recommendation__action:focus-visible,
+.blog-partner-banner__item:focus-visible {
+  outline: 3px solid rgba(125, 211, 252, 0.9);
+  outline-offset: 3px;
+}
+
+.privacy-stack-recommendation__action > span:nth-child(2),
+.blog-partner-banner__copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.privacy-stack-recommendation__action strong,
+.blog-partner-banner__item strong {
+  display: block;
+  overflow-wrap: anywhere;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.privacy-stack-recommendation__action small,
+.blog-partner-banner__item small {
+  display: block;
+  margin-top: 0.25rem;
+  color: #94a3b8;
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.privacy-stack-recommendation__benefits {
+  display: block;
+  margin-top: 0.45rem;
+  color: #bae6fd;
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.privacy-stack-recommendation__notice {
+  display: block;
+  margin-top: 0.9rem;
+  color: #94a3b8;
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.privacy-stack-recommendation__action-icon,
+.blog-partner-banner__icon {
+  display: grid;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  background: rgba(15, 23, 42, 0.7);
+  border-radius: 9px;
+  font-size: 1.05rem;
+}
+
+.privacy-stack-recommendation__action > .bi,
+.blog-partner-banner__item > .bi {
+  flex: 0 0 auto;
+  color: #93c5fd;
+}
+
+.blog-partner-banner {
+  position: relative;
+  margin: 2rem 0;
+  padding: 1.2rem 1.2rem 1.2rem 1.35rem;
+  color: #e2e8f0;
+  background: linear-gradient(145deg, #111827, #1e293b);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-left: 4px solid #38bdf8;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+.blog-partner-banner__intro {
+  margin-bottom: 1rem;
+}
+
+.blog-partner-banner__intro h2 {
+  margin: 0;
+  color: #f8fafc;
+  font-size: 1.15rem;
+  line-height: 1.35;
+}
+
+.blog-partner-banner__intro p {
+  margin: 0.35rem 0 0;
+  color: #cbd5e1;
+  font-size: 0.85rem;
+}
+
+.blog-partner-banner__notice {
+  display: block;
+  margin-top: 0.8rem;
+  color: #94a3b8;
+  font-size: 0.7rem;
+}
+
+@media (max-width: 768px) {
+  .privacy-stack-recommendation__header {
+    gap: 0.75rem;
+  }
+
+  .privacy-stack-recommendation__actions,
+  .blog-partner-banner__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .privacy-stack-recommendation__action,
+  .blog-partner-banner__item {
+    min-height: 76px;
+  }
+}
+
 @media (max-width: 768px) {
   .yesim-card-content {
     flex-direction: column;
@@ -5043,8 +5255,73 @@ footer.bg-light {
 
 .privacy-stack__shields,
 .privacy-stack__funnel,
-.privacy-stack__bridge {
+.privacy-stack__bridge,
+.privacy-stack__financial {
   padding: 1rem 0 2rem;
+}
+
+.privacy-stack__financial {
+  background: #f8fafc;
+}
+
+.privacy-stack__financial-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.privacy-stack__financial-card {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  min-width: 0;
+  padding: 1.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-top: 3px solid #38bdf8;
+  border-radius: 12px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+.privacy-stack__financial-card--cashmaal {
+  border-top-color: #22c55e;
+}
+
+.privacy-stack__financial-icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  background: #f1f5f9;
+  border-radius: 12px;
+  font-size: 1.2rem;
+}
+
+.privacy-stack__financial-card h3 {
+  margin: 0.2rem 0 0.45rem;
+  color: #0f172a;
+  font-size: 1.2rem;
+}
+
+.privacy-stack__financial-card p {
+  margin-bottom: 0.85rem;
+}
+
+.privacy-stack__financial-card .privacy-stack__bullet-list {
+  margin-bottom: 1.1rem;
+}
+
+.privacy-stack__financial-card .privacy-stack__panel-btn:focus-visible {
+  outline: 3px solid rgba(14, 116, 144, 0.35);
+  outline-offset: 3px;
+}
+
+.privacy-stack__financial-notice {
+  margin: 1rem 0 0;
+  color: #64748b;
+  font-size: 0.78rem;
+  line-height: 1.55;
 }
 
 .privacy-stack__section-head {
@@ -5381,6 +5658,7 @@ footer.bg-light {
   .privacy-stack__hero-grid,
   .privacy-stack__funnel-grid,
   .privacy-stack__panel-grid,
+  .privacy-stack__financial-grid,
   .privacy-stack__bridge-card,
   .privacy-stack__metrics-grid,
   .privacy-stack__insight-grid,
@@ -5392,6 +5670,7 @@ footer.bg-light {
   .privacy-stack__hero-copy,
   .privacy-stack__hero-card,
   .privacy-stack__panel,
+  .privacy-stack__financial-card,
   .privacy-stack__funnel-card,
   .privacy-stack__bridge-card {
     padding: 1.5rem;

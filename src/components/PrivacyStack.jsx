@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import PageNavbar from './PageNavbar';
 import Footer from './Footer';
 import AppIcon from './AppIcon';
-import { AFFILIATE_REL, getAffiliateLink } from '../utils/affiliateLinks';
+import { AFFILIATE_REL, getAffiliateLink, PARTNER_DESTINATIONS } from '../utils/affiliateLinks';
 import { trackAffiliateClick, trackPlacementClick } from '../utils/affiliateTracking';
 
 const STORAGE_KEY = 'affiliateClickEvents';
@@ -159,6 +159,8 @@ export default function PrivacyStack() {
   const nordVpnHeroHref = getAffiliateLink('nordvpn', 'stack_hero_nord');
   const nordVpnShieldHref = getAffiliateLink('nordvpn', 'stack_network_nordvpn');
   const nordPassShieldHref = getAffiliateLink('nordpass', 'stack_network_nordpass');
+  const pstHref = PARTNER_DESTINATIONS.pst;
+  const cashmaalHref = PARTNER_DESTINATIONS.cashmaal;
 
   useEffect(() => {
     setIntent(detectIntent(location.search));
@@ -315,7 +317,7 @@ export default function PrivacyStack() {
         <title>Privacy Stack - Protect Email, Phone & Network | TempMail Pro</title>
         <meta
           name="description"
-          content="Build a full privacy stack with TempMail Pro, Yesim, NordVPN, and NordPass. Protect your email, phone number, IP address, and password habits in one workflow."
+          content="Build a practical privacy stack with TempMail Pro, Yesim, NordVPN, NordPass, and optional payment privacy tools for eligible online workflows."
         />
         <meta
           name="keywords"
@@ -539,6 +541,69 @@ export default function PrivacyStack() {
                 </article>
               ))}
             </div>
+          </div>
+        </section>
+
+        <section className="privacy-stack__financial" aria-labelledby="privacy-stack-financial-title">
+          <div className="container">
+            <div className="privacy-stack__section-head">
+              <span className="privacy-stack__eyebrow">Optional Financial Shield</span>
+              <h2 id="privacy-stack-financial-title">Keep payment privacy in the same conversation</h2>
+              <p>
+                Some trials, subscriptions, and ad platforms ask for a card after email verification. These optional external providers may help separate selected online payments from your everyday card. Fees, verification, eligibility, and merchant acceptance vary.
+              </p>
+            </div>
+
+            <div className="privacy-stack__financial-grid">
+              <article className="privacy-stack__financial-card privacy-stack__financial-card--pst">
+                <div className="privacy-stack__financial-icon" aria-hidden="true">💳</div>
+                <div>
+                  <span className="privacy-stack__panel-eyebrow">Premium VCC</span>
+                  <h3>PST.NET</h3>
+                  <p>Review virtual-card options for eligible trials, subscriptions, and advertising workflows.</p>
+                  <ul className="privacy-stack__bullet-list">
+                    <li><AppIcon iconClass="fas fa-check" /><span>Review current fees and card limits</span></li>
+                    <li><AppIcon iconClass="fas fa-check" /><span>Check regional and merchant support</span></li>
+                    <li><AppIcon iconClass="fas fa-check" /><span>Confirm verification and funding terms</span></li>
+                  </ul>
+                  <a
+                    href={pstHref}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    className="privacy-stack__panel-btn"
+                    onClick={() => handleAffiliateClick('pst', 'stack_financial_pst', pstHref, 'Review PST.NET Options')}
+                  >
+                    Review PST.NET Options
+                    <AppIcon iconClass="fas fa-arrow-right ms-2" />
+                  </a>
+                </div>
+              </article>
+
+              <article className="privacy-stack__financial-card privacy-stack__financial-card--cashmaal">
+                <div className="privacy-stack__financial-icon" aria-hidden="true">🌐</div>
+                <div>
+                  <span className="privacy-stack__panel-eyebrow">Prepaid Visa</span>
+                  <h3>CashMaal</h3>
+                  <p>Explore prepaid Visa options for supported online purchases and payment workflows.</p>
+                  <ul className="privacy-stack__bullet-list">
+                    <li><AppIcon iconClass="fas fa-check" /><span>Check activation and funding steps</span></li>
+                    <li><AppIcon iconClass="fas fa-check" /><span>Review verification and regional policy</span></li>
+                    <li><AppIcon iconClass="fas fa-check" /><span>Confirm merchant and currency support</span></li>
+                  </ul>
+                  <a
+                    href={cashmaalHref}
+                    target="_blank"
+                    rel={AFFILIATE_REL}
+                    className="privacy-stack__panel-btn"
+                    onClick={() => handleAffiliateClick('cashmaal', 'stack_financial_cashmaal', cashmaalHref, 'Review CashMaal Options')}
+                  >
+                    Review CashMaal Options
+                    <AppIcon iconClass="fas fa-arrow-right ms-2" />
+                  </a>
+                </div>
+              </article>
+            </div>
+            <p className="privacy-stack__financial-notice">Optional partner links. TempMail Pro does not control provider pricing, approval, verification, or availability. Use accurate information and follow each provider's and merchant's terms.</p>
           </div>
         </section>
 
