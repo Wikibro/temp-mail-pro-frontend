@@ -16,7 +16,7 @@ For the email side of this workflow, see [how temporary email helps with online 
 
 CashMaal offers external payment products that users may evaluate for online purchases and other supported transactions. Exact card availability, funding methods, fees, verification requirements, billing-address rules, currency support, and regional access can change.
 
-Review the provider's current information here before making a decision: [Explore CashMaal Visa card options](https://cashmaal.com).
+Review the provider's current information here before making a decision: [Explore CashMaal Visa card options](https://www.cashmaal.com/?i=virtual_card&ref=156898).
 
 ## What to Verify Before You Sign Up
 
@@ -55,4 +55,4 @@ If you manage multiple low-risk signup layers, the [TempMailPro Privacy Stack](/
 
 CashMaal is a separate external service and is not operated by TempMailPro. This article may include an affiliate link. Features, pricing, verification, card limits, currency support, and regional availability can change. Confirm the current terms directly with CashMaal before using any financial product.
 
-[Review CashMaal Visa card options](https://cashmaal.com)
+[Review CashMaal Visa card options](https://www.cashmaal.com/?i=virtual_card&ref=156898)

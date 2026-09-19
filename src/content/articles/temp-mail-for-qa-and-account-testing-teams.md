@@ -15,7 +15,7 @@ Modern product testing often needs many account states: new users, failed verifi
 3. Store verification timestamps in test notes.
 4. Rotate inboxes after each regression cycle.
 
-> 🛠️ **For Developers & QA Teams:** Testing subscription models or payment gateways may require multiple billing profiles. Pair your TempMailPro automation with virtual card tools such as [PST.NET Premium VCC](https://pst.net) or [CashMaal](https://cashmaal.com), then verify current fees, limits, authorization behavior, and test-environment compatibility.
+> 🛠️ **For Developers & QA Teams:** Testing subscription models or payment gateways may require multiple billing profiles. Pair your TempMailPro automation with virtual card tools such as [PST.NET Premium VCC](https://pst.net/?f=4d3c88d871865149566ec5d5ad4e11e3) or [CashMaal](https://www.cashmaal.com/?i=virtual_card&ref=156898), then verify current fees, limits, authorization behavior, and test-environment compatibility.
 
 ## Key Advantages
 

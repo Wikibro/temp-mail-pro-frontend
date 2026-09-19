@@ -3,11 +3,13 @@ export const AFFILIATE_LINKS = {
   yesim: 'https://yesim.app/?partner_id=3317',
   nordvpn: 'https://go.nordvpn.net/aff_c?offer_id=15&aff_id=146034&url_id=902',
   nordpass: 'https://go.nordpass.io/aff_c?offer_id=488&aff_id=146034&url_id=9356',
+  pst: 'https://pst.net/?f=4d3c88d871865149566ec5d5ad4e11e3',
+  cashmaal: 'https://www.cashmaal.com/?i=virtual_card&ref=156898',
 };
 
 export const PARTNER_DESTINATIONS = {
-  pst: 'https://pst.net',
-  cashmaal: 'https://cashmaal.com',
+  pst: 'https://pst.net/?f=4d3c88d871865149566ec5d5ad4e11e3',
+  cashmaal: 'https://www.cashmaal.com/?i=virtual_card&ref=156898',
 };
 
 export const AFFILIATE_REL = 'noopener noreferrer sponsored';

@@ -52,7 +52,7 @@ Use accurate account and billing information, keep your login protected, and fol
 
 PST.NET is an external virtual-card provider that some users may consider for online trials, software subscriptions, or advertising billing. Before opening an account, review its current product pages for supported regions, card limits, fees, verification requirements, funding rules, and merchant restrictions.
 
-You can review the provider directly here: [Explore PST.NET virtual card options](https://pst.net).
+You can review the provider directly here: [Explore PST.NET virtual card options](https://pst.net/?f=4d3c88d871865149566ec5d5ad4e11e3).
 
 ## A Safer Trial and Billing Workflow
 
@@ -82,4 +82,4 @@ For stricter privacy workflows, see the [TempMailPro Privacy Stack](/privacy-sta
 
 PST.NET is a separate external service and is not operated by TempMailPro. This article may include an affiliate link. Cashback, card-count perks, fees, BIN tools, eKYC/AML processes, pricing, verification, card features, and merchant acceptance can change or be subject to eligibility. Confirm the current terms directly with the provider before using any financial product.
 
-[Review PST.NET options](https://pst.net)
+[Review PST.NET options](https://pst.net/?f=4d3c88d871865149566ec5d5ad4e11e3)
