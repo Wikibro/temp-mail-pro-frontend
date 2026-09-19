@@ -69,6 +69,8 @@ function TempMailApp({ onEmailCopied }) {
   const [tokenValid, setTokenValid] = useState(true);
   const [showExpiredCard, setShowExpiredCard] = useState(false);
   const [showAddPanel, setShowAddPanel] = useState(false);
+  const [availableDomains, setAvailableDomains] = useState(['uberip.com']);
+  const [selectedDomain, setSelectedDomain] = useState('uberip.com');
   const [inboxCounts, setInboxCounts] = useState(() => {
     // Seed counts from localStorage cached messages
     const saved = localStorage.getItem('generatedEmails');
@@ -85,6 +87,34 @@ function TempMailApp({ onEmailCopied }) {
   const location = useLocation();
   const isAppPage = location.pathname === "/app";
   const currentUrl = `${window.location.origin}${location.pathname}`;
+
+  // Fetch active domains from backend (or fallback to mail.tm API)
+  useEffect(() => {
+    const fetchDomains = async () => {
+      try {
+        const res = await axios.get(`${API_ROOT}/accounts/domains`, { timeout: 6000 });
+        if (res.data?.domains && Array.isArray(res.data.domains) && res.data.domains.length > 0) {
+          setAvailableDomains(res.data.domains);
+          setSelectedDomain(res.data.domains[0]);
+          return;
+        }
+      } catch (_) {
+        // Fallback directly to mail.tm public domains if backend domains endpoint is not yet updated
+        try {
+          const directRes = await axios.get('https://api.mail.tm/domains?page=1', { timeout: 6000 });
+          const member = directRes.data?.['hydra:member'] || [];
+          const domains = member.filter(d => d && d.isActive !== false && d.domain).map(d => d.domain);
+          if (domains.length > 0) {
+            setAvailableDomains(domains);
+            setSelectedDomain(domains[0]);
+          }
+        } catch (e) {
+          console.warn('Could not fetch active domains:', e.message);
+        }
+      }
+    };
+    fetchDomains();
+  }, []);
 
   // Use refs to access current state in intervals
   const accountRef = useRef(account);
@@ -200,6 +230,9 @@ function TempMailApp({ onEmailCopied }) {
   const createNewAccount = async (options = {}) => {
     const isAuto = options === true;
     const customName = typeof options === 'object' ? options.customName : null;
+    const requestedDomain = typeof options === 'object' && options.domain
+      ? options.domain
+      : selectedDomain;
     const durationMs = typeof options === 'object' && options.durationMs
       ? options.durationMs
       : DURATIONS['1hour'];
@@ -236,7 +269,10 @@ function TempMailApp({ onEmailCopied }) {
           return;
         }
 
-        res = await axios.post(`${API_ROOT}/accounts/create`, { username: requestedUsername });
+        res = await axios.post(`${API_ROOT}/accounts/create`, {
+          username: requestedUsername,
+          domain: requestedDomain
+        });
 
         const createdAddress = (res.data?.address || res.data?.email || '').toLowerCase();
         const createdLocalPart = createdAddress.split('@')[0] || '';
@@ -247,7 +283,9 @@ function TempMailApp({ onEmailCopied }) {
           return;
         }
       } else {
-        res = await axios.post(`${API_ROOT}/accounts/create`);
+        res = await axios.post(`${API_ROOT}/accounts/create`, {
+          domain: requestedDomain
+        });
       }
       const now = new Date();
       const expirationTime = new Date(now.getTime() + (isAuto ? DURATIONS['1hour'] : durationMs));
@@ -446,6 +484,9 @@ function TempMailApp({ onEmailCopied }) {
                 onGenerate={(opts) => createNewAccount(opts)}
                 isLoading={isLoading}
                 compact={!!account}
+                availableDomains={availableDomains}
+                selectedDomain={selectedDomain}
+                onDomainChange={setSelectedDomain}
               />
             )}
 

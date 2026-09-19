@@ -11,6 +11,8 @@ const AccountManager = ({
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copyResetTimer, setCopyResetTimer] = useState(null);
 
+  const [showQr, setShowQr] = useState(false);
+
   const email = account?.address || account?.email || '';
 
   const copyToClipboard = () => {
@@ -84,7 +86,14 @@ const AccountManager = ({
           <AppIcon iconClass="bi bi-envelope-fill" />
         </div>
         <div className="am-email-body">
-          <div className="am-email-label">Active Email</div>
+          <div className="am-email-label d-flex align-items-center gap-2">
+            <span>Active Email</span>
+            {email.includes('@') && (
+              <span className="badge bg-primary-subtle text-primary border border-primary-subtle" style={{ fontSize: '0.72rem', padding: '2px 8px' }}>
+                <AppIcon iconClass="bi bi-globe2 me-1" />{email.split('@')[1]}
+              </span>
+            )}
+          </div>
           <div className="am-email-address" title={email}>
             {email || <span className="am-generating">Generating…</span>}
           </div>
@@ -130,7 +139,31 @@ const AccountManager = ({
           <AppIcon iconClass={`bi bi-arrow-clockwise${isLoading ? ' spin' : ''} me-1`} />
           {isLoading ? 'Refreshing…' : 'Refresh Inbox'}
         </button>
+        {email && (
+          <button
+            className="am-action-btn"
+            onClick={() => setShowQr(v => !v)}
+            title="Scan QR Code on mobile"
+          >
+            <AppIcon iconClass="bi bi-qr-code-scan me-1" />
+            {showQr ? 'Hide QR' : 'Mobile QR'}
+          </button>
+        )}
       </div>
+
+      {showQr && email && (
+        <div className="text-center p-3 mt-2 bg-light rounded-3 border">
+          <div className="fw-bold small text-muted mb-2">Scan with your phone camera:</div>
+          <img
+            src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(email)}`}
+            alt={`QR Code for ${email}`}
+            width="150"
+            height="150"
+            className="img-fluid rounded border bg-white p-1"
+          />
+          <div className="font-monospace small text-primary mt-2">{email}</div>
+        </div>
+      )}
     </div>
   );
 };

@@ -14,14 +14,16 @@ const UNITS = [
   { label: 'Days', value: 'day', ms: 86400 * 1000, min: 1, max: 365 },
 ];
 
-const DOMAIN_HINT = 'mail.tm';
+const DOMAIN_HINT = 'uberip.com';
 
-const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
+const EmailGenerator = ({ onGenerate, isLoading, compact = false, availableDomains = [], selectedDomain = '', onDomainChange }) => {
   const [customName, setCustomName] = useState('');
   const [selectedPreset, setSelectedPreset] = useState(1); // 1 hour default
   const [isCustom, setIsCustom] = useState(false);
   const [customValue, setCustomValue] = useState(30);
   const [customUnit, setCustomUnit] = useState('min');
+
+  const currentDomain = selectedDomain || (availableDomains.length > 0 ? availableDomains[0] : DOMAIN_HINT);
 
   const getDurationMs = () => {
     if (isCustom) {
@@ -46,6 +48,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
   const handleGenerate = () => {
     onGenerate({
       customName: customName.trim() || null,
+      domain: currentDomain,
       durationMs: getDurationMs(),
     });
   };
@@ -55,7 +58,7 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
   if (compact) {
     return (
       <div className="eg-compact">
-        {/* Name input */}
+        {/* Name and Domain input */}
         <div className="eg-name-row mb-2">
           <div className="eg-name-input-wrap">
             <input
@@ -66,7 +69,19 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
               onChange={(e) => setCustomName(sanitizeName(e.target.value))}
               maxLength={30}
             />
-            <span className="eg-domain-hint">@{DOMAIN_HINT}</span>
+            {availableDomains.length > 1 ? (
+              <select
+                className="eg-domain-select"
+                value={currentDomain}
+                onChange={(e) => onDomainChange && onDomainChange(e.target.value)}
+              >
+                {availableDomains.map((d) => (
+                  <option key={d} value={d}>@{d}</option>
+                ))}
+              </select>
+            ) : (
+              <span className="eg-domain-hint">@{currentDomain}</span>
+            )}
           </div>
         </div>
 
@@ -141,10 +156,10 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
           Protect your inbox. No registration, instant setup.
         </p>
 
-        {/* Custom username field */}
+        {/* Custom username and domain field */}
         <div className="eg-field-group">
           <label className="eg-label">
-            <AppIcon iconClass="bi bi-person me-1" />Username <span className="eg-optional">(optional)</span>
+            <AppIcon iconClass="bi bi-person me-1" />Username &amp; Domain <span className="eg-optional">(optional)</span>
           </label>
           <div className="eg-name-input-wrap">
             <input
@@ -155,11 +170,23 @@ const EmailGenerator = ({ onGenerate, isLoading, compact = false }) => {
               onChange={(e) => setCustomName(sanitizeName(e.target.value))}
               maxLength={30}
             />
-            <span className="eg-domain-hint">@{DOMAIN_HINT}</span>
+            {availableDomains.length > 1 ? (
+              <select
+                className="eg-domain-select"
+                value={currentDomain}
+                onChange={(e) => onDomainChange && onDomainChange(e.target.value)}
+              >
+                {availableDomains.map((d) => (
+                  <option key={d} value={d}>@{d}</option>
+                ))}
+              </select>
+            ) : (
+              <span className="eg-domain-hint">@{currentDomain}</span>
+            )}
           </div>
           {customName && (
             <div className="eg-preview">
-              Preview: <strong>{customName}@{DOMAIN_HINT}</strong>
+              Preview: <strong>{customName}@{currentDomain}</strong>
             </div>
           )}
         </div>

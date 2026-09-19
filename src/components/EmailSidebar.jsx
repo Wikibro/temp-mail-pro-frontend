@@ -44,11 +44,16 @@ const EmailSidebar = ({
         </div>
         <div className="email-sidebar-info">
           <div className="email-sidebar-addr">{addr}</div>
-          <div className="email-sidebar-meta">
+          <div className="email-sidebar-meta d-flex align-items-center gap-1 flex-wrap">
             {isExpired ? (
               <span className="badge bg-secondary">Expired</span>
             ) : (
               <span className="email-sidebar-expiry">⏱ {formatExpiry(email.expiration)}</span>
+            )}
+            {addr.includes('@') && (
+              <span className="badge bg-light text-secondary border" style={{ fontSize: '0.68rem', padding: '1px 5px' }}>
+                @{addr.split('@')[1]}
+              </span>
             )}
           </div>
         </div>

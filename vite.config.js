@@ -17,6 +17,15 @@ function tempMailDevApiPlugin() {
 
     res.setHeader('Content-Type', 'application/json');
 
+    // GET /api/accounts/domains
+    if (req.method === 'GET' && pathname === '/api/accounts/domains') {
+      res.statusCode = 200;
+      res.end(JSON.stringify({
+        domains: ['uberip.com', 'mailto.plus', 'fexpost.com', 'rover.info']
+      }));
+      return;
+    }
+
     // POST /api/accounts/create
     if (req.method === 'POST' && pathname === '/api/accounts/create') {
       let body = '';
@@ -27,11 +36,12 @@ function tempMailDevApiPlugin() {
         const username = parsed.username
           ? parsed.username.toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 24)
           : null;
+        const domain = parsed.domain || 'uberip.com';
 
         const randomStr = Math.random().toString(36).substring(2, 8);
         const address = username
-          ? `${username}@tempmailpk.com`
-          : `temp_${randomStr}@tempmailpk.com`;
+          ? `${username}@${domain}`
+          : `temp_${randomStr}@${domain}`;
         const token = `tok_${Date.now()}_${randomStr}`;
 
         const newAccount = {
@@ -62,7 +72,16 @@ function tempMailDevApiPlugin() {
             <p>Any incoming messages to this address will automatically appear in your inbox list.</p>
           </div>`,
           createdAt: new Date().toISOString(),
-          date: new Date().toISOString()
+          date: new Date().toISOString(),
+          hasAttachments: true,
+          attachments: [
+            {
+              id: 'att_sample_quickstart',
+              filename: 'QuickStart_Guide.txt',
+              contentType: 'text/plain',
+              size: 1420
+            }
+          ]
         };
         messagesByToken.set(token, [welcomeMsg]);
 
